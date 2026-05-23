@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, ExternalLink } from "lucide-react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
 const fadeUp = {
@@ -44,6 +45,7 @@ const education = [
     degree: "BASc, Electrical Engineering (Co-op) · GPA: 3.8/4.0",
     period: "Sept 2025 — Apr 2030",
     location: "Waterloo, ON",
+    logo: "/uwaterloo.png",
   },
 ];
 
@@ -54,6 +56,7 @@ const experience = [
     role: "Electrical & Firmware Engineer",
     period: "Sept 2025 — Present",
     location: "Waterloo, ON",
+    logo: "/waterlooformulaelectric_logo.jpg",
     bullets: [
       "Developed C/C++ HIL test utilities for BMU, VCU, and PDU firmware, simulating sensor inputs, ADC readings, fault states, and CAN messages across 3 vehicle control modules.",
       "Implemented pre-HV startup firmware logic for brake/throttle inputs, sensor monitoring, CAN validation, and fault handling, improving low-voltage readiness before vehicle integration.",
@@ -65,6 +68,7 @@ const experience = [
     role: "Data Engineer · Co-op",
     period: "Jan 2026 — Apr 2026",
     location: "Richmond Hill, ON",
+    logo: "/einfolab.webp",
     bullets: [
       "Developed SQL Server and MySQL databases for clinical, dental imaging, finance, and administrative systems by writing queries, views, validation scripts, and data fixes, improving reporting accuracy to 98%.",
       "Configured Windows Server and workstation environments for healthcare clients, including RDP access, ODBC connections, mapped drives, RAID/NAS backups, and user permissions, reducing setup time by 35%.",
@@ -72,10 +76,11 @@ const experience = [
     ],
   },
   {
-    company: "Middlefield Collegiate Institute — Robotics Club",
+    company: "Robotics Team",
     role: "Hardware Systems Lead",
     period: "Oct 2023 — Jun 2025",
     location: "Markham, ON",
+    logo: "/robotics.webp",
     bullets: [
       "Designed an RC Mars rover with a six-wheel drivetrain, ESP32 motor controller, camera stream, and custom chassis, enabling reliable traversal over uneven terrain.",
       "Programmed embedded motor-control firmware in C++/Arduino to map joystick input to PWM drive and steering signals, improving steering repeatability by 40%.",
@@ -209,14 +214,19 @@ export default function Home() {
         {education.map((e, i) => (
           <motion.div key={e.school} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
             className="border border-black/10 dark:border-white/12 rounded-xl p-6">
-            <div className="flex items-start justify-between gap-4 flex-wrap">
-              <div>
-                <h3 className="text-black dark:text-white font-semibold">{e.school}</h3>
-                <p className="text-black/60 dark:text-white/60 text-sm mt-1">{e.degree}</p>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
+                <Image src={e.logo} alt={e.school} width={40} height={40} className="object-contain w-full h-full" />
               </div>
-              <div className="text-right shrink-0">
-                <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
-                <p className="text-black/45 dark:text-white/45 text-xs mt-1">{e.location}</p>
+              <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <h3 className="text-black dark:text-white font-semibold">{e.school}</h3>
+                  <p className="text-black/60 dark:text-white/60 text-sm mt-1">{e.degree}</p>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
+                  <p className="text-black/45 dark:text-white/45 text-xs mt-1">{e.location}</p>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -229,14 +239,19 @@ export default function Home() {
           {experience.map((e, i) => (
             <motion.div key={e.company} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
               className="border border-black/10 dark:border-white/12 rounded-xl p-6">
-              <div className="flex items-start justify-between gap-4 flex-wrap mb-4">
-                <div>
-                  <h3 className="text-black dark:text-white font-semibold">{e.company}</h3>
-                  <p className="text-black/60 dark:text-white/60 text-sm mt-1">{e.role}</p>
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
+                  <Image src={e.logo} alt={e.company} width={40} height={40} className="object-contain w-full h-full" />
                 </div>
-                <div className="text-right shrink-0">
-                  <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
-                  <p className="text-black/45 dark:text-white/45 text-xs mt-1">{e.location}</p>
+                <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <p className="text-black/60 dark:text-white/60 text-sm">{e.role}</p>
+                    <h3 className="text-black dark:text-white font-semibold mt-0.5">{e.company}</h3>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
+                    <p className="text-black/45 dark:text-white/45 text-xs mt-1">{e.location}</p>
+                  </div>
                 </div>
               </div>
               <ul className="space-y-2">
