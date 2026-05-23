@@ -57,11 +57,7 @@ const experience = [
     period: "Sept 2025 — Present",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    bullets: [
-      "Developed C/C++ HIL test utilities for BMU, VCU, and PDU firmware, simulating sensor inputs, ADC readings, fault states, and CAN messages across 3 vehicle control modules.",
-      "Implemented pre-HV startup firmware logic for brake/throttle inputs, sensor monitoring, CAN validation, and fault handling, improving low-voltage readiness before vehicle integration.",
-      "Built CAN log analysis tools to parse vehicle data, visualize signal trends, and export CSVs for firmware debugging, reducing manual log review time by 30%.",
-    ],
+    description: "UWFE is a student design team that builds and races a formula-style electric racecar at FSAE Michigan and Formula Hybrid+Electric competitions. I work on the electrical and firmware side — developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Unit, building CAN log analysis tooling to accelerate firmware debugging, and implementing pre-HV startup logic to improve vehicle readiness before track integration.",
   },
   {
     company: "Einfolab Inc.",
@@ -69,11 +65,7 @@ const experience = [
     period: "Jan 2026 — Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    bullets: [
-      "Developed SQL Server and MySQL databases for clinical, dental imaging, finance, and administrative systems by writing queries, views, validation scripts, and data fixes, improving reporting accuracy to 98%.",
-      "Configured Windows Server and workstation environments for healthcare clients, including RDP access, ODBC connections, mapped drives, RAID/NAS backups, and user permissions, reducing setup time by 35%.",
-      "Automated healthcare data cleaning and reconciliation workflows with Python, pandas, and scheduled scripts, reducing recurring verification tasks from 2 hours to under 30 minutes.",
-    ],
+    description: "Einfolab is an IT solutions provider serving healthcare and non-profit clients across Ontario. I designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems, automated data cleaning and reconciliation pipelines using Python and pandas, and configured Windows Server environments for client deployments — improving reporting accuracy and significantly reducing manual setup overhead.",
   },
   {
     company: "Robotics Team",
@@ -81,11 +73,7 @@ const experience = [
     period: "Oct 2023 — Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    bullets: [
-      "Designed an RC Mars rover with a six-wheel drivetrain, ESP32 motor controller, camera stream, and custom chassis, enabling reliable traversal over uneven terrain.",
-      "Programmed embedded motor-control firmware in C++/Arduino to map joystick input to PWM drive and steering signals, improving steering repeatability by 40%.",
-      "Integrated ultrasonic sensors, IMU telemetry, and OpenCV-based camera feedback to detect obstacles, stabilize driving, and trigger fail-safe stops during demos.",
-    ],
+    description: "Led the hardware division of a competitive robotics team, designing and building an RC Mars rover from the ground up. I owned the full hardware stack — chassis design, ESP32-based motor control firmware in C++/Arduino, PWM drive and steering mapping, and sensor integration including ultrasonic, IMU, and OpenCV camera feedback for real-time obstacle detection and autonomous fail-safes.",
   },
 ];
 
@@ -93,28 +81,28 @@ const projects = [
   {
     name: "Social Posting Dashboard",
     stack: ["React", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js"],
-    description: "Full-stack social app with user registration, login, profile pages, posts, likes, and comments. REST API routes via Express, session-based auth with Passport.js and bcrypt, backed by PostgreSQL on Neon and deployed on Render.",
+    description: "A full-stack social platform where users can register, log in, create posts, like and comment on content, and manage profile pages. Built with a React/Vite frontend, an Express REST API backend, and PostgreSQL for persistent storage. Authentication uses Passport.js with bcrypt-hashed passwords and session management. Deployed on Render with a Neon PostgreSQL database.",
     repo: "https://github.com/rayymondf/Posting_Dashboard_Project",
     demo: "https://posting-dashboard-project.onrender.com/",
   },
   {
     name: "Lingo — Chrome Translator",
     stack: ["JavaScript", "Manifest V3", "DeepL API", "Chrome APIs"],
-    description: "Chrome extension for in-browser translation with saved history and language preferences. Integrated the DeepL API with async Fetch, input validation, rate-limit handling, and Chrome localStorage for persistence. Published on the Chrome Web Store.",
+    description: "A Chrome extension that enables seamless in-browser translation using the DeepL API. Built with Manifest V3, it features a Chrome Side Panel UI, async fetch with input validation and rate-limit handling, and localStorage persistence for translation history and language preferences. Published and live on the Chrome Web Store.",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
   },
   {
     name: "Todo List App",
     stack: ["HTML", "CSS", "Vanilla JavaScript", "LocalStorage"],
-    description: "Browser-based task manager with project organisation, priority/due-date sorting, and full localStorage persistence — built with vanilla JavaScript, no framework.",
+    description: "A browser-based task manager built with vanilla JavaScript — no frameworks. Users can create multiple projects, add todos with due dates and priorities, sort tasks, mark items complete, and edit entries inline. All data persists across sessions via localStorage.",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
   },
   {
     name: "Java 8-Ball Pool Game",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
-    description: "Two-player pool game built with Java Swing, featuring a custom game loop, mouse controls, and 2D physics — velocity, friction, cushion bounces, pocket detection, and ball-to-ball collisions. Full rule enforcement for solids/stripes, scratches, and fouls.",
+    description: "A two-player 8-ball billiards game built in Java Swing with a custom game loop and mouse-driven controls. Features realistic 2D physics including velocity, friction, cushion bounces, pocket detection, and ball-to-ball collisions. Implements full rule enforcement — solids/stripes assignment, scratches, ball-in-hand, and win/loss conditions.",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
     demo: null,
   },
@@ -214,11 +202,11 @@ export default function Home() {
         {education.map((e, i) => (
           <motion.div key={e.school} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
             className="border border-black/10 dark:border-white/12 rounded-xl p-6">
-            <div className="flex items-start gap-4">
+            <div className="flex items-center gap-4">
               <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
                 <Image src={e.logo} alt={e.school} width={80} height={80} className="object-contain w-full h-full" />
               </div>
-              <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
+              <div className="flex-1 flex items-center justify-between gap-4 flex-wrap">
                 <div>
                   <h3 className="text-black dark:text-white font-semibold">{e.school}</h3>
                   <p className="text-black/60 dark:text-white/60 text-sm mt-1">{e.degree}</p>
@@ -246,7 +234,7 @@ export default function Home() {
                     alt={e.company}
                     width={80}
                     height={80}
-                    className={`object-contain w-full h-full ${e.logo === "/robotics.webp" ? "scale-150 object-cover" : ""}`}
+                    className={`object-contain w-full h-full ${e.logo === "/robotics.webp" ? "scale-[1.25] object-cover" : ""}`}
                   />
                 </div>
                 <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
@@ -260,14 +248,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <ul className="space-y-2">
-                {e.bullets.map((b, j) => (
-                  <li key={j} className="text-black/65 dark:text-white/65 text-sm flex gap-2">
-                    <span className="text-black/30 dark:text-white/30 mt-1.5 shrink-0">—</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-black/65 dark:text-white/65 text-sm leading-relaxed">{e.description}</p>
             </motion.div>
           ))}
         </div>
