@@ -239,9 +239,15 @@ export default function Home() {
           {experience.map((e, i) => (
             <motion.div key={e.company} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
               className="border border-black/10 dark:border-white/12 rounded-xl p-6">
-              <div className="flex items-start gap-5 mb-4">
+              <div className="flex items-center gap-5 mb-4">
                 <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
-                  <Image src={e.logo} alt={e.company} width={80} height={80} className="object-contain w-full h-full" />
+                  <Image
+                    src={e.logo}
+                    alt={e.company}
+                    width={80}
+                    height={80}
+                    className={`object-contain w-full h-full ${e.logo === "/robotics.webp" ? "scale-150 object-cover" : ""}`}
+                  />
                 </div>
                 <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
                   <div>
@@ -254,7 +260,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <ul className="space-y-2 pl-[100px]">
+              <ul className="space-y-2">
                 {e.bullets.map((b, j) => (
                   <li key={j} className="text-black/65 dark:text-white/65 text-sm flex gap-2">
                     <span className="text-black/30 dark:text-white/30 mt-1.5 shrink-0">—</span>
