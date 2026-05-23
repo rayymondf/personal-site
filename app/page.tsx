@@ -143,7 +143,7 @@ export default function Home() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section id="hero" className="relative min-h-screen px-6 pt-36 pb-24 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
+      <section id="hero" className="relative min-h-screen px-6 pt-36 pb-14 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:32px_32px]" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
