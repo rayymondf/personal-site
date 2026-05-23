@@ -75,10 +75,10 @@ const experience = [
 
 const projects = [
   {
-    name: "Social Posting Dashboard",
+    name: "Social Media App",
     stack: ["React", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js"],
     description: "A full-stack social platform where users can register, log in, create posts, like and comment on content, and manage profile pages. Built with a React/Vite frontend, an Express REST API backend, and PostgreSQL for persistent storage. Authentication uses Passport.js with bcrypt-hashed passwords and session management. Deployed on Render with a Neon PostgreSQL database.",
-    repo: "https://github.com/rayymondf/Posting_Dashboard_Project",
+    repo: "https://github.com/rayymondf/Social_Media_Project",
     demo: "https://posting-dashboard-project.onrender.com/",
   },
   {
