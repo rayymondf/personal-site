@@ -119,11 +119,11 @@ const projects = [
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="py-24 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
+    <section id={id} className="py-14 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto">
         <motion.h2
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-10"
+          className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-6"
         >
           {title}
         </motion.h2>
