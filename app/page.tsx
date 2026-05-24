@@ -76,6 +76,7 @@ const experience = [
 const projects = [
   {
     name: "Social Media App",
+    image: "/social-app.png",
     stack: ["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"],
     description: "Full-stack social platform with a React 19/Vite SPA frontend and an Express REST API backend. Authentication uses Passport.js local strategy with bcrypt password hashing and PostgreSQL-backed session storage via connect-pg-simple. Features include a reverse-chronological home timeline, like/unlike with live counts, a searchable profiles directory, per-user profile pages, direct messaging with thread creation and deletion, and a shared guest account. SPA routing is implemented with the Browser History API without React Router. Deployed on Render with a Neon PostgreSQL database.",
     repo: "https://github.com/rayymondf/Social_Media_Project",
@@ -83,6 +84,7 @@ const projects = [
   },
   {
     name: "Lingo — Chrome Translator",
+    image: "/lingo-ext.png",
     stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"],
     description: "Chrome extension built with Manifest V3 that surfaces a translation workspace in Chrome's native Side Panel. A background service worker registers the panel on icon click. Translation is handled via the DeepL Free API (POST /v2/translate), with a dynamic language list fetched from /v2/languages and a built-in fallback if the request fails. Draft text, the last selected language, and recent translation history are persisted with the Chrome Storage API. No build step, no npm dependencies — Chrome loads the extension directly as an unpacked set of files. Published on the Chrome Web Store.",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
@@ -90,6 +92,7 @@ const projects = [
   },
   {
     name: "Todo List App",
+    image: "/todo-app.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
     description: "Browser-based task manager with no framework or build step. Implements a strict three-layer architecture: a pure TodoModel layer (no DOM access) handling all CRUD and query logic, a Storage module for localStorage serialization, and an App layer managing rendering and event delegation. Features a monthly calendar view that plots todos by due date alongside a flat list view with live search, filter (all/active/completed/overdue), and sort (date, priority, A-Z). Todos support title, description, due date, priority, comma-separated tags, and repeat intervals. Fully accessible with ARIA roles, keyboard navigation, and focus management.",
     repo: "https://github.com/rayymondf/Todo-List-Project",
@@ -97,6 +100,7 @@ const projects = [
   },
   {
     name: "Java 8-Ball Pool Game",
+    image: "/pool-game.png",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
     description: "Two-player 8-ball billiards game in Java Swing with a custom Swing Timer game loop. Physics built from scratch: per-tick velocity integration, friction, elastic ball-ball collision with overlap separation, cushion bounce with energy loss, and sub-step detection to prevent tunnelling. Pocket detection uses a distance threshold checked before rail bounce. Full rule enforcement: open-table start, automatic solids/stripes assignment, scratch detection, ball-in-hand, and win/loss conditions.",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
@@ -217,6 +221,60 @@ function PCBModal({ onClose }: { onClose: () => void }) {
                 <li><span className="text-black dark:text-white font-medium">P1</span> — MTSW-104-07-T-S-170, 4-pin 2.54mm through-hole header (Mill-Max)</li>
               </ul>
             </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+// ─── Project Modal ────────────────────────────────────────────────────────────
+
+function ProjectModal({ project, onClose }: { project: typeof projects[number]; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className="relative bg-[#f5f5f0] dark:bg-[#111] border border-black/10 dark:border-white/12 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-7"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button onClick={onClose} className="absolute top-4 right-4 text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+            <X size={18} />
+          </button>
+
+          <h2 className="text-black dark:text-white font-semibold text-lg mb-4">{project.name}</h2>
+
+          <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+            <Image src={project.image} alt={project.name} width={800} height={500} className="w-full h-auto object-cover" />
+          </div>
+
+          <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed mb-5">{project.description}</p>
+
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {project.stack.map((s) => (
+              <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+                {s}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex gap-3">
+            <a href={project.repo} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors">
+              {GITHUB_SVG} Repository
+            </a>
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors">
+                <ExternalLink size={13} /> Live Demo
+              </a>
+            )}
           </div>
         </motion.div>
       </motion.div>
@@ -355,43 +413,54 @@ export default function Home() {
 
       {/* ── Projects ── */}
       <Section id="projects" title="Projects">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-4">
           {projects.map((p, i) => (
             <motion.div key={p.name} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
-              className="border border-black/10 dark:border-white/12 rounded-xl p-5 flex flex-col gap-3 hover:border-black/25 dark:hover:border-white/25 transition-colors">
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">{p.name}</h3>
-                <div className="flex gap-2 shrink-0">
-                  <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label="Repository"
-                    className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
-                    {GITHUB_SVG}
-                  </a>
-                  {p.demo && (
-                    <a href={p.demo} target="_blank" rel="noopener noreferrer" aria-label="Live demo"
-                      className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
-                      <ExternalLink size={15} />
-                    </a>
-                  )}
+              className="border border-black/10 dark:border-white/12 rounded-xl p-5 flex flex-col gap-4 hover:border-black/25 dark:hover:border-white/25 transition-colors">
+              <div className="flex flex-col sm:flex-row gap-4">
+                {/* Image left */}
+                <div className="sm:w-56 shrink-0 rounded-lg overflow-hidden border border-black/8 dark:border-white/10 bg-black" style={{ aspectRatio: "16/10" }}>
+                  <Image src={p.image} alt={p.name} width={224} height={140} className="w-full h-full object-contain" />
                 </div>
-              </div>
-              <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed flex-1">{p.description}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {p.stack.map((s) => (
-                  <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
-                    {s}
-                  </span>
-                ))}
+                {/* Content right */}
+                <div className="flex flex-col gap-3 flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">{p.name}</h3>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label="Repository"
+                        className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+                        {GITHUB_SVG}
+                      </a>
+                      {p.demo && (
+                        <a href={p.demo} target="_blank" rel="noopener noreferrer" aria-label="Live demo"
+                          className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+                          <ExternalLink size={15} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed">{p.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.stack.map((s) => (
+                      <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
 
           {/* PCB Project — full width */}
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={projects.length}
-            className="sm:col-span-2 border border-black/10 dark:border-white/12 rounded-xl p-5 flex flex-col gap-4 hover:border-black/25 dark:hover:border-white/25 transition-colors">
+            className="border border-black/10 dark:border-white/12 rounded-xl p-5 flex flex-col gap-4 hover:border-black/25 dark:hover:border-white/25 transition-colors">
             <div className="flex flex-col sm:flex-row gap-4">
               {/* Image left */}
-              <div className="sm:w-48 shrink-0 rounded-lg overflow-hidden border border-black/8 dark:border-white/10 bg-black">
-                <Image src="/pcb1.png" alt="Low-Side Current Sensing PCB" width={192} height={128} className="w-full h-full object-cover" />
+              <div className="sm:w-56 shrink-0 rounded-lg overflow-hidden border border-black/8 dark:border-white/10 bg-black" style={{ aspectRatio: "16/10" }}>
+                <Image src="/pcb1.png" alt="Low-Side Current Sensing PCB" width={224} height={140} className="w-full h-full object-contain" />
               </div>
               {/* Content right */}
               <div className="flex flex-col gap-3 flex-1 min-w-0">
