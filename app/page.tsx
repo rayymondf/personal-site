@@ -76,29 +76,29 @@ const experience = [
 const projects = [
   {
     name: "Social Media App",
-    stack: ["React", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js"],
-    description: "A full-stack social platform where users can register, log in, create posts, like and comment on content, and manage profile pages. Built with a React/Vite frontend, an Express REST API backend, and PostgreSQL for persistent storage. Authentication uses Passport.js with bcrypt-hashed passwords and session management. Deployed on Render with a Neon PostgreSQL database.",
+    stack: ["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"],
+    description: "Full-stack social platform with a React 19/Vite SPA frontend and an Express REST API backend. Authentication uses Passport.js local strategy with bcrypt password hashing and PostgreSQL-backed session storage via connect-pg-simple. Features include a reverse-chronological home timeline, like/unlike with live counts, a searchable profiles directory, per-user profile pages, direct messaging with thread creation and deletion, and a shared guest account. SPA routing is implemented with the Browser History API without React Router. Deployed on Render with a Neon PostgreSQL database.",
     repo: "https://github.com/rayymondf/Social_Media_Project",
     demo: "https://social-media-project-1-d15l.onrender.com/",
   },
   {
     name: "Lingo — Chrome Translator",
-    stack: ["JavaScript", "Manifest V3", "DeepL API", "Chrome APIs"],
-    description: "A Chrome extension that enables seamless in-browser translation using the DeepL API. Built with Manifest V3, it features a Chrome Side Panel UI, async fetch with input validation and rate-limit handling, and localStorage persistence for translation history and language preferences. Published and live on the Chrome Web Store.",
+    stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"],
+    description: "Chrome extension built with Manifest V3 that surfaces a translation workspace in Chrome's native Side Panel. A background service worker registers the panel on icon click. Translation is handled via the DeepL Free API (POST /v2/translate), with a dynamic language list fetched from /v2/languages and a built-in fallback if the request fails. Draft text, the last selected language, and recent translation history are persisted with the Chrome Storage API. No build step, no npm dependencies — Chrome loads the extension directly as an unpacked set of files. Published on the Chrome Web Store.",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
   },
   {
     name: "Todo List App",
-    stack: ["HTML", "CSS", "Vanilla JavaScript", "LocalStorage"],
-    description: "A browser-based task manager built with vanilla JavaScript — no frameworks. Users can create multiple projects, add todos with due dates and priorities, sort tasks, mark items complete, and edit entries inline. All data persists across sessions via localStorage.",
+    stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
+    description: "Browser-based task manager with no framework or build step. Implements a strict three-layer architecture: a pure TodoModel layer (no DOM access) handling all CRUD and query logic, a Storage module for localStorage serialization, and an App layer managing rendering and event delegation. Features a monthly calendar view that plots todos by due date alongside a flat list view with live search, filter (all/active/completed/overdue), and sort (date, priority, A-Z). Todos support title, description, due date, priority, comma-separated tags, and repeat intervals. Fully accessible with ARIA roles, keyboard navigation, and focus management.",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
   },
   {
     name: "Java 8-Ball Pool Game",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
-    description: "A two-player 8-ball billiards game built in Java Swing with a custom game loop and mouse-driven controls. Features realistic 2D physics including velocity, friction, cushion bounces, pocket detection, and ball-to-ball collisions. Implements full rule enforcement — solids/stripes assignment, scratches, ball-in-hand, and win/loss conditions.",
+    description: "Two-player 8-ball billiards game in Java Swing with a custom Swing Timer game loop. Physics built from scratch: per-tick velocity integration, friction, elastic ball-ball collision with overlap separation, cushion bounce with energy loss, and sub-step detection to prevent tunnelling. Pocket detection uses a distance threshold checked before rail bounce. Full rule enforcement: open-table start, automatic solids/stripes assignment, scratch detection, ball-in-hand, and win/loss conditions.",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
     demo: null,
   },
@@ -406,7 +406,7 @@ export default function Home() {
                   </button>
                 </div>
                 <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed">
-                  A compact current sensing PCB designed in KiCad for UW Orbital&apos;s power monitoring subsystem. Uses a low-side topology with the INA180 current sense amplifier and a 10mΩ precision shunt resistor to measure load current and output a proportional analog voltage.
+                  A current-sense breakout board designed in Altium Designer for UW Orbital&apos;s power monitoring subsystem. Uses a low-side topology with the INA180B3IDBVR amplifier (100 V/V gain) and a 10mΩ shunt resistor to output a voltage proportional to load current, readable by an MCU ADC.
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {["Altium Designer", "INA180", "PCB Design", "Analog Electronics", "Embedded Systems", "UW Orbital"].map((s) => (
