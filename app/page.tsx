@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback } from "react";
-import { motion } from "framer-motion";
-import { Mail, ExternalLink } from "lucide-react";
+import { useCallback, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, ExternalLink, X } from "lucide-react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
@@ -126,12 +126,111 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
+// ─── PCB Modal ────────────────────────────────────────────────────────────────
+
+function PCBModal({ onClose }: { onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className="relative bg-[#f5f5f0] dark:bg-[#111] border border-black/10 dark:border-white/12 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-7"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button onClick={onClose} className="absolute top-4 right-4 text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+            <X size={18} />
+          </button>
+
+          <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Low-Side Current Sensing PCB</h2>
+          <p className="text-black/45 dark:text-white/45 text-xs mb-5">UW Orbital · Altium Designer · Hardware Design</p>
+
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
+              <Image src="/pcb1.png" alt="PCB Layout" width={600} height={400} className="w-full h-auto object-cover" />
+              <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">PCB Layout</p>
+            </div>
+            <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white dark:bg-white/5">
+              <Image src="/pcb2.png" alt="Schematic" width={600} height={400} className="w-full h-auto object-cover" />
+              <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Schematic</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 text-sm text-black/70 dark:text-white/65 leading-relaxed">
+            <p>
+              A low-side current-sense breakout board designed for UW Orbital&apos;s Electrical Power System (EPS). The board measures DC bus current on a 5V rail over a 0–200mA range and outputs a proportional analog voltage readable by a microcontroller ADC. The same sensing topology is used on Orbital&apos;s flight CubeSat hardware.
+            </p>
+
+            <p>
+              Microcontrollers read voltage through an ADC, not current directly. To measure current, a small <span className="text-black dark:text-white font-medium">shunt resistor</span> is placed in series with the load and Ohm&apos;s Law (V = IR) is applied to infer current from the measured voltage drop. The challenge is signal amplitude: at 200mA through a 10mΩ shunt, the differential voltage is only 2mV, which falls below the ~4mV resolution of a typical 8-bit ADC. A current-sense amplifier is required to bring the signal into a usable range before digitisation.
+            </p>
+
+            <p>
+              This board uses a <span className="text-black dark:text-white font-medium">low-side sensing topology</span>, where the shunt resistor is placed between the load return path and ground. Both amplifier inputs operate near ground potential, which avoids the high common-mode voltage present in high-side configurations and simplifies the amplifier requirements. The trade-off is a small ground offset under load, which is acceptable for this application.
+            </p>
+
+            <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4 space-y-3">
+              <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest">Signal Path</p>
+              <p className="text-xs text-black/60 dark:text-white/60 leading-relaxed">
+                Load supply → R1 (shunt) → load return → GND. The INA180&apos;s IN+ and IN− pins connect across R1, measuring the differential voltage. The amplified output V_OUT = Gain × I_LOAD × R_SENSE is fed to an MCU ADC. C1 (100nF) decouples the VS supply pin. P1 breaks out V_LOAD, 3V3, V_OUT, and GND for external connection.
+              </p>
+            </div>
+
+            <p>
+              The amplifier IC is the <span className="text-black dark:text-white font-medium">INA180B3IDBVR</span> (Texas Instruments), a precision single-channel current-sense amplifier in a SOT-23-5 package. It integrates a matched internal resistor gain network, which minimises gain error and temperature drift without external components. Key specifications from the datasheet:
+            </p>
+            <ul className="text-xs text-black/60 dark:text-white/60 space-y-1 pl-4 list-disc">
+              <li>Fixed gain: <span className="text-black dark:text-white font-medium">100 V/V</span> (A3 variant) — amplifies the 2mV shunt signal at 200mA to 200mV, well within ADC range on a 3.3V supply</li>
+              <li>Supply voltage (VS): <span className="text-black dark:text-white font-medium">2.7V to 5.5V</span>, operated at 3.3V on this board</li>
+              <li>Common-mode input range: <span className="text-black dark:text-white font-medium">−0.2V to +26V</span>, independent of VS — supports both low- and high-side configurations</li>
+              <li>Gain error: ±1% max; input offset voltage: ±150µV max at V<sub>CM</sub> = 0V, ±500µV max at V<sub>CM</sub> = 12V</li>
+              <li>Bandwidth: 210kHz; output slew rate: 2V/µs; quiescent current: 260µA max</li>
+              <li>Operating temperature: −40°C to +125°C</li>
+            </ul>
+
+            <p>
+              The shunt resistor is a <span className="text-black dark:text-white font-medium">WSL0603R0100FEA</span> (Vishay), a 10mΩ, 1W precision resistor in an 0603 package. The low resistance value keeps power dissipation minimal (P = I²R = 0.4mW at 200mA) while still generating a differential signal the INA180 can amplify. The 0603 package matches Orbital&apos;s standard component sizing, balancing board density with hand-solderability.
+            </p>
+
+            <p>
+              The bypass capacitor is a <span className="text-black dark:text-white font-medium">C0603C104K8RACTU</span> (KEMET), a 100nF X7R ceramic capacitor placed as close as possible to the INA180&apos;s VS pin. This value is specified in the INA180 typical application circuit (Figure 9-3 of the datasheet) and suppresses high-frequency noise on the supply rail that would otherwise couple into the amplifier output and corrupt the current reading.
+            </p>
+
+            <p>
+              The connector is a <span className="text-black dark:text-white font-medium">MTSW-104-07-T-S-170</span> (Mill-Max), a 4-pin through-hole header with 2.54mm pitch. It exposes all four interface signals — V_LOAD, 3V3, V_OUT, and GND — allowing the board to be wired directly to a bench supply and microcontroller for validation.
+            </p>
+
+            <p>
+              The schematic and PCB layout were completed in <span className="text-black dark:text-white font-medium">Altium Designer </span> via UW Orbital&apos;s shared Altium 365 workspace. Layout decisions followed standard breakout board practice: C1 placed within 1mm of the VS pin to minimise supply inductance, P1 positioned at the board edge for easy probing, and a GND copper pour on both layers stitched with vias to reduce ground plane impedance and provide a low-resistance return path.
+            </p>
+
+            <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4">
+              <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest mb-2">Bill of Materials</p>
+              <ul className="space-y-1 text-xs text-black/60 dark:text-white/60">
+                <li><span className="text-black dark:text-white font-medium">U1</span> — INA180B3IDBVR, 100 V/V current-sense amplifier, SOT-23-5 (Texas Instruments)</li>
+                <li><span className="text-black dark:text-white font-medium">R1</span> — WSL0603R0100FEA, 10mΩ 1W shunt resistor, 0603 (Vishay)</li>
+                <li><span className="text-black dark:text-white font-medium">C1</span> — C0603C104K8RACTU, 100nF X7R bypass capacitor, 0603 (KEMET)</li>
+                <li><span className="text-black dark:text-white font-medium">P1</span> — MTSW-104-07-T-S-170, 4-pin 2.54mm through-hole header (Mill-Max)</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
   const scrollTo = useCallback((id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
+  const [pcbModalOpen, setPcbModalOpen] = useState(false);
 
   return (
     <>
@@ -285,8 +384,44 @@ export default function Home() {
               </div>
             </motion.div>
           ))}
+
+          {/* PCB Project — full width */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={projects.length}
+            className="sm:col-span-2 border border-black/10 dark:border-white/12 rounded-xl p-5 flex flex-col gap-4 hover:border-black/25 dark:hover:border-white/25 transition-colors">
+            <div className="flex flex-col sm:flex-row gap-4">
+              {/* Image left */}
+              <div className="sm:w-48 shrink-0 rounded-lg overflow-hidden border border-black/8 dark:border-white/10 bg-black">
+                <Image src="/pcb1.png" alt="Low-Side Current Sensing PCB" width={192} height={128} className="w-full h-full object-cover" />
+              </div>
+              {/* Content right */}
+              <div className="flex flex-col gap-3 flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">Low-Side Current Sensing PCB</h3>
+                    <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">UW Orbital</p>
+                  </div>
+                  <button onClick={() => setPcbModalOpen(true)}
+                    className="shrink-0 text-xs text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1 transition-colors">
+                    Learn More ↗
+                  </button>
+                </div>
+                <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed">
+                  A compact current sensing PCB designed in KiCad for UW Orbital&apos;s power monitoring subsystem. Uses a low-side topology with the INA180 current sense amplifier and a 10mΩ precision shunt resistor to measure load current and output a proportional analog voltage.
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Altium Designer", "INA180", "PCB Design", "Analog Electronics", "Embedded Systems", "UW Orbital"].map((s) => (
+                    <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </Section>
+
+      {pcbModalOpen && <PCBModal onClose={() => setPcbModalOpen(false)} />}
 
       {/* ── Contact ── */}
       <Section id="contact" title="Contact">
