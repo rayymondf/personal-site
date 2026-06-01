@@ -258,7 +258,7 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
               </ul>
             </div>
             <p>
-              The entire stack runs inside <span className="text-black dark:text-white font-medium">Docker </span> via WATonomous&apos;s monorepo infrastructure, a Docker Compose wrapper that orchestrates the robot, simulator, and visualization containers simultaneously. All inter-node communication is handled by the ROS2 DDS middleware with no shared memory or manual IPC required.
+              The entire stack runs inside <span className="text-black dark:text-white font-medium">Docker</span> via WATonomous&apos;s monorepo infrastructure, a Docker Compose wrapper that orchestrates the robot, simulator, and visualization containers simultaneously. All inter-node communication is handled by the ROS2 DDS middleware with no shared memory or manual IPC required.
             </p>
             <p>
               Real-time state was visualized in <span className="text-black dark:text-white font-medium">Foxglove Studio</span> over a WebSocket bridge. The 3D panel renders the live occupancy grid, inflated obstacle halos, and the A* path as a polyline, making it straightforward to diagnose replanning behavior and tune inflation radius and lookahead distance.
