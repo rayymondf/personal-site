@@ -228,6 +228,86 @@ function PCBModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+// ─── WATonomous Modal ─────────────────────────────────────────────────────────
+
+function WATonomousModal({ onClose }: { onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className="relative bg-[#f5f5f0] dark:bg-[#111] border border-black/10 dark:border-white/12 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-7"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button onClick={onClose} className="absolute top-4 right-4 text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+            <X size={18} />
+          </button>
+
+          <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Autonomous Robot Navigation Stack</h2>
+          <p className="text-black/45 dark:text-white/45 text-xs mb-5">WATonomous ASD · ROS2 · C++ · Gazebo · Foxglove</p>
+
+          <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+            <Image src="/wato-asd.png" alt="Foxglove visualization of autonomous navigation" width={800} height={500} className="w-full h-auto object-cover" />
+            <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Foxglove: live costmap, inflated obstacles, and A* path overlaid on the occupancy grid</p>
+          </div>
+
+          <div className="space-y-4 text-sm text-black/70 dark:text-white/65 leading-relaxed">
+            <p>
+              Built a full autonomous navigation stack for a simulated differential-drive robot in <span className="text-black dark:text-white font-medium">Gazebo</span>, developed as part of the WATonomous Autonomous Software Division onboarding. The system enables the robot to navigate to arbitrary goal points while avoiding static obstacles — entirely from scratch in <span className="text-black dark:text-white font-medium">C++ with ROS2 Humble</span>.
+            </p>
+
+            <p>
+              The stack is composed of four tightly coupled ROS2 nodes communicating over typed topics. Each node owns a distinct layer of the navigation pipeline, mirroring the perception → world model → planning → control architecture used in production autonomous systems.
+            </p>
+
+            <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4 space-y-3">
+              <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest">Node Architecture</p>
+              <ul className="space-y-2 text-xs text-black/60 dark:text-white/60">
+                <li><span className="text-black dark:text-white font-medium">Costmap</span> — Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid coordinates, marks occupied cells, and applies a distance-weighted inflation kernel to produce a cost gradient around obstacles. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/costmap</code>.</li>
+                <li><span className="text-black dark:text-white font-medium">Map Memory</span> — Fuses incoming local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms each costmap into the world frame and merges via linear fusion, updating only when the robot has displaced beyond a distance threshold to avoid redundant writes.</li>
+                <li><span className="text-black dark:text-white font-medium">Planner</span> — Runs <span className="text-black dark:text-white font-medium">A*</span> on the global occupancy grid to compute a collision-free path from the robot&apos;s current pose to a user-specified <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::PointStamped</code> goal. Implements a two-state machine (idle / tracking) and replans automatically on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.</li>
+                <li><span className="text-black dark:text-white font-medium">Control</span> — Implements <span className="text-black dark:text-white font-medium">Pure Pursuit</span> to track the planned path. Selects a lookahead waypoint, computes the required arc curvature, and outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> velocity commands to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.</li>
+              </ul>
+            </div>
+
+            <p>
+              The entire stack runs inside <span className="text-black dark:text-white font-medium">Docker</span> via WATonomous&apos;s monorepo infrastructure — a Docker Compose wrapper that orchestrates the robot, simulator, and visualization containers simultaneously. All inter-node communication is handled by the ROS2 DDS middleware; no shared memory or manual IPC required.
+            </p>
+
+            <p>
+              Real-time state was visualized in <span className="text-black dark:text-white font-medium">Foxglove Studio</span> over a WebSocket bridge. The 3D panel renders the live occupancy grid, inflated obstacle halos, and the A* path as a polyline — making it straightforward to diagnose replanning behavior and tune inflation radius and lookahead distance.
+            </p>
+
+            <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4">
+              <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest mb-2">Stack</p>
+              <ul className="space-y-1 text-xs text-black/60 dark:text-white/60">
+                <li><span className="text-black dark:text-white font-medium">Language</span> — C++17 (rclcpp)</li>
+                <li><span className="text-black dark:text-white font-medium">Middleware</span> — ROS2 Humble (DDS pub/sub, typed messages)</li>
+                <li><span className="text-black dark:text-white font-medium">Simulation</span> — Gazebo (differential-drive robot, laser scanner, camera)</li>
+                <li><span className="text-black dark:text-white font-medium">Visualization</span> — Foxglove Studio (WebSocket, 3D + raw message panels)</li>
+                <li><span className="text-black dark:text-white font-medium">Infrastructure</span> — Docker Compose, WATonomous monorepo (watod CLI)</li>
+                <li><span className="text-black dark:text-white font-medium">Algorithms</span> — A* (grid search, Euclidean heuristic), Pure Pursuit (geometric path tracking)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <a href="https://youtu.be/jMNTflrencM" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors w-fit">
+              <ExternalLink size={13} /> Demo Video
+            </a>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 // ─── Project Modal ────────────────────────────────────────────────────────────
 
 function ProjectModal({ project, onClose }: { project: typeof projects[number]; onClose: () => void }) {
@@ -289,6 +369,7 @@ export default function Home() {
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
   const [pcbModalOpen, setPcbModalOpen] = useState(false);
+  const [watoModalOpen, setWatoModalOpen] = useState(false);
 
   return (
     <>
@@ -487,10 +568,43 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
+
+          {/* WATonomous ASD — full width */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={projects.length + 1}
+            className="border border-black/10 dark:border-white/12 rounded-xl p-5 flex flex-col gap-4 hover:border-black/25 dark:hover:border-white/25 transition-colors">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="sm:w-56 shrink-0 rounded-lg overflow-hidden border border-black/8 dark:border-white/10 bg-black" style={{ aspectRatio: "16/10" }}>
+                <Image src="/wato-asd.png" alt="Autonomous Robot Navigation" width={224} height={140} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex flex-col gap-3 flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">Autonomous Robot Navigation Stack</h3>
+                    <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">WATonomous ASD</p>
+                  </div>
+                  <button onClick={() => setWatoModalOpen(true)}
+                    className="shrink-0 text-xs text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1 transition-colors">
+                    Learn More ↗
+                  </button>
+                </div>
+                <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed">
+                  Full autonomous navigation stack for a simulated differential-drive robot. Built four ROS2 C++ nodes — Costmap (LiDAR → occupancy grid), Map Memory (global map fusion), Planner (A* pathfinding), and Control (Pure Pursuit) — visualized live in Foxglove Studio.
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["ROS2 Humble", "C++17", "Gazebo", "Foxglove", "A*", "Pure Pursuit", "Docker", "WATonomous"].map((s) => (
+                    <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </Section>
 
       {pcbModalOpen && <PCBModal onClose={() => setPcbModalOpen(false)} />}
+      {watoModalOpen && <WATonomousModal onClose={() => setWatoModalOpen(false)} />}
 
       {/* ── Contact ── */}
       <Section id="contact" title="Contact">
