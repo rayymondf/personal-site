@@ -53,7 +53,7 @@ const experience = [
     period: "Sept 2025 — Present",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    description: "UWFE is a student design team that builds and races a formula-style electric racecar at FSAE Michigan and Formula Hybrid+Electric competitions. I work on the electrical and firmware side — developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Unit, building CAN log analysis tooling to accelerate firmware debugging, and implementing pre-HV startup logic to improve vehicle readiness before track integration.",
+    description: "UWFE is a student design team that builds and races a formula-style electric racecar at FSAE Michigan and Formula Hybrid+Electric competitions. I work on the electrical and firmware side: developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Unit, building CAN log analysis tooling to accelerate firmware debugging, and implementing pre-HV startup logic to improve vehicle readiness before track integration.",
   },
   {
     company: "Einfolab Inc.",
@@ -61,7 +61,7 @@ const experience = [
     period: "Jan 2026 — Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    description: "Einfolab is an IT solutions provider serving healthcare and non-profit clients across Ontario. I designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems, automated data cleaning and reconciliation pipelines using Python and pandas, and configured Windows Server environments for client deployments — improving reporting accuracy and significantly reducing manual setup overhead.",
+    description: "Einfolab is an IT solutions provider serving healthcare and non-profit clients across Ontario. I designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems, automated data cleaning and reconciliation pipelines using Python and pandas, and configured Windows Server environments for client deployments, improving reporting accuracy and significantly reducing manual setup overhead.",
   },
   {
     company: "Robotics Team",
@@ -69,7 +69,7 @@ const experience = [
     period: "Oct 2023 — Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    description: "Led the hardware division of a competitive robotics team, designing and building an RC Mars rover from the ground up. I owned the full hardware stack — chassis design, ESP32-based motor control firmware in C++/Arduino, PWM drive and steering mapping, and sensor integration including ultrasonic, IMU, and OpenCV camera feedback for real-time obstacle detection and autonomous fail-safes.",
+    description: "Led the hardware division of a competitive robotics team, designing and building an RC Mars rover from the ground up. I owned the full hardware stack: chassis design, ESP32-based motor control firmware in C++/Arduino, PWM drive and steering mapping, and sensor integration including ultrasonic, IMU, and OpenCV camera feedback for real-time obstacle detection and autonomous fail-safes.",
   },
 ];
 
@@ -83,10 +83,10 @@ const projects = [
     demo: "https://social-media-project-1-d15l.onrender.com/",
   },
   {
-    name: "Lingo — Chrome Translator",
+    name: "Lingo: Chrome Translator",
     image: "/lingo-ext.png",
     stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"],
-    description: "Chrome extension built with Manifest V3 that surfaces a translation workspace in Chrome's native Side Panel. A background service worker registers the panel on icon click. Translation is handled via the DeepL Free API (POST /v2/translate), with a dynamic language list fetched from /v2/languages and a built-in fallback if the request fails. Draft text, the last selected language, and recent translation history are persisted with the Chrome Storage API. No build step, no npm dependencies — Chrome loads the extension directly as an unpacked set of files. Published on the Chrome Web Store.",
+    description: "Chrome extension built with Manifest V3 that surfaces a translation workspace in Chrome's native Side Panel. A background service worker registers the panel on icon click. Translation is handled via the DeepL Free API (POST /v2/translate), with a dynamic language list fetched from /v2/languages and a built-in fallback if the request fails. Draft text, the last selected language, and recent translation history are persisted with the Chrome Storage API. No build step, no npm dependencies. Chrome loads the extension directly as an unpacked set of files. Published on the Chrome Web Store.",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
   },
@@ -188,9 +188,9 @@ function PCBModal({ onClose }: { onClose: () => void }) {
               The amplifier IC is the <span className="text-black dark:text-white font-medium">INA180B3IDBVR</span> (Texas Instruments), a precision single-channel current-sense amplifier in a SOT-23-5 package. It integrates a matched internal resistor gain network, which minimises gain error and temperature drift without external components. Key specifications from the datasheet:
             </p>
             <ul className="text-xs text-black/60 dark:text-white/60 space-y-1 pl-4 list-disc">
-              <li>Fixed gain: <span className="text-black dark:text-white font-medium">100 V/V</span> (A3 variant) — amplifies the 2mV shunt signal at 200mA to 200mV, well within ADC range on a 3.3V supply</li>
+              <li>Fixed gain: <span className="text-black dark:text-white font-medium">100 V/V</span> (A3 variant), amplifies the 2mV shunt signal at 200mA to 200mV, well within ADC range on a 3.3V supply</li>
               <li>Supply voltage (VS): <span className="text-black dark:text-white font-medium">2.7V to 5.5V</span>, operated at 3.3V on this board</li>
-              <li>Common-mode input range: <span className="text-black dark:text-white font-medium">−0.2V to +26V</span>, independent of VS — supports both low- and high-side configurations</li>
+              <li>Common-mode input range: <span className="text-black dark:text-white font-medium">−0.2V to +26V</span>, independent of VS, supports both low- and high-side configurations</li>
               <li>Gain error: ±1% max; input offset voltage: ±150µV max at V<sub>CM</sub> = 0V, ±500µV max at V<sub>CM</sub> = 12V</li>
               <li>Bandwidth: 210kHz; output slew rate: 2V/µs; quiescent current: 260µA max</li>
               <li>Operating temperature: −40°C to +125°C</li>
@@ -205,7 +205,7 @@ function PCBModal({ onClose }: { onClose: () => void }) {
             </p>
 
             <p>
-              The connector is a <span className="text-black dark:text-white font-medium">MTSW-104-07-T-S-170</span> (Mill-Max), a 4-pin through-hole header with 2.54mm pitch. It exposes all four interface signals — V_LOAD, 3V3, V_OUT, and GND — allowing the board to be wired directly to a bench supply and microcontroller for validation.
+              The connector is a <span className="text-black dark:text-white font-medium">MTSW-104-07-T-S-170</span> (Mill-Max), a 4-pin through-hole header with 2.54mm pitch. It exposes all four interface signals (V_LOAD, 3V3, V_OUT, and GND), allowing the board to be wired directly to a bench supply and microcontroller for validation.
             </p>
 
             <p>
@@ -215,10 +215,10 @@ function PCBModal({ onClose }: { onClose: () => void }) {
             <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4">
               <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest mb-2">Bill of Materials</p>
               <ul className="space-y-1 text-xs text-black/60 dark:text-white/60">
-                <li><span className="text-black dark:text-white font-medium">U1</span> — INA180B3IDBVR, 100 V/V current-sense amplifier, SOT-23-5 (Texas Instruments)</li>
-                <li><span className="text-black dark:text-white font-medium">R1</span> — WSL0603R0100FEA, 10mΩ 1W shunt resistor, 0603 (Vishay)</li>
-                <li><span className="text-black dark:text-white font-medium">C1</span> — C0603C104K8RACTU, 100nF X7R bypass capacitor, 0603 (KEMET)</li>
-                <li><span className="text-black dark:text-white font-medium">P1</span> — MTSW-104-07-T-S-170, 4-pin 2.54mm through-hole header (Mill-Max)</li>
+                <li><span className="text-black dark:text-white font-medium">U1</span>: INA180B3IDBVR, 100 V/V current-sense amplifier, SOT-23-5 (Texas Instruments)</li>
+                <li><span className="text-black dark:text-white font-medium">R1</span>: WSL0603R0100FEA, 10mΩ 1W shunt resistor, 0603 (Vishay)</li>
+                <li><span className="text-black dark:text-white font-medium">C1</span>: C0603C104K8RACTU, 100nF X7R bypass capacitor, 0603 (KEMET)</li>
+                <li><span className="text-black dark:text-white font-medium">P1</span>: MTSW-104-07-T-S-170, 4-pin 2.54mm through-hole header (Mill-Max)</li>
               </ul>
             </div>
           </div>
@@ -258,40 +258,40 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
 
           <div className="space-y-4 text-sm text-black/70 dark:text-white/65 leading-relaxed">
             <p>
-              Built a full autonomous navigation stack for a simulated differential-drive robot in <span className="text-black dark:text-white font-medium">Gazebo</span>, developed as part of the WATonomous Autonomous Software Division onboarding. The system enables the robot to navigate to arbitrary goal points while avoiding static obstacles — entirely from scratch in <span className="text-black dark:text-white font-medium">C++ with ROS2 Humble</span>.
+              Built a full autonomous navigation stack for a simulated differential-drive robot in <span className="text-black dark:text-white font-medium">Gazebo</span> for WATonomous&apos;s Autonomous Software Division. The system enables the robot to navigate to arbitrary goal points while avoiding static obstacles, written entirely from scratch in <span className="text-black dark:text-white font-medium">C++ with ROS2 Humble</span>.
             </p>
 
             <p>
-              The stack is composed of four tightly coupled ROS2 nodes communicating over typed topics. Each node owns a distinct layer of the navigation pipeline, mirroring the perception → world model → planning → control architecture used in production autonomous systems.
+              The stack is composed of four tightly coupled ROS2 nodes communicating over typed topics. Each node owns a distinct layer of the navigation pipeline, mirroring the perception, world model, planning, and control architecture used in production autonomous systems.
             </p>
 
             <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4 space-y-3">
               <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest">Node Architecture</p>
               <ul className="space-y-2 text-xs text-black/60 dark:text-white/60">
-                <li><span className="text-black dark:text-white font-medium">Costmap</span> — Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid coordinates, marks occupied cells, and applies a distance-weighted inflation kernel to produce a cost gradient around obstacles. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/costmap</code>.</li>
-                <li><span className="text-black dark:text-white font-medium">Map Memory</span> — Fuses incoming local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms each costmap into the world frame and merges via linear fusion, updating only when the robot has displaced beyond a distance threshold to avoid redundant writes.</li>
-                <li><span className="text-black dark:text-white font-medium">Planner</span> — Runs <span className="text-black dark:text-white font-medium">A*</span> on the global occupancy grid to compute a collision-free path from the robot&apos;s current pose to a user-specified <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::PointStamped</code> goal. Implements a two-state machine (idle / tracking) and replans automatically on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.</li>
-                <li><span className="text-black dark:text-white font-medium">Control</span> — Implements <span className="text-black dark:text-white font-medium">Pure Pursuit</span> to track the planned path. Selects a lookahead waypoint, computes the required arc curvature, and outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> velocity commands to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.</li>
+                <li><span className="text-black dark:text-white font-medium">Costmap:</span> Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid coordinates, marks occupied cells, and applies a distance-weighted inflation kernel to produce a cost gradient around obstacles. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/costmap</code>.</li>
+                <li><span className="text-black dark:text-white font-medium">Map Memory:</span> Fuses incoming local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms each costmap into the world frame and merges via linear fusion, updating only when the robot has displaced beyond a distance threshold to avoid redundant writes.</li>
+                <li><span className="text-black dark:text-white font-medium">Planner:</span> Runs <span className="text-black dark:text-white font-medium">A*</span> on the global occupancy grid to compute a collision-free path from the robot&apos;s current pose to a user-specified <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::PointStamped</code> goal. Implements a two-state machine (idle / tracking) and replans automatically on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.</li>
+                <li><span className="text-black dark:text-white font-medium">Control:</span> Implements <span className="text-black dark:text-white font-medium">Pure Pursuit</span> to track the planned path. Selects a lookahead waypoint, computes the required arc curvature, and outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> velocity commands to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.</li>
               </ul>
             </div>
 
             <p>
-              The entire stack runs inside <span className="text-black dark:text-white font-medium">Docker</span> via WATonomous&apos;s monorepo infrastructure — a Docker Compose wrapper that orchestrates the robot, simulator, and visualization containers simultaneously. All inter-node communication is handled by the ROS2 DDS middleware; no shared memory or manual IPC required.
+              The entire stack runs inside <span className="text-black dark:text-white font-medium">Docker</span> via WATonomous&apos;s monorepo infrastructure, a Docker Compose wrapper that orchestrates the robot, simulator, and visualization containers simultaneously. All inter-node communication is handled by the ROS2 DDS middleware with no shared memory or manual IPC required.
             </p>
 
             <p>
-              Real-time state was visualized in <span className="text-black dark:text-white font-medium">Foxglove Studio</span> over a WebSocket bridge. The 3D panel renders the live occupancy grid, inflated obstacle halos, and the A* path as a polyline — making it straightforward to diagnose replanning behavior and tune inflation radius and lookahead distance.
+              Real-time state was visualized in <span className="text-black dark:text-white font-medium">Foxglove Studio</span> over a WebSocket bridge. The 3D panel renders the live occupancy grid, inflated obstacle halos, and the A* path as a polyline, making it straightforward to diagnose replanning behavior and tune inflation radius and lookahead distance.
             </p>
 
             <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4">
               <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest mb-2">Stack</p>
               <ul className="space-y-1 text-xs text-black/60 dark:text-white/60">
-                <li><span className="text-black dark:text-white font-medium">Language</span> — C++17 (rclcpp)</li>
-                <li><span className="text-black dark:text-white font-medium">Middleware</span> — ROS2 Humble (DDS pub/sub, typed messages)</li>
-                <li><span className="text-black dark:text-white font-medium">Simulation</span> — Gazebo (differential-drive robot, laser scanner, camera)</li>
-                <li><span className="text-black dark:text-white font-medium">Visualization</span> — Foxglove Studio (WebSocket, 3D + raw message panels)</li>
-                <li><span className="text-black dark:text-white font-medium">Infrastructure</span> — Docker Compose, WATonomous monorepo (watod CLI)</li>
-                <li><span className="text-black dark:text-white font-medium">Algorithms</span> — A* (grid search, Euclidean heuristic), Pure Pursuit (geometric path tracking)</li>
+                <li><span className="text-black dark:text-white font-medium">Language:</span> C++17 (rclcpp)</li>
+                <li><span className="text-black dark:text-white font-medium">Middleware:</span> ROS2 Humble (DDS pub/sub, typed messages)</li>
+                <li><span className="text-black dark:text-white font-medium">Simulation:</span> Gazebo (differential-drive robot, laser scanner, camera)</li>
+                <li><span className="text-black dark:text-white font-medium">Visualization:</span> Foxglove Studio (WebSocket, 3D + raw message panels)</li>
+                <li><span className="text-black dark:text-white font-medium">Infrastructure:</span> Docker Compose, WATonomous monorepo (watod CLI)</li>
+                <li><span className="text-black dark:text-white font-medium">Algorithms:</span> A* (grid search, Euclidean heuristic), Pure Pursuit (geometric path tracking)</li>
               </ul>
             </div>
           </div>
@@ -588,7 +588,7 @@ export default function Home() {
                   </button>
                 </div>
                 <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed">
-                  Full autonomous navigation stack for a simulated differential-drive robot. Built four ROS2 C++ nodes — Costmap (LiDAR → occupancy grid), Map Memory (global map fusion), Planner (A* pathfinding), and Control (Pure Pursuit) — visualized live in Foxglove Studio.
+                  Full autonomous navigation stack for a simulated differential-drive robot. Built four ROS2 C++ nodes: Costmap (LiDAR to occupancy grid), Map Memory (global map fusion), Planner (A* pathfinding), and Control (Pure Pursuit), visualized live in Foxglove Studio.
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {["ROS2 Humble", "C++17", "Gazebo", "Foxglove", "A*", "Pure Pursuit", "Docker", "WATonomous"].map((s) => (
