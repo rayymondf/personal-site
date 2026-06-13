@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, ExternalLink, X } from "lucide-react";
 import Image from "next/image";
@@ -35,7 +35,7 @@ const skills: Record<string, string[]> = {
   Languages: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
   "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "HTML5", "CSS3"],
   "Data & Cloud": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "Git", "Docker", "Linux"],
-  "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Inverse Kinematics", "Computer Vision", "OpenCV"],
+  "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Computer Vision", "OpenCV"],
   "Embedded & Hardware": ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
 };
 
@@ -43,7 +43,7 @@ const education = [
   {
     school: "University of Waterloo",
     degree: "BASc, Electrical Engineering (Co-op) · GPA: 3.8/4.0",
-    period: "Sept 2025 - Apr 2030",
+    period: "Sept 2025 – Apr 2030",
     location: "Waterloo, ON",
     logo: "/uwaterloo.png",
   },
@@ -52,39 +52,39 @@ const education = [
 const experience = [
   {
     company: "WATonomous",
-    role: "Robotics Engineer · Humanoid Team",
-    period: "Jan 2026 - Present",
+    role: "Robotics Software Engineer · Humanoid Team",
+    period: "Jan 2026 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
     description:
-      "Developing robotics software and control algorithms within the team's Dockerized ROS2 monorepo for a custom-built bipedal humanoid robot, in collaboration with the UW Robotics Lab. Implemented iterative Jacobian IK with damped least squares in MuJoCo to control a 6-DOF arm and 15-DOF hand across 21 degrees of freedom. Integrated PCA-based hand pose compression trained on real human motion data, reducing 15 finger joints to a 7-dimensional control space for real-time manipulation.",
+      "WATonomous is the University of Waterloo's flagship autonomy design team, building software for autonomous vehicles, humanoid robots, and racecars. On the Humanoid subteam — in collaboration with the UW Robotics Lab — developed motion control software in a Dockerized ROS2 monorepo for a custom-built bipedal robot. Implemented iterative Jacobian IK with damped least squares in MuJoCo to control a 6-DOF arm and 15-DOF hand. Integrated PCA-based hand pose compression trained on real human motion capture data, reducing 15 finger joints to a 7-dimensional latent space for real-time dexterous manipulation.",
   },
   {
     company: "Einfolab Inc.",
     role: "Data Engineer · Co-op",
-    period: "Jan 2026 - Apr 2026",
+    period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
     description:
-      "Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems serving healthcare and non-profit clients across Ontario. Built Python and pandas pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort. Configured and deployed Windows Server environments for client onboarding.",
+      "Einfolab is a boutique IT consultancy in Richmond Hill serving healthcare and non-profit organizations across Ontario. Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems. Built Python and pandas ETL pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual processing time. Configured and deployed Windows Server environments for client onboarding.",
   },
   {
     company: "University of Waterloo Formula Electric",
-    role: "Electrical and Firmware Engineer",
-    period: "Sept 2025 - Present",
+    role: "Electrical & Firmware Engineer",
+    period: "Sept 2025 – Present",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
     description:
-      "Developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module on a formula-style electric vehicle competing at FSAE Michigan and Formula Hybrid+Electric. Built CAN log parsing and analysis tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
+      "UW Formula Electric (UWFE) is a student design team that builds and races an open-wheel electric formula car at FSAE Michigan and the Formula Hybrid+Electric competition. Developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM). Built CAN log parsing and analysis tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
   },
   {
     company: "Robotics Team",
     role: "Hardware Systems Lead",
-    period: "Oct 2023 - Jun 2025",
+    period: "Oct 2023 – Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
     description:
-      "Led hardware design and build of a competitive RC Mars rover, owning the full stack from chassis design to embedded firmware. Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping. Integrated ultrasonic, IMU, and OpenCV camera sensors for real-time obstacle detection and autonomous fail-safe logic.",
+      "Led the full hardware design and build of a competitive RC Mars rover, owning the entire stack from chassis design through to embedded firmware. Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping. Integrated ultrasonic, IMU, and OpenCV camera modules for real-time obstacle detection and autonomous fail-safe logic.",
   },
 ];
 
@@ -148,7 +148,7 @@ const projects: Project[] = [
     image: "/pcb1.png",
     stack: ["Altium Designer", "INA180B3IDBVR", "PCB Design", "Analog Electronics", "Altium 365"],
     shortDesc:
-      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and a 10 mOhm shunt resistor outputs a voltage proportional to DC bus load current, readable by an MCU ADC.",
+      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and a 10 mΩ shunt resistor outputs a voltage proportional to DC bus load current, readable by an MCU ADC.",
     modalKey: "pcb",
     repo: null,
     demo: null,
@@ -261,14 +261,18 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">BuildBoard</h2>
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">Full-Stack Web App · React 19 · Node.js · PostgreSQL · Deployed on Render</p>
 
-      <div className="space-y-3 mb-6">
+      <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
-          <Image src="/buildboard-hero.png" alt="BuildBoard landing page" width={800} height={500} className="w-full h-auto object-cover" />
+          <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+            <Image src="/buildboard-hero.png" alt="BuildBoard landing page" fill className="object-cover" />
+          </div>
           <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Landing page</p>
         </div>
         <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
-          <Image src="/buildboard-detail.png" alt="BuildBoard project page" width={800} height={500} className="w-full h-auto object-cover" />
-          <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Project detail page with build log updates</p>
+          <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+            <Image src="/buildboard-detail.png" alt="BuildBoard project page" fill className="object-cover" />
+          </div>
+          <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Project detail page</p>
         </div>
       </div>
 
@@ -288,21 +292,21 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
 
         <ModalSection title="Key Features">
           <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">Project pages</span> - title, description, category, status, GitHub/demo links, skill tags</li>
-            <li><span className="text-black dark:text-white font-medium">Build logs</span> - milestone-tagged progress posts per project with comments and likes</li>
-            <li><span className="text-black dark:text-white font-medium">Team recruitment</span> - open roles with skill areas, join requests, owner accept/reject workflow</li>
-            <li><span className="text-black dark:text-white font-medium">Ranked feed</span> - score = likes &times; 2 + comments &times; 3 - age_in_hours &times; 0.05, computed as a SQL expression</li>
-            <li><span className="text-black dark:text-white font-medium">Authorization</span> - owner / admin / member permission model enforced at the route level</li>
-            <li><span className="text-black dark:text-white font-medium">Direct messaging</span> - DM threads between users with full conversation and message APIs</li>
-            <li><span className="text-black dark:text-white font-medium">Search</span> - ILIKE keyword search composable with category, status, and tag filters</li>
-            <li><span className="text-black dark:text-white font-medium">Guest demo</span> - read-only access with seeded demo data, no registration required</li>
+            <li><span className="text-black dark:text-white font-medium">Project pages</span> — title, description, category, status, GitHub/demo links, skill tags</li>
+            <li><span className="text-black dark:text-white font-medium">Build logs</span> — milestone-tagged progress posts per project with comments and likes</li>
+            <li><span className="text-black dark:text-white font-medium">Team recruitment</span> — open roles with skill areas, join requests, owner accept/reject workflow</li>
+            <li><span className="text-black dark:text-white font-medium">Ranked feed</span> — score = likes × 2 + comments × 3 − age_in_hours × 0.05, computed as a SQL expression</li>
+            <li><span className="text-black dark:text-white font-medium">Authorization</span> — owner / admin / member permission model enforced at the route level</li>
+            <li><span className="text-black dark:text-white font-medium">Direct messaging</span> — DM threads between users with full conversation and message APIs</li>
+            <li><span className="text-black dark:text-white font-medium">Search</span> — ILIKE keyword search composable with category, status, and tag filters</li>
+            <li><span className="text-black dark:text-white font-medium">Guest demo</span> — read-only access with seeded demo data, no registration required</li>
           </ul>
         </ModalSection>
 
         <ModalSection title="Security">
           <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
             <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">requireAuth</code> middleware on all write endpoints</li>
-            <li>Parameterized SQL queries throughout, no string interpolation</li>
+            <li>Parameterized SQL queries throughout — no string interpolation</li>
             <li>Session cookie: <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">httpOnly</code>, <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sameSite: lax</code>, <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">secure</code> in production</li>
             <li>CORS restricted to frontend origin only</li>
           </ul>
@@ -328,7 +332,7 @@ function LingoModal({ onClose }: { onClose: () => void }) {
 
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          Lingo is a Chrome extension built on Manifest V3 that surfaces a full translation workspace inside Chrome&apos;s native Side Panel. No npm packages, no build step, no framework. Chrome loads it directly as an unpacked set of files and it is live on the Chrome Web Store.
+          Lingo is a Chrome extension built on Manifest V3 that surfaces a full translation workspace inside Chrome&apos;s native Side Panel. No npm packages, no build step, no framework — Chrome loads it directly as an unpacked set of files and it is live on the Chrome Web Store.
         </p>
 
         <ModalSection title="How It Works">
@@ -344,9 +348,9 @@ function LingoModal({ onClose }: { onClose: () => void }) {
 
         <ModalSection title="Permissions">
           <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sidePanel</code> - opens the translator inside Chrome&apos;s native side panel</li>
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">storage</code> - persists draft text, language, and history locally</li>
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">https://api-free.deepl.com/*</code> - host permission for DeepL Free API calls</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sidePanel</code> — opens the translator inside Chrome&apos;s native side panel</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">storage</code> — persists draft text, language, and history locally</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">https://api-free.deepl.com/*</code> — host permission for DeepL Free API calls</li>
           </ul>
         </ModalSection>
 
@@ -383,12 +387,12 @@ function TodoModal({ onClose }: { onClose: () => void }) {
 
         <ModalSection title="Features">
           <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">Calendar view</span> - 7-column monthly grid with todo chips plotted by due date; click any day to open a detail modal</li>
-            <li><span className="text-black dark:text-white font-medium">List view</span> - filtered, sorted flat list with live search across title, description, and tags</li>
-            <li><span className="text-black dark:text-white font-medium">Filters</span> - All / Active / Completed / Overdue, composable with tag filter</li>
-            <li><span className="text-black dark:text-white font-medium">Sort modes</span> - Newest / Due date / Priority / A to Z</li>
-            <li><span className="text-black dark:text-white font-medium">Todo fields</span> - title, description, due date, priority, comma-separated tags, repeat interval</li>
-            <li><span className="text-black dark:text-white font-medium">Accessibility</span> - ARIA roles, labels, keyboard navigation, and programmatic focus management</li>
+            <li><span className="text-black dark:text-white font-medium">Calendar view</span> — 7-column monthly grid with todo chips plotted by due date; click any day to open a detail modal</li>
+            <li><span className="text-black dark:text-white font-medium">List view</span> — filtered, sorted flat list with live search across title, description, and tags</li>
+            <li><span className="text-black dark:text-white font-medium">Filters</span> — All / Active / Completed / Overdue, composable with tag filter</li>
+            <li><span className="text-black dark:text-white font-medium">Sort modes</span> — Newest / Due date / Priority / A to Z</li>
+            <li><span className="text-black dark:text-white font-medium">Todo fields</span> — title, description, due date, priority, comma-separated tags, repeat interval</li>
+            <li><span className="text-black dark:text-white font-medium">Accessibility</span> — ARIA roles, labels, keyboard navigation, and programmatic focus management</li>
           </ul>
         </ModalSection>
 
@@ -412,12 +416,12 @@ function PoolModal({ onClose }: { onClose: () => void }) {
 
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          A two-player 8-ball billiards game in Java Swing with a fully custom physics engine. All collision detection, resolution, and movement dynamics are computed from scratch each tick on a Swing Timer game loop, with no third-party physics library.
+          A two-player 8-ball billiards game in Java Swing with a fully custom physics engine. All collision detection, resolution, and movement dynamics are computed from scratch each tick on a Swing Timer game loop — no third-party physics library.
         </p>
 
         <ModalSection title="Physics Engine">
           <div className="space-y-2">
-            <ModalRow label="Integration" value="Per-tick velocity integration. Ball positions updated by velocity * dt each frame. Friction decelerates multiplicatively until below a rest threshold." />
+            <ModalRow label="Integration" value="Per-tick velocity integration. Ball positions updated by velocity × dt each frame. Friction decelerates multiplicatively until below a rest threshold." />
             <ModalRow label="Ball collisions" value="Elastic circle-circle overlap detection. Velocities resolved along the collision normal using conservation of momentum. Overlap separation prevents same-tick tunnelling." />
             <ModalRow label="Cushion bounce" value="AABB boundary checks on all four rails. Normal velocity component reflected and scaled by an energy loss coefficient to simulate cushion damping." />
             <ModalRow label="Sub-step CCD" value="At high speeds the physics step is subdivided to prevent any ball from passing through another ball or a rail within a single frame." />
@@ -450,45 +454,49 @@ function PCBModal({ onClose }: { onClose: () => void }) {
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">UW Orbital · Altium Designer · Analog Hardware Design</p>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
-          <Image src="/pcb1.png" alt="PCB Layout" width={600} height={400} className="w-full h-auto object-cover" />
+        <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 flex flex-col">
+          <div className="relative w-full bg-white dark:bg-white/5" style={{ aspectRatio: "4/3" }}>
+            <Image src="/pcb1.png" alt="PCB Layout" fill className="object-contain p-2" />
+          </div>
           <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">PCB Layout</p>
         </div>
-        <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-white dark:bg-white/5">
-          <Image src="/pcb2.png" alt="Schematic" width={600} height={400} className="w-full h-auto object-cover" />
+        <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 flex flex-col">
+          <div className="relative w-full bg-white dark:bg-white/5" style={{ aspectRatio: "4/3" }}>
+            <Image src="/pcb2.png" alt="Schematic" fill className="object-contain p-2" />
+          </div>
           <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Schematic</p>
         </div>
       </div>
 
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          A low-side current-sense breakout board designed for UW Orbital&apos;s Electrical Power System (EPS). Measures DC bus current on a 5V rail over a 0-200 mA range and outputs a proportional analog voltage readable by an MCU ADC. The same sensing topology is used on Orbital&apos;s flight CubeSat hardware.
+          A low-side current-sense breakout board designed for UW Orbital&apos;s Electrical Power System (EPS). Measures DC bus current on a 5V rail over a 0–200 mA range and outputs a proportional analog voltage readable by an MCU ADC. The same sensing topology is used on Orbital&apos;s flight CubeSat hardware.
         </p>
 
         <ModalSection title="Design Overview">
           <div className="space-y-2">
             <ModalRow label="Topology" value="Low-side sensing. Shunt placed between load return and ground. Both amplifier inputs operate near ground, avoiding the high common-mode voltage of high-side configurations." />
-            <ModalRow label="Why amplification" value="At 200 mA through a 10 mOhm shunt, the differential signal is only 2 mV, below the ~4 mV resolution of a typical 8-bit ADC. The INA180 amplifies this to 200 mV (100 V/V), well within a 3.3V ADC range." />
-            <ModalRow label="Signal path" value="Load supply to R1 (shunt) to load return to GND. INA180 IN+ and IN- connect across R1. V_OUT = Gain x I_LOAD x R_SENSE routed to MCU ADC." />
+            <ModalRow label="Why amplification" value="At 200 mA through a 10 mΩ shunt, the differential signal is only 2 mV — below the ~4 mV resolution of a typical 8-bit ADC. The INA180 amplifies this to 200 mV (100 V/V), well within a 3.3V ADC range." />
+            <ModalRow label="Signal path" value="Load supply → R1 (shunt) → load return → GND. INA180 IN+ and IN− connect across R1. V_OUT = Gain × I_LOAD × R_SENSE, routed to MCU ADC." />
           </div>
         </ModalSection>
 
         <ModalSection title="Bill of Materials">
           <ul className="space-y-2 text-xs text-black/65 dark:text-white/60">
             <li>
-              <span className="text-black dark:text-white font-medium">U1 - INA180B3IDBVR (Texas Instruments)</span><br />
-              100 V/V gain, SOT-23-5. Supply: 2.7-5.5V. Common-mode: -0.2V to +26V. Gain error: +/-1% max. Bandwidth: 210 kHz. Range: -40C to +125C.
+              <span className="text-black dark:text-white font-medium">U1 — INA180B3IDBVR (Texas Instruments)</span><br />
+              100 V/V gain, SOT-23-5. Supply: 2.7–5.5V. Common-mode: −0.2V to +26V. Gain error: ±1% max. Bandwidth: 210 kHz. Range: −40°C to +125°C.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">R1 - WSL0603R0100FEA (Vishay)</span><br />
-              10 mOhm, 1W shunt resistor, 0603. P = I&sup2;R = 0.4 mW at 200 mA. Low resistance minimizes insertion loss.
+              <span className="text-black dark:text-white font-medium">R1 — WSL0603R0100FEA (Vishay)</span><br />
+              10 mΩ, 1W shunt resistor, 0603. P = I²R = 0.4 mW at 200 mA. Low resistance minimizes insertion loss.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">C1 - C0603C104K8RACTU (KEMET)</span><br />
+              <span className="text-black dark:text-white font-medium">C1 — C0603C104K8RACTU (KEMET)</span><br />
               100 nF X7R bypass capacitor, 0603. Placed within 1 mm of VS pin. Suppresses supply noise that would corrupt the current reading.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">P1 - MTSW-104-07-T-S-170 (Mill-Max)</span><br />
+              <span className="text-black dark:text-white font-medium">P1 — MTSW-104-07-T-S-170 (Mill-Max)</span><br />
               4-pin 2.54 mm through-hole header. Exposes V_LOAD, 3V3, V_OUT, and GND for bench validation.
             </li>
           </ul>
@@ -519,22 +527,22 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
 
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          A full autonomous navigation stack built from scratch for a simulated differential-drive robot in Gazebo, developed for WATonomous&apos;s Autonomous Software Division. The system enables point-to-point navigation with static obstacle avoidance via four tightly coupled ROS2 C++ nodes, mirroring the perception-world model-planning-control architecture used in production autonomous systems.
+          A full autonomous navigation stack built from scratch for a simulated differential-drive robot in Gazebo, developed for WATonomous&apos;s Autonomous Software Division. The system enables point-to-point navigation with static obstacle avoidance via four tightly coupled ROS2 C++ nodes, mirroring the perception–world model–planning–control architecture used in production autonomous systems.
         </p>
 
         <ModalSection title="Node Architecture">
           <ul className="space-y-3 text-xs text-black/65 dark:text-white/60">
             <li>
-              <span className="text-black dark:text-white font-medium">Costmap</span> - Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid, marks occupied cells, applies distance-weighted inflation kernel. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code>.
+              <span className="text-black dark:text-white font-medium">Costmap</span> — Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid, marks occupied cells, applies distance-weighted inflation kernel. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code>.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">Map Memory</span> - Fuses local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms into world frame via linear fusion. Updates only beyond a displacement threshold.
+              <span className="text-black dark:text-white font-medium">Map Memory</span> — Fuses local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms into world frame via linear fusion. Updates only beyond a displacement threshold.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">Planner (A*)</span> - Runs A* on the global grid with a Euclidean heuristic. Implements an idle/tracking state machine and replans on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.
+              <span className="text-black dark:text-white font-medium">Planner (A*)</span> — Runs A* on the global grid with a Euclidean heuristic. Implements an idle/tracking state machine and replans on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">Control (Pure Pursuit)</span> - Selects a lookahead waypoint, computes arc curvature, outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.
+              <span className="text-black dark:text-white font-medium">Control (Pure Pursuit)</span> — Selects a lookahead waypoint, computes arc curvature, outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.
             </li>
           </ul>
         </ModalSection>
@@ -558,21 +566,13 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
 // ── Project Card ──────────────────────────────────────────────────────────────
 
 function StackTags({ stack }: { stack: string[] }) {
-  // Show all tags but cap display at 6 to keep cards consistent
-  const visible = stack.slice(0, 6);
-  const overflow = stack.length - visible.length;
   return (
     <div className="flex flex-wrap gap-1.5">
-      {visible.map((s) => (
-        <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+      {stack.map((s) => (
+        <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50 whitespace-nowrap">
           {s}
         </span>
       ))}
-      {overflow > 0 && (
-        <span className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/40 dark:text-white/40">
-          +{overflow}
-        </span>
-      )}
     </div>
   );
 }
@@ -629,8 +629,11 @@ function ProjectCard({ project, index, onLearnMore }: { project: Project; index:
 type ModalKey = "buildboard" | "lingo" | "todo" | "pool" | "pcb" | "wato" | null;
 
 export default function Home() {
-  const scrollTo = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = useCallback((id: string) => {
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  }, []);
   const [openModal, setOpenModal] = useState<ModalKey>(null);
+  const closeModal = useCallback(() => setOpenModal(null), []);
 
   return (
     <>
@@ -650,7 +653,7 @@ export default function Home() {
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
             className="text-base md:text-lg text-black/70 dark:text-white/75 mb-3 max-w-2xl leading-relaxed">
-            Electrical Engineering student at the University of Waterloo, working across embedded systems, robotics, hardware design, machine learning, and full-stack software. Focused on building practical, reliable systems that solve real problems.
+            Electrical Engineering student at the University of Waterloo, working across embedded systems, robotics, hardware design, and full-stack software. Focused on building practical, reliable systems that solve real problems.
           </motion.p>
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3}
@@ -759,12 +762,12 @@ export default function Home() {
       </Section>
 
       <AnimatePresence>
-        {openModal === "buildboard" && <BuildBoardModal onClose={() => setOpenModal(null)} />}
-        {openModal === "lingo" && <LingoModal onClose={() => setOpenModal(null)} />}
-        {openModal === "todo" && <TodoModal onClose={() => setOpenModal(null)} />}
-        {openModal === "pool" && <PoolModal onClose={() => setOpenModal(null)} />}
-        {openModal === "pcb" && <PCBModal onClose={() => setOpenModal(null)} />}
-        {openModal === "wato" && <WATonomousModal onClose={() => setOpenModal(null)} />}
+        {openModal === "buildboard" && <BuildBoardModal onClose={closeModal} />}
+        {openModal === "lingo" && <LingoModal onClose={closeModal} />}
+        {openModal === "todo" && <TodoModal onClose={closeModal} />}
+        {openModal === "pool" && <PoolModal onClose={closeModal} />}
+        {openModal === "pcb" && <PCBModal onClose={closeModal} />}
+        {openModal === "wato" && <WATonomousModal onClose={closeModal} />}
       </AnimatePresence>
 
       {/* Contact */}
