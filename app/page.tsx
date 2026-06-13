@@ -57,7 +57,7 @@ const experience = [
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
     description:
-      "WATonomous is UW's leading robotics design team, working on autonomous vehicles, humanoid robots, and racecars. On the Humanoid subteam, developed motion control software for a custom-built bipedal robot inside a shared Dockerized ROS2 monorepo, in collaboration with the UW Robotics Lab. Wrote arm and hand control code in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom. Also trained a PCA model on human hand motion data to compress 15 finger joint positions down to 7 values, making real-time hand control practical.",
+      "WATonomous is the University of Waterloo's leading robotics design team, building software for autonomous vehicles, humanoid robots, and racecars. On the Humanoid subteam, in collaboration with the UW Robotics Lab, Raymond develops motion control software for a custom-built bipedal robot inside a shared Dockerized ROS2 monorepo. He implemented arm and hand control in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom, and trained a PCA model on human hand motion data to compress 15 finger joint positions to 7 values, enabling practical real-time hand control.",
   },
   {
     company: "Einfolab Inc.",
@@ -66,7 +66,7 @@ const experience = [
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
     description:
-      "Einfolab is a small IT company in Richmond Hill that builds database and software solutions for healthcare clinics, dental offices, and non-profits across Ontario. Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems. Wrote Python and pandas scripts to automate data cleaning, deduplication, and reconciliation across systems, which improved reporting accuracy and cut down manual work. Also configured and deployed Windows Server environments for new client onboarding.",
+      "Einfolab is an IT and data management company in Richmond Hill that provides database, software, and infrastructure solutions to healthcare clinics, dental offices, and non-profits across Ontario. Raymond designed and maintained SQL Server and MySQL databases supporting clinical, dental, and administrative workflows. He built Python and pandas pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort. He also supported client onboarding by configuring and deploying Windows Server environments.",
   },
   {
     company: "University of Waterloo Formula Electric",
@@ -75,7 +75,7 @@ const experience = [
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
     description:
-      "UW Formula Electric (UWFE) is a student design team that builds and races an open-wheel electric formula car at FSAE Michigan and the Formula Hybrid+Electric competition. Developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM). Built CAN log parsing and analysis tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
+      "UW Formula Electric (UWFE) is a student design team that builds and races an open-wheel electric formula car at FSAE Michigan and the Formula Hybrid+Electric competition. Raymond developed C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM). He built CAN log parsing and analysis tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
   },
   {
     company: "Robotics Team",
@@ -84,7 +84,7 @@ const experience = [
     location: "Markham, ON",
     logo: "/robotics.webp",
     description:
-      "Led the full hardware design and build of a competitive RC Mars rover, owning the entire stack from chassis design through to embedded firmware. Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping. Integrated ultrasonic, IMU, and OpenCV camera modules for real-time obstacle detection and autonomous fail-safe logic.",
+      "Led the full hardware design and build of a competitive RC Mars rover, owning the entire stack from chassis design through to embedded firmware. Raymond developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping. He integrated ultrasonic, IMU, and OpenCV camera modules for real-time obstacle detection and autonomous fail-safe logic.",
   },
 ];
 
