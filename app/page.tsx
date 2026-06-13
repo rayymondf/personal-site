@@ -33,8 +33,8 @@ const LINKEDIN_SVG = (
 
 const skills: Record<string, string[]> = {
   Languages: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
-  "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "HTML5", "CSS3"],
-  "Data & Cloud": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "Git", "Docker", "Linux"],
+  "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "Passport.js", "HTML5", "CSS3"],
+  "Data & ML": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "scikit-learn", "Git", "Docker", "Linux"],
   "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Computer Vision", "OpenCV"],
   "Embedded & Hardware": ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
 };
@@ -57,7 +57,7 @@ const experience = [
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
     description:
-      "WATonomous is the University of Waterloo's leading robotics design team, building software for autonomous vehicles, humanoid robots, and racecars. Working on the Humanoid subteam in collaboration with the UW Robotics Lab, contributed to motion control software for a custom-built bipedal robot inside a shared Dockerized ROS2 monorepo. Implemented arm and hand control in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom, and trained a PCA model on human hand motion data to compress 15 finger joint positions to 7 values, enabling practical real-time hand control.",
+      "WATonomous is the University of Waterloo's leading robotics design team, designing and building autonomous vehicles, humanoid robots, and electric racecars — competing in international FSAE, SAE AutoDrive, and RoboSub competitions. Working on the Humanoid subteam in collaboration with the UW Robotics Lab, contributed to motion control software for a custom-built bipedal robot inside a shared Dockerized ROS2 monorepo. Implemented arm and hand control in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom, and trained a PCA model on human hand motion data to compress 15 finger joint positions to 7 values, enabling practical real-time hand control.",
   },
   {
     company: "Einfolab Inc.",
