@@ -29,12 +29,14 @@ const LINKEDIN_SVG = (
   </svg>
 );
 
-// Data
+// ── Data ──────────────────────────────────────────────────────────────────────
 
 const skills: Record<string, string[]> = {
   Languages: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
-  "Frontend & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs"],
-  "Databases & Tools": ["PostgreSQL", "MySQL", "SQL Server", "Git", "Docker", "Linux", "ROS2", "Gazebo"],
+  "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "HTML5", "CSS3"],
+  "Data & Cloud": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "Git", "Docker", "Linux"],
+  "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove"],
+  "ML & Control": ["Reinforcement Learning", "Inverse Kinematics", "Geometric Fabrics", "PCA", "Computer Vision", "OpenCV"],
   "Embedded & Hardware": ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
 };
 
@@ -50,13 +52,13 @@ const education = [
 
 const experience = [
   {
-    company: "WATonomous ASD",
-    role: "Autonomous Systems Developer",
+    company: "WATonomous",
+    role: "Robotics Engineer · Humanoid Team",
     period: "Jan 2026 - Present",
     location: "Waterloo, ON",
-    logo: "/wato-asd.png",
+    logo: "/watonomous_logo.jpg",
     description:
-      "WATonomous is a student engineering team building full-stack autonomous driving software. I developed a complete autonomous navigation stack for a simulated differential-drive robot in Gazebo using ROS2 and C++17. The system includes four tightly coupled nodes covering perception (LiDAR to occupancy grid), global map fusion, A* path planning, and Pure Pursuit control. Visualized live in Foxglove Studio over a WebSocket bridge.",
+      "WATonomous is a University of Waterloo design team building full-stack autonomous systems, including a custom-designed bipedal humanoid robot developed in collaboration with the UW Robotics Lab (UWRL). The Humanoid team designs the robot from scratch across mechanical, electrical, and software layers. Contributions include developing robotics software and control algorithms within the team's Dockerized ROS2 monorepo, implementing inverse kinematics solvers for the 6-DOF arm and 15-DOF hand using iterative Jacobian methods with damped least squares (DLS) in MuJoCo, and integrating PCA-based hand pose compression trained on real human motion data to reduce 15 finger joints to a 7-dimensional control space. Work spans simulation in Isaac Sim and MuJoCo and supports the team's broader goal of deploying autonomous locomotion and manipulation on physical hardware.",
   },
   {
     company: "Einfolab Inc.",
@@ -65,7 +67,7 @@ const experience = [
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
     description:
-      "Einfolab is an IT solutions provider serving healthcare and non-profit clients across Ontario. Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems. Automated data cleaning and reconciliation pipelines using Python and pandas. Configured Windows Server environments for client deployments, improving reporting accuracy and reducing manual setup overhead.",
+      "Einfolab is an IT solutions company delivering database and infrastructure services to healthcare and non-profit clients across Ontario. Work involved designing and maintaining SQL Server and MySQL databases for clinical, dental, and administrative record systems. Python and pandas pipelines were built to automate data cleaning, deduplication, and reconciliation across client datasets. Windows Server environments were configured and deployed for client onboarding, reducing manual setup time and improving cross-system reporting accuracy.",
   },
   {
     company: "University of Waterloo Formula Electric",
@@ -74,7 +76,7 @@ const experience = [
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
     description:
-      "UWFE builds and races a formula-style electric vehicle at FSAE Michigan and Formula Hybrid+Electric competitions. I develop C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Unit. I also build CAN log analysis tooling to accelerate firmware debugging and implement pre-HV startup logic to improve vehicle readiness before track integration.",
+      "UWFE is a student design team that builds and competes with a formula-style electric vehicle at FSAE Michigan and Formula Hybrid+Electric. Responsibilities include developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM), building CAN log parsing and analysis tooling to accelerate firmware debugging across subsystems, and implementing pre-HV startup sequencing logic to ensure system readiness before track integration.",
   },
   {
     company: "Robotics Team",
@@ -83,11 +85,11 @@ const experience = [
     location: "Markham, ON",
     logo: "/robotics.webp",
     description:
-      "Led the hardware division of a competitive robotics team, designing and building an RC Mars rover from the ground up. Owned the full hardware stack: chassis design, ESP32-based motor control firmware in C++/Arduino, PWM drive and steering mapping, and sensor integration including ultrasonic, IMU, and OpenCV camera feedback for real-time obstacle detection and autonomous fail-safes.",
+      "Led the hardware division of a competitive robotics team, designing and building an RC Mars rover from the ground up. Full ownership of the hardware stack: chassis mechanical design, ESP32-based motor control firmware in C++/Arduino, PWM drive and steering actuation mapping, and sensor integration including ultrasonic ranging, IMU, and an OpenCV camera pipeline for real-time obstacle detection and autonomous fail-safe logic.",
   },
 ];
 
-// Project types
+// ── Project types ─────────────────────────────────────────────────────────────
 
 type SoftwareProject = {
   kind: "software";
@@ -95,7 +97,7 @@ type SoftwareProject = {
   image: string;
   stack: string[];
   shortDesc: string;
-  longDesc: string;
+  modalKey: "buildboard" | "lingo" | "todo" | "pool";
   repo: string;
   demo: string | null;
 };
@@ -121,9 +123,8 @@ const softwareProjects: SoftwareProject[] = [
     image: "/buildboard.png",
     stack: ["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"],
     shortDesc:
-      "Collaboration platform for student engineers. Create project pages, post build logs, recruit teammates by skill, and message collaborators. Includes ranked feed, role-based permissions, and a guest demo account.",
-    longDesc:
-      "Full-stack engineering collaboration platform with a React 19/Vite SPA and an Express REST API. Session auth uses Passport.js local strategy with bcrypt and PostgreSQL-backed session storage. Features include a ranked activity feed (likes, comments, recency scoring), project pages with build log updates, open-role recruitment with accept/reject workflow, skill-based search with ILIKE filters, direct messaging threads, and object-level authorization (owner/admin/member). SPA routing is implemented with the Browser History API. Deployed on Render with a Neon PostgreSQL database.",
+      "Full-stack collaboration platform for student engineers. Users create project pages, post build logs, recruit teammates by skill tag, and message collaborators. Features role-based permissions, a ranked activity feed, and a guest demo account.",
+    modalKey: "buildboard",
     repo: "https://github.com/rayymondf/Posting_Platform",
     demo: "https://posting-platform.onrender.com/",
   },
@@ -133,9 +134,8 @@ const softwareProjects: SoftwareProject[] = [
     image: "/lingo-ext.png",
     stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"],
     shortDesc:
-      "Chrome extension that opens a translation workspace in the native Side Panel. Translates via DeepL, supports a dynamic language list, and persists draft text, language selection, and history with Chrome Storage.",
-    longDesc:
-      "Chrome extension built with Manifest V3 that surfaces a translation workspace in Chrome's native Side Panel. A background service worker registers the panel on icon click. Translation is handled via the DeepL Free API (POST /v2/translate), with a dynamic language list fetched from /v2/languages and a built-in fallback if the request fails. Draft text, the last selected language, and recent translation history are persisted with the Chrome Storage API. No build step or npm dependencies. Published on the Chrome Web Store.",
+      "Chrome extension (Manifest V3) that opens a persistent translation workspace inside Chrome's native Side Panel. Translates text via the DeepL Free API, persists draft text, language selection, and history using Chrome Storage. Published on the Chrome Web Store.",
+    modalKey: "lingo",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
   },
@@ -145,9 +145,8 @@ const softwareProjects: SoftwareProject[] = [
     image: "/todo-app.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
     shortDesc:
-      "Browser-based task manager with a strict three-layer architecture, monthly calendar view, live search and filters, and full accessibility support. No framework or build step.",
-    longDesc:
-      "Browser-based task manager with no framework or build step. Implements a strict three-layer architecture: a pure TodoModel layer (no DOM access) handling all CRUD and query logic, a Storage module for localStorage serialization, and an App layer managing rendering and event delegation. Features a monthly calendar view that plots todos by due date alongside a flat list view with live search, filter (all/active/completed/overdue), and sort (date, priority, A-Z). Todos support title, description, due date, priority, comma-separated tags, and repeat intervals. Fully accessible with ARIA roles, keyboard navigation, and focus management.",
+      "Zero-dependency browser task manager with a strict three-layer architecture (TodoModel, Storage, App). Features a monthly calendar view, live search, filter/sort, priority levels, tags, repeat intervals, and full ARIA accessibility.",
+    modalKey: "todo",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
   },
@@ -157,9 +156,8 @@ const softwareProjects: SoftwareProject[] = [
     image: "/pool-game.png",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
     shortDesc:
-      "Two-player 8-ball billiards game in Java Swing with custom physics: per-tick velocity integration, elastic collisions, friction, cushion bounce, pocket detection, and full rule enforcement.",
-    longDesc:
-      "Two-player 8-ball billiards game in Java Swing with a custom Swing Timer game loop. Physics built from scratch: per-tick velocity integration, friction, elastic ball-ball collision with overlap separation, cushion bounce with energy loss, and sub-step detection to prevent tunnelling. Pocket detection uses a distance threshold checked before rail bounce. Full rule enforcement: open-table start, automatic solids/stripes assignment, scratch detection, ball-in-hand, and win/loss conditions.",
+      "Two-player 8-ball billiards game in Java Swing with a fully custom physics engine: per-tick velocity integration, elastic ball collisions with overlap correction, friction, cushion bounce, and sub-step tunnelling prevention.",
+    modalKey: "pool",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
     demo: null,
   },
@@ -171,9 +169,9 @@ const hardwareProjects: HardwareProject[] = [
     name: "Low-Side Current Sensing PCB",
     subtitle: "UW Orbital",
     image: "/pcb1.png",
-    stack: ["Altium Designer", "INA180", "PCB Design", "Analog Electronics", "Embedded Systems", "UW Orbital"],
+    stack: ["Altium Designer", "INA180B3IDBVR", "PCB Design", "Analog Electronics", "Altium 365", "UW Orbital"],
     shortDesc:
-      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and 10mO shunt resistor outputs a voltage proportional to load current, readable by an MCU ADC.",
+      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and a 10 mOhm shunt resistor outputs a voltage proportional to DC bus load current, readable by an MCU ADC.",
     modalKey: "pcb",
     repo: null,
     demo: null,
@@ -185,12 +183,14 @@ const hardwareProjects: HardwareProject[] = [
     image: "/wato-asd.png",
     stack: ["ROS2 Humble", "C++17", "Gazebo", "Foxglove", "A*", "Pure Pursuit", "Docker", "WATonomous"],
     shortDesc:
-      "Full autonomous navigation stack for a simulated differential-drive robot. Four ROS2 C++ nodes: LiDAR Costmap, global Map Memory, A* Planner, and Pure Pursuit Controller, visualized live in Foxglove Studio.",
+      "Full autonomous navigation stack for a simulated differential-drive robot in Gazebo. Four ROS2 C++ nodes: LiDAR Costmap, global Map Memory, A* Planner, and Pure Pursuit Controller. Visualized live in Foxglove Studio.",
     modalKey: "wato",
     repo: null,
     demo: "https://youtu.be/jMNTflrencM",
   },
 ];
+
+const allProjects: Project[] = [...softwareProjects, ...hardwareProjects];
 
 const contacts = [
   { label: "Personal Email", value: "rayymondf29@gmail.com", href: "mailto:rayymondf29@gmail.com", icon: <Mail size={16} /> },
@@ -199,22 +199,18 @@ const contacts = [
   { label: "GitHub", value: "rayymondf", href: "https://github.com/rayymondf", icon: GITHUB_SVG },
 ];
 
-// Section wrapper
+// ── Shared UI ─────────────────────────────────────────────────────────────────
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="py-14 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-6">
-          {title}
-        </h2>
+        <h2 className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-6">{title}</h2>
         {children}
       </div>
     </section>
   );
 }
-
-// Modal Shell
 
 function ModalShell({ onClose, children }: { onClose: () => void; children: React.ReactNode }) {
   return (
@@ -238,46 +234,244 @@ function ModalShell({ onClose, children }: { onClose: () => void; children: Reac
   );
 }
 
-// Software Project Modal
+// ── Reusable modal sub-components ─────────────────────────────────────────────
 
-function SoftwareProjectModal({ project, onClose }: { project: SoftwareProject; onClose: () => void }) {
+function ModalTag({ children }: { children: React.ReactNode }) {
   return (
-    <ModalShell onClose={onClose}>
-      <h2 className="text-black dark:text-white font-semibold text-lg mb-4">{project.name}</h2>
-      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
-        <Image src={project.image} alt={project.name} width={800} height={500} className="w-full h-auto object-cover" />
-      </div>
-      <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed mb-5">{project.longDesc}</p>
-      <div className="flex flex-wrap gap-1.5 mb-5">
-        {project.stack.map((s) => (
-          <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
-            {s}
-          </span>
-        ))}
-      </div>
-      <div className="flex gap-3">
-        <a href={project.repo} target="_blank" rel="noopener noreferrer"
+    <span className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+      {children}
+    </span>
+  );
+}
+
+function ModalSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/2 dark:bg-white/3">
+      <p className="text-[11px] font-semibold text-black/45 dark:text-white/45 uppercase tracking-widest mb-3">{title}</p>
+      {children}
+    </div>
+  );
+}
+
+function ModalRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex gap-2 text-xs">
+      <span className="text-black/40 dark:text-white/40 shrink-0 w-28">{label}</span>
+      <span className="text-black/70 dark:text-white/65">{value}</span>
+    </div>
+  );
+}
+
+function ModalLinks({ repo, demo }: { repo: string | null; demo: string | null; demoLabel?: string }) {
+  return (
+    <div className="flex gap-3 mt-6">
+      {repo && (
+        <a href={repo} target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors">
           {GITHUB_SVG} Repository
         </a>
-        {project.demo && (
-          <a href={project.demo} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors">
-            <ExternalLink size={13} /> Live Demo
-          </a>
-        )}
+      )}
+      {demo && (
+        <a href={demo} target="_blank" rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors">
+          <ExternalLink size={13} /> {demo.includes("youtu") ? "Demo Video" : "Live Demo"}
+        </a>
+      )}
+    </div>
+  );
+}
+
+// ── Project Modals ────────────────────────────────────────────────────────────
+
+function BuildBoardModal({ onClose }: { onClose: () => void }) {
+  const p = softwareProjects[0];
+  return (
+    <ModalShell onClose={onClose}>
+      <h2 className="text-black dark:text-white font-semibold text-lg mb-1">BuildBoard</h2>
+      <p className="text-black/45 dark:text-white/45 text-xs mb-5">Full-Stack Web Application · React 19 · Node.js · PostgreSQL</p>
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+        <Image src={p.image} alt="BuildBoard" width={800} height={500} className="w-full h-auto object-cover" />
       </div>
+
+      <div className="space-y-4">
+        <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
+          BuildBoard is a full-stack collaboration platform built for student engineers, makers, and robotics teams to share technical projects, recruit teammates by skill, post build log updates, and message collaborators. The platform addresses the gap between generic social networks and purpose-built engineering collaboration tools.
+        </p>
+
+        <ModalSection title="Architecture">
+          <div className="space-y-1.5">
+            <ModalRow label="Frontend" value="React 19 SPA with Vite. SPA routing via Browser History API (no React Router). Responsive layout with sidebar nav on desktop and bottom tab bar on mobile." />
+            <ModalRow label="Backend" value="Node.js + Express REST API. All routes under /api/*. Session-cookie auth via Passport.js LocalStrategy with bcrypt password hashing." />
+            <ModalRow label="Database" value="PostgreSQL (Neon). connect-pg-simple for session storage. Parameterized queries throughout. UNIQUE constraints for duplicate-like prevention." />
+            <ModalRow label="Hosting" value="Render (server + static). Neon serverless PostgreSQL. Tables created automatically on first startup." />
+          </div>
+        </ModalSection>
+
+        <ModalSection title="Key Features">
+          <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
+            <li><span className="text-black dark:text-white font-medium">Project pages</span> - title, description, category, status, GitHub/demo links, skill tags</li>
+            <li><span className="text-black dark:text-white font-medium">Build log updates</span> - milestone-tagged progress posts per project with comments and likes</li>
+            <li><span className="text-black dark:text-white font-medium">Team recruitment</span> - open roles with skill areas, join requests, owner accept/reject workflow</li>
+            <li><span className="text-black dark:text-white font-medium">Ranked activity feed</span> - score = likes &times; 2 + comments &times; 3 - age_in_hours &times; 0.05, computed as a SQL expression</li>
+            <li><span className="text-black dark:text-white font-medium">Object-level authorization</span> - owner / admin / member permission model enforced at the route level</li>
+            <li><span className="text-black dark:text-white font-medium">Direct messaging</span> - DM threads between users with full conversation and message APIs</li>
+            <li><span className="text-black dark:text-white font-medium">Search</span> - ILIKE keyword search composable with category, status, and skill tag filters</li>
+            <li><span className="text-black dark:text-white font-medium">Guest demo account</span> - read-only access with seeded demo data</li>
+          </ul>
+        </ModalSection>
+
+        <ModalSection title="Security">
+          <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
+            <li>Route-level <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">requireAuth</code> middleware on all write endpoints</li>
+            <li>Parameterized SQL queries throughout - no string interpolation</li>
+            <li>Session cookie: <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">httpOnly</code>, <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sameSite: lax</code>, <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">secure</code> in production</li>
+            <li>CORS configured for frontend origin only</li>
+          </ul>
+        </ModalSection>
+
+        <div className="flex flex-wrap gap-1.5">
+          {p.stack.map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+        </div>
+      </div>
+      <ModalLinks repo={p.repo} demo={p.demo} />
     </ModalShell>
   );
 }
 
-// PCB Modal
+function LingoModal({ onClose }: { onClose: () => void }) {
+  const p = softwareProjects[1];
+  return (
+    <ModalShell onClose={onClose}>
+      <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Lingo: Chrome Translator</h2>
+      <p className="text-black/45 dark:text-white/45 text-xs mb-5">Chrome Extension · Manifest V3 · DeepL API · Published on Chrome Web Store</p>
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+        <Image src={p.image} alt="Lingo" width={800} height={500} className="w-full h-auto object-cover" />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
+          Lingo is a Chrome extension built on Manifest V3 that surfaces a full translation workspace inside Chrome's native Side Panel. The extension requires no npm packages, no build step, and no framework - Chrome loads it directly as an unpacked set of files.
+        </p>
+
+        <ModalSection title="Extension Architecture">
+          <div className="space-y-1.5">
+            <ModalRow label="Entry point" value="manifest.json declares sidePanelServiceWorker.js as the background service worker and requests sidePanel and storage permissions." />
+            <ModalRow label="Service worker" value="sidePanelServiceWorker.js registers the side panel on icon click via chrome.sidePanel.open(), keeping the panel persistent across navigation." />
+            <ModalRow label="Panel UI" value="panel.html loads styles.css, languageSelector.js, and backendService.js. No framework - vanilla JS handles all rendering and event binding." />
+            <ModalRow label="Language loading" value="GET /v2/languages fetches DeepL's supported target languages on panel open. Falls back to a built-in static list if the request fails." />
+            <ModalRow label="Translation" value="POST /v2/translate sends user text and selected language to DeepL Free API. Result is read from data.translations[0].text." />
+            <ModalRow label="Persistence" value="Chrome Storage API persists draft input text, last selected target language, and recent translation history across side panel sessions." />
+          </div>
+        </ModalSection>
+
+        <ModalSection title="Permissions">
+          <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sidePanel</code> - opens the translator inside Chrome's native side panel UI</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">storage</code> - persists draft text, language selection, and translation history locally</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">https://api-free.deepl.com/*</code> - host permission for DeepL Free API calls</li>
+          </ul>
+        </ModalSection>
+
+        <div className="flex flex-wrap gap-1.5">
+          {p.stack.map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+        </div>
+      </div>
+      <ModalLinks repo={p.repo} demo={p.demo} />
+    </ModalShell>
+  );
+}
+
+function TodoModal({ onClose }: { onClose: () => void }) {
+  const p = softwareProjects[2];
+  return (
+    <ModalShell onClose={onClose}>
+      <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Todo List App</h2>
+      <p className="text-black/45 dark:text-white/45 text-xs mb-5">Vanilla JavaScript · Zero Dependencies · Strict MVC Architecture</p>
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+        <Image src={p.image} alt="Todo App" width={800} height={500} className="w-full h-auto object-cover" />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
+          A browser-based task manager built with zero dependencies - no framework, no npm, no build step. The project enforces a strict three-layer architecture that cleanly separates data logic from storage and rendering, making the codebase easy to test and extend despite the absence of a framework.
+        </p>
+
+        <ModalSection title="Code Architecture">
+          <div className="space-y-1.5">
+            <ModalRow label="TodoModel" value="Pure data layer with no DOM access. Handles createTodo, updateTodo, toggleTodo, deleteTodo, filterTodos, filterByTag, sortTodos, getTodosForDate, getAllTags, and isOverdue." />
+            <ModalRow label="Storage" value="Serializes and deserializes the full state object to/from localStorage under the key todo-app-v2. Normalizes on load to handle schema changes." />
+            <ModalRow label="App" value="Connects model to DOM via event delegation. Manages calendar rendering, list rendering, and three modal types (todo form, day view, delete confirm). Keyboard support via Escape-to-close." />
+          </div>
+        </ModalSection>
+
+        <ModalSection title="Features">
+          <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
+            <li><span className="text-black dark:text-white font-medium">Calendar view</span> - 7-column monthly grid with todo chips plotted by due date. Clicking a day opens a day-detail modal.</li>
+            <li><span className="text-black dark:text-white font-medium">List view</span> - filtered, sorted flat list with live search across title, description, and tags</li>
+            <li><span className="text-black dark:text-white font-medium">Filter modes</span> - All / Active / Completed / Overdue, composable with tag filter</li>
+            <li><span className="text-black dark:text-white font-medium">Sort modes</span> - Newest first / Due date / Priority / A to Z</li>
+            <li><span className="text-black dark:text-white font-medium">Todo fields</span> - title, description, due date, priority (low/medium/high), comma-separated tags, repeat interval (none/daily/weekly/monthly)</li>
+            <li><span className="text-black dark:text-white font-medium">Accessibility</span> - ARIA roles, labels, keyboard navigation, and programmatic focus management throughout</li>
+          </ul>
+        </ModalSection>
+
+        <div className="flex flex-wrap gap-1.5">
+          {p.stack.map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+        </div>
+      </div>
+      <ModalLinks repo={p.repo} demo={p.demo} />
+    </ModalShell>
+  );
+}
+
+function PoolModal({ onClose }: { onClose: () => void }) {
+  const p = softwareProjects[3];
+  return (
+    <ModalShell onClose={onClose}>
+      <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Java 8-Ball Pool Game</h2>
+      <p className="text-black/45 dark:text-white/45 text-xs mb-5">Java Swing · Custom 2D Physics Engine · OOP Design</p>
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+        <Image src={p.image} alt="Pool Game" width={800} height={500} className="w-full h-auto object-cover" />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
+          A two-player 8-ball billiards game implemented in Java Swing with a fully custom physics engine. The physics simulation runs on a Swing Timer game loop with no third-party physics library - all collision detection, resolution, and movement dynamics are computed from scratch each tick.
+        </p>
+
+        <ModalSection title="Physics Engine">
+          <div className="space-y-1.5">
+            <ModalRow label="Integration" value="Per-tick velocity integration. Each ball's position is updated by velocity * dt each frame. Friction decelerates balls multiplicatively until below a rest threshold." />
+            <ModalRow label="Ball collisions" value="Elastic collision detection using circle-circle overlap. On contact, velocities are resolved along the collision normal using conservation of momentum. Overlap separation prevents tunnelling on the same tick." />
+            <ModalRow label="Cushion bounce" value="AABB boundary checks for all four rails. Velocity component normal to the wall is reflected and scaled by an energy loss coefficient to simulate cushion damping." />
+            <ModalRow label="Sub-step detection" value="Tunnelling prevention via sub-step CCD: at high speeds, the physics step is subdivided to ensure no ball passes through another or a rail within a single frame." />
+            <ModalRow label="Pocket detection" value="Distance threshold check against each pocket center, evaluated before rail bounce so a ball entering a pocket doesn't incorrectly reflect off the rail first." />
+          </div>
+        </ModalSection>
+
+        <ModalSection title="Rule Enforcement">
+          <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
+            <li>Open table at game start - solids/stripes assignment triggers on first legal pocket</li>
+            <li>Scratch detection and ball-in-hand placement for the fouled player</li>
+            <li>Win condition: all assigned balls pocketed, then 8-ball legally sunk</li>
+            <li>Loss condition: 8-ball sunk early or on a scratch</li>
+          </ul>
+        </ModalSection>
+
+        <div className="flex flex-wrap gap-1.5">
+          {p.stack.map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+        </div>
+      </div>
+      <ModalLinks repo={p.repo} demo={p.demo} />
+    </ModalShell>
+  );
+}
 
 function PCBModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Low-Side Current Sensing PCB</h2>
-      <p className="text-black/45 dark:text-white/45 text-xs mb-5">UW Orbital · Altium Designer · Hardware Design</p>
+      <p className="text-black/45 dark:text-white/45 text-xs mb-5">UW Orbital · Altium Designer · Analog Hardware Design</p>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
@@ -290,166 +484,148 @@ function PCBModal({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="space-y-4 text-sm text-black/70 dark:text-white/65 leading-relaxed">
-        <p>
-          A low-side current-sense breakout board designed for UW Orbital&apos;s Electrical Power System (EPS). The board measures DC bus current on a 5V rail over a 0-200mA range and outputs a proportional analog voltage readable by a microcontroller ADC. The same sensing topology is used on Orbital&apos;s flight CubeSat hardware.
+      <div className="space-y-4">
+        <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
+          A low-side current-sense breakout board designed for UW Orbital's Electrical Power System (EPS). The board measures DC bus current on a 5V rail over a 0-200 mA range and outputs a proportional analog voltage readable by a microcontroller ADC. The same sensing topology is used on Orbital's flight CubeSat hardware.
         </p>
-        <p>
-          Microcontrollers read voltage through an ADC, not current directly. To measure current, a small <span className="text-black dark:text-white font-medium">shunt resistor</span> is placed in series with the load and Ohm&apos;s Law (V = IR) is applied to infer current from the measured voltage drop. The challenge is signal amplitude: at 200mA through a 10mO shunt, the differential voltage is only 2mV, which falls below the ~4mV resolution of a typical 8-bit ADC. A current-sense amplifier is required to bring the signal into a usable range before digitisation.
-        </p>
-        <p>
-          This board uses a <span className="text-black dark:text-white font-medium">low-side sensing topology</span>, where the shunt resistor is placed between the load return path and ground. Both amplifier inputs operate near ground potential, which avoids the high common-mode voltage present in high-side configurations and simplifies the amplifier requirements. The trade-off is a small ground offset under load, which is acceptable for this application.
-        </p>
-        <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4 space-y-3">
-          <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest">Signal Path</p>
-          <p className="text-xs text-black/60 dark:text-white/60 leading-relaxed">
-            Load supply &rarr; R1 (shunt) &rarr; load return &rarr; GND. The INA180&apos;s IN+ and IN- pins connect across R1, measuring the differential voltage. The amplified output V_OUT = Gain x I_LOAD x R_SENSE is fed to an MCU ADC. C1 (100nF) decouples the VS supply pin. P1 breaks out V_LOAD, 3V3, V_OUT, and GND for external connection.
-          </p>
-        </div>
-        <p>
-          The amplifier IC is the <span className="text-black dark:text-white font-medium">INA180B3IDBVR</span> (Texas Instruments), a precision single-channel current-sense amplifier in a SOT-23-5 package. Key specifications:
-        </p>
-        <ul className="text-xs text-black/60 dark:text-white/60 space-y-1 pl-4 list-disc">
-          <li>Fixed gain: <span className="text-black dark:text-white font-medium">100 V/V</span> (A3 variant), amplifies the 2mV shunt signal at 200mA to 200mV</li>
-          <li>Supply voltage (VS): <span className="text-black dark:text-white font-medium">2.7V to 5.5V</span>, operated at 3.3V on this board</li>
-          <li>Common-mode input range: <span className="text-black dark:text-white font-medium">-0.2V to +26V</span>, independent of VS</li>
-          <li>Gain error: plus or minus 1% max; bandwidth: 210kHz; quiescent current: 260uA max</li>
-          <li>Operating temperature: -40C to +125C</li>
-        </ul>
-        <p>
-          The shunt resistor is a <span className="text-black dark:text-white font-medium">WSL0603R0100FEA</span> (Vishay), 10mO, 1W in an 0603 package. The bypass capacitor is a <span className="text-black dark:text-white font-medium">C0603C104K8RACTU</span> (KEMET), 100nF X7R ceramic placed close to the INA180 VS pin. The connector is a <span className="text-black dark:text-white font-medium">MTSW-104-07-T-S-170</span> (Mill-Max), a 4-pin 2.54mm through-hole header exposing V_LOAD, 3V3, V_OUT, and GND.
-        </p>
-        <p>
-          Schematic and PCB layout completed in <span className="text-black dark:text-white font-medium">Altium Designer</span> via UW Orbital&apos;s shared Altium 365 workspace. C1 placed within 1mm of the VS pin to minimise supply inductance, and a GND copper pour on both layers is stitched with vias.
-        </p>
-        <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4">
-          <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest mb-2">Bill of Materials</p>
-          <ul className="space-y-1 text-xs text-black/60 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">U1</span>: INA180B3IDBVR, 100 V/V current-sense amplifier, SOT-23-5 (Texas Instruments)</li>
-            <li><span className="text-black dark:text-white font-medium">R1</span>: WSL0603R0100FEA, 10mO 1W shunt resistor, 0603 (Vishay)</li>
-            <li><span className="text-black dark:text-white font-medium">C1</span>: C0603C104K8RACTU, 100nF X7R bypass capacitor, 0603 (KEMET)</li>
-            <li><span className="text-black dark:text-white font-medium">P1</span>: MTSW-104-07-T-S-170, 4-pin 2.54mm through-hole header (Mill-Max)</li>
+
+        <ModalSection title="Design Overview">
+          <div className="space-y-1.5">
+            <ModalRow label="Topology" value="Low-side sensing. Shunt resistor placed between load return path and ground. Both amplifier inputs operate near ground potential, avoiding the high common-mode voltage of high-side configurations." />
+            <ModalRow label="Why amplification" value="At 200 mA through a 10 mOhm shunt, the differential signal is only 2 mV - below the ~4 mV resolution of a typical 8-bit ADC. The INA180 amplifies this to 200 mV (100 V/V gain), well within a 3.3V ADC range." />
+            <ModalRow label="Signal path" value="Load supply -> R1 (shunt) -> load return -> GND. INA180 IN+ and IN- connect across R1. V_OUT = Gain x I_LOAD x R_SENSE is routed to an MCU ADC pin." />
+          </div>
+        </ModalSection>
+
+        <ModalSection title="Component Selection">
+          <ul className="space-y-2 text-xs text-black/65 dark:text-white/60">
+            <li>
+              <span className="text-black dark:text-white font-medium">U1 - INA180B3IDBVR (Texas Instruments)</span>
+              <br />Precision current-sense amplifier, SOT-23-5. Fixed gain: 100 V/V. Supply: 2.7-5.5V (operated at 3.3V). Common-mode range: -0.2V to +26V independent of VS. Gain error: +/-1% max. Bandwidth: 210 kHz. Temp range: -40C to +125C.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">R1 - WSL0603R0100FEA (Vishay)</span>
+              <br />10 mOhm, 1W precision shunt resistor, 0603. Power dissipation at 200 mA: P = I^2 x R = 0.4 mW. Low resistance keeps insertion loss minimal while generating a signal the INA180 can amplify.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">C1 - C0603C104K8RACTU (KEMET)</span>
+              <br />100 nF X7R bypass capacitor, 0603. Placed within 1 mm of the INA180 VS pin per the datasheet application circuit (Figure 9-3). Suppresses high-frequency supply noise that would corrupt the current reading.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">P1 - MTSW-104-07-T-S-170 (Mill-Max)</span>
+              <br />4-pin 2.54 mm through-hole header. Exposes V_LOAD, 3V3, V_OUT, and GND for bench validation and MCU connection.
+            </li>
           </ul>
-        </div>
+        </ModalSection>
+
+        <ModalSection title="Layout and Tools">
+          <div className="space-y-1.5">
+            <ModalRow label="Tool" value="Altium Designer via UW Orbital's shared Altium 365 workspace." />
+            <ModalRow label="Bypass cap placement" value="C1 placed within 1 mm of VS pin to minimize supply trace inductance." />
+            <ModalRow label="Ground plane" value="GND copper pour on both layers, stitched with vias to reduce ground impedance and provide a low-resistance return path." />
+            <ModalRow label="Connector" value="P1 positioned at board edge for easy probing during bench validation." />
+          </div>
+        </ModalSection>
       </div>
     </ModalShell>
   );
 }
-
-// WATonomous Modal
 
 function WATonomousModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Autonomous Robot Navigation Stack</h2>
-      <p className="text-black/45 dark:text-white/45 text-xs mb-5">WATonomous ASD · ROS2 · C++ · Gazebo · Foxglove</p>
+      <p className="text-black/45 dark:text-white/45 text-xs mb-5">WATonomous ASD · ROS2 Humble · C++17 · Gazebo · Foxglove</p>
 
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
-        <Image src="/wato-asd.png" alt="Foxglove visualization of autonomous navigation" width={800} height={500} className="w-full h-auto object-cover" />
+        <Image src="/wato-asd.png" alt="Foxglove visualization" width={800} height={500} className="w-full h-auto object-cover" />
         <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Foxglove: live costmap, inflated obstacles, and A* path overlaid on the occupancy grid</p>
       </div>
 
-      <div className="space-y-4 text-sm text-black/70 dark:text-white/65 leading-relaxed">
-        <p>
-          Built a full autonomous navigation stack for a simulated differential-drive robot in <span className="text-black dark:text-white font-medium">Gazebo</span> for WATonomous&apos;s Autonomous Software Division. The system enables the robot to navigate to arbitrary goal points while avoiding static obstacles, written entirely from scratch in <span className="text-black dark:text-white font-medium">C++ with ROS2 Humble</span>.
+      <div className="space-y-4">
+        <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
+          A full autonomous navigation stack built from scratch for a simulated differential-drive robot in Gazebo, developed as part of WATonomous's Autonomous Software Division onboarding. The system enables point-to-point navigation with static obstacle avoidance using four tightly coupled ROS2 C++ nodes, mirroring the perception-world model-planning-control pipeline used in production autonomous systems.
         </p>
-        <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4 space-y-3">
-          <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest">Node Architecture</p>
-          <ul className="space-y-2 text-xs text-black/60 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">Costmap:</span> Subscribes to /lidar (LaserScan). Converts polar scan data to Cartesian grid coordinates, marks occupied cells, and applies a distance-weighted inflation kernel. Publishes nav_msgs::OccupancyGrid to /costmap.</li>
-            <li><span className="text-black dark:text-white font-medium">Map Memory:</span> Fuses incoming local costmaps into a persistent global map using odometry from /odom/filtered. Transforms each costmap into the world frame and merges via linear fusion, updating only when the robot has displaced beyond a distance threshold.</li>
-            <li><span className="text-black dark:text-white font-medium">Planner:</span> Runs <span className="text-black dark:text-white font-medium">A*</span> on the global occupancy grid to compute a collision-free path to a user-specified goal. Implements a two-state machine (idle/tracking) and replans on map updates or timeout. Publishes nav_msgs::Path.</li>
-            <li><span className="text-black dark:text-white font-medium">Control:</span> Implements <span className="text-black dark:text-white font-medium">Pure Pursuit</span> to track the planned path. Selects a lookahead waypoint, computes arc curvature, and outputs geometry_msgs::Twist velocity commands to /cmd_vel at 10 Hz.</li>
-          </ul>
-        </div>
-        <p>
-          The entire stack runs inside <span className="text-black dark:text-white font-medium">Docker</span> via WATonomous&apos;s monorepo infrastructure. Real-time state was visualized in <span className="text-black dark:text-white font-medium">Foxglove Studio</span> over a WebSocket bridge, rendering the live occupancy grid, inflated obstacle halos, and A* path as a polyline.
-        </p>
-        <div className="border border-black/8 dark:border-white/10 rounded-xl p-4 bg-black/3 dark:bg-white/4">
-          <p className="text-[11px] font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest mb-2">Stack</p>
-          <ul className="space-y-1 text-xs text-black/60 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">Language:</span> C++17 (rclcpp)</li>
-            <li><span className="text-black dark:text-white font-medium">Middleware:</span> ROS2 Humble (DDS pub/sub, typed messages)</li>
-            <li><span className="text-black dark:text-white font-medium">Simulation:</span> Gazebo (differential-drive robot, laser scanner, camera)</li>
-            <li><span className="text-black dark:text-white font-medium">Visualization:</span> Foxglove Studio (WebSocket, 3D + raw message panels)</li>
-            <li><span className="text-black dark:text-white font-medium">Infrastructure:</span> Docker Compose, WATonomous monorepo (watod CLI)</li>
-            <li><span className="text-black dark:text-white font-medium">Algorithms:</span> A* (grid search, Euclidean heuristic), Pure Pursuit (geometric path tracking)</li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="mt-6">
-        <a href="https://youtu.be/jMNTflrencM" target="_blank" rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-xs text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1.5 transition-colors w-fit">
-          <ExternalLink size={13} /> Demo Video
-        </a>
+        <ModalSection title="Node Architecture">
+          <ul className="space-y-3 text-xs text-black/65 dark:text-white/60">
+            <li>
+              <span className="text-black dark:text-white font-medium">Costmap Node</span>
+              <br />Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid coordinates, marks occupied cells, then applies a distance-weighted inflation kernel to produce a cost gradient around obstacles. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/costmap</code>.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">Map Memory Node</span>
+              <br />Fuses incoming local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms each costmap into the world frame via linear fusion. Updates only when the robot displaces beyond a distance threshold to avoid redundant writes.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">Planner Node (A*)</span>
+              <br />Runs A* on the global occupancy grid with a Euclidean heuristic to compute a collision-free path to a <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::PointStamped</code> goal. Implements an idle/tracking state machine and replans automatically on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">Control Node (Pure Pursuit)</span>
+              <br />Selects a lookahead waypoint on the planned path, computes the required arc curvature, and outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> velocity commands to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.
+            </li>
+          </ul>
+        </ModalSection>
+
+        <ModalSection title="Stack">
+          <div className="space-y-1.5">
+            <ModalRow label="Language" value="C++17 (rclcpp)" />
+            <ModalRow label="Middleware" value="ROS2 Humble - DDS pub/sub, typed messages" />
+            <ModalRow label="Simulation" value="Gazebo - differential-drive robot, laser scanner, camera" />
+            <ModalRow label="Visualization" value="Foxglove Studio - WebSocket bridge, 3D + raw message panels" />
+            <ModalRow label="Infrastructure" value="Docker Compose, WATonomous monorepo (watod CLI)" />
+            <ModalRow label="Algorithms" value="A* (grid search, Euclidean heuristic), Pure Pursuit (geometric path tracking)" />
+          </div>
+        </ModalSection>
       </div>
+      <ModalLinks repo={null} demo="https://youtu.be/jMNTflrencM" />
     </ModalShell>
   );
 }
 
-// Shared card link buttons
+// ── Project Card ──────────────────────────────────────────────────────────────
 
-function CardLinks({ repo, demo }: { repo: string | null; demo: string | null }) {
-  return (
-    <div className="flex items-center gap-2">
-      {repo && (
-        <a href={repo} target="_blank" rel="noopener noreferrer" aria-label="Repository"
-          className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
-          {GITHUB_SVG}
-        </a>
-      )}
-      {demo && (
-        <a href={demo} target="_blank" rel="noopener noreferrer" aria-label="Live demo"
-          className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
-          <ExternalLink size={15} />
-        </a>
-      )}
-    </div>
-  );
-}
-
-// Project Card (grid cell)
-
-function ProjectCard({
-  project,
-  index,
-  onLearnMore,
-}: {
-  project: Project;
-  index: number;
-  onLearnMore: () => void;
-}) {
-  const isHardware = project.kind === "hardware";
+function ProjectCard({ project, index, onLearnMore }: { project: Project; index: number; onLearnMore: () => void }) {
   return (
     <motion.div
       variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={index}
-      className="border border-black/10 dark:border-white/12 rounded-xl overflow-hidden flex flex-col hover:border-black/25 dark:hover:border-white/25 transition-colors"
+      className="border border-black/10 dark:border-white/12 rounded-xl overflow-hidden flex flex-col hover:border-black/25 dark:hover:border-white/25 transition-colors h-full"
     >
-      {/* Image */}
-      <div className="relative w-full bg-black" style={{ aspectRatio: "16/9" }}>
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          className={`object-cover${isHardware && project.image === "/wato-asd.png" ? "" : ""}`}
-        />
+      {/* Fixed-ratio image */}
+      <div className="relative w-full bg-black shrink-0" style={{ aspectRatio: "16/9" }}>
+        <Image src={project.image} alt={project.name} fill className="object-cover" />
       </div>
 
-      {/* Content */}
+      {/* Content - flex-1 so all cards stretch to same height in a row */}
       <div className="flex flex-col gap-2.5 p-4 flex-1">
         <div className="flex items-start justify-between gap-2">
           <div>
             <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">{project.name}</h3>
-            {isHardware && (
-              <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{(project as HardwareProject).subtitle}</p>
+            {project.kind === "hardware" && (
+              <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{project.subtitle}</p>
             )}
           </div>
-          <CardLinks repo={project.repo} demo={project.demo} />
+          {/* Top-level repo + demo links */}
+          <div className="flex items-center gap-2 shrink-0">
+            {project.repo && (
+              <a href={project.repo} target="_blank" rel="noopener noreferrer" aria-label="Repository"
+                className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+                {GITHUB_SVG}
+              </a>
+            )}
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label="Live demo"
+                className="text-black/35 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+                <ExternalLink size={15} />
+              </a>
+            )}
+          </div>
         </div>
 
         <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed flex-1">{project.shortDesc}</p>
 
+        {/* Stack tags - max 4 + overflow count */}
         <div className="flex flex-wrap gap-1.5">
           {project.stack.slice(0, 4).map((s) => (
             <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
@@ -463,10 +639,8 @@ function ProjectCard({
           )}
         </div>
 
-        <button
-          onClick={onLearnMore}
-          className="self-start text-xs text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1 transition-colors mt-1"
-        >
+        <button onClick={onLearnMore}
+          className="self-start mt-1 text-xs text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1 transition-colors">
           Learn More
         </button>
       </div>
@@ -474,16 +648,13 @@ function ProjectCard({
   );
 }
 
-// Page
+// ── Page ──────────────────────────────────────────────────────────────────────
+
+type ModalKey = "buildboard" | "lingo" | "todo" | "pool" | "pcb" | "wato" | null;
 
 export default function Home() {
   const scrollTo = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
-
-  const [pcbModalOpen, setPcbModalOpen] = useState(false);
-  const [watoModalOpen, setWatoModalOpen] = useState(false);
-  const [activeProject, setActiveProject] = useState<SoftwareProject | null>(null);
-
-  const allProjects: Project[] = [...softwareProjects, ...hardwareProjects];
+  const [openModal, setOpenModal] = useState<ModalKey>(null);
 
   return (
     <>
@@ -492,12 +663,9 @@ export default function Home() {
       {/* Hero */}
       <section id="hero" className="relative min-h-screen px-6 pt-36 pb-14 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:32px_32px]" />
-
         <div className="relative z-10 max-w-3xl mx-auto">
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={0}
-            className="text-sm text-black/40 dark:text-white/50 mb-3">
-            Hi, I&apos;m
-          </motion.p>
+            className="text-sm text-black/40 dark:text-white/50 mb-3">Hi, I&apos;m</motion.p>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
             className="text-5xl md:text-7xl font-bold text-black dark:text-white mb-5 leading-tight">
@@ -506,7 +674,7 @@ export default function Home() {
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
             className="text-base md:text-lg text-black/70 dark:text-white/75 mb-3 max-w-2xl leading-relaxed">
-            Electrical Engineering student at the University of Waterloo with interests in embedded systems, autonomous systems, and full-stack software development. I build practical, reliable solutions across hardware and software.
+            Electrical Engineering student at the University of Waterloo, working across embedded systems, robotics, hardware design, machine learning, and full-stack software. Focused on building practical systems that span from bare metal firmware to autonomous software pipelines.
           </motion.p>
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3}
@@ -537,8 +705,7 @@ export default function Home() {
                 <p className="text-[10px] text-black/35 dark:text-white/35 uppercase tracking-widest mb-2">{category}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {items.map((skill) => (
-                    <span key={skill}
-                      className="px-2.5 py-1 text-xs bg-black/6 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/65 dark:text-white/65">
+                    <span key={skill} className="px-2.5 py-1 text-xs bg-black/6 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/65 dark:text-white/65">
                       {skill}
                     </span>
                   ))}
@@ -581,13 +748,8 @@ export default function Home() {
               className="border border-black/10 dark:border-white/12 rounded-xl p-6">
               <div className="flex items-center gap-5 mb-4">
                 <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
-                  <Image
-                    src={e.logo}
-                    alt={e.company}
-                    width={80}
-                    height={80}
-                    className={`object-contain w-full h-full${e.logo === "/robotics.webp" ? " scale-[1.25] object-cover" : ""}`}
-                  />
+                  <Image src={e.logo} alt={e.company} width={80} height={80}
+                    className={`object-contain w-full h-full${e.logo === "/robotics.webp" ? " scale-[1.25] object-cover" : ""}`} />
                 </div>
                 <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
                   <div>
@@ -606,32 +768,27 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Projects - 2-per-row grid */}
+      {/* Projects - uniform 2-per-row grid, equal card heights per row */}
       <Section id="projects" title="Projects">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
           {allProjects.map((p, i) => (
             <ProjectCard
               key={p.name}
               project={p}
               index={i}
-              onLearnMore={() => {
-                if (p.kind === "software") {
-                  setActiveProject(p as SoftwareProject);
-                } else if ((p as HardwareProject).modalKey === "pcb") {
-                  setPcbModalOpen(true);
-                } else {
-                  setWatoModalOpen(true);
-                }
-              }}
+              onLearnMore={() => setOpenModal(p.modalKey as ModalKey)}
             />
           ))}
         </div>
       </Section>
 
       <AnimatePresence>
-        {activeProject && <SoftwareProjectModal project={activeProject} onClose={() => setActiveProject(null)} />}
-        {pcbModalOpen && <PCBModal onClose={() => setPcbModalOpen(false)} />}
-        {watoModalOpen && <WATonomousModal onClose={() => setWatoModalOpen(false)} />}
+        {openModal === "buildboard" && <BuildBoardModal onClose={() => setOpenModal(null)} />}
+        {openModal === "lingo" && <LingoModal onClose={() => setOpenModal(null)} />}
+        {openModal === "todo" && <TodoModal onClose={() => setOpenModal(null)} />}
+        {openModal === "pool" && <PoolModal onClose={() => setOpenModal(null)} />}
+        {openModal === "pcb" && <PCBModal onClose={() => setOpenModal(null)} />}
+        {openModal === "wato" && <WATonomousModal onClose={() => setOpenModal(null)} />}
       </AnimatePresence>
 
       {/* Contact */}
