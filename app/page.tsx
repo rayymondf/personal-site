@@ -208,9 +208,9 @@ function ModalShell({ onClose, children }: { onClose: () => void; children: Reac
   );
 }
 
-function ModalTag({ children }: { children: React.ReactNode }) {
+function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50">
+    <span className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/[0.08] border border-black/10 dark:border-white/[0.12] rounded-full text-black/50 dark:text-white/50 whitespace-nowrap">
       {children}
     </span>
   );
@@ -261,18 +261,9 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">BuildBoard</h2>
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">Full-Stack Web App · React 19 · Node.js · PostgreSQL · Deployed on Render</p>
 
-      <div className="flex flex-col gap-3 mb-6">
-        <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
-          <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-            <Image src="/buildboard-hero.png" alt="BuildBoard landing page" fill className="object-cover" />
-          </div>
-          <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Landing page</p>
-        </div>
-        <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
-          <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-            <Image src="/buildboard-detail.png" alt="BuildBoard project page" fill className="object-cover" />
-          </div>
-          <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Project detail page</p>
+      <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
+        <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+          <Image src="/buildboard-hero.png" alt="BuildBoard landing page" fill className="object-cover" />
         </div>
       </div>
 
@@ -313,7 +304,7 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
         </ModalSection>
 
         <div className="flex flex-wrap gap-1.5">
-          {["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"].map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+          {["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
       </div>
       <ModalLinks repo="https://github.com/rayymondf/Posting_Platform" demo="https://posting-platform.onrender.com/" />
@@ -355,7 +346,7 @@ function LingoModal({ onClose }: { onClose: () => void }) {
         </ModalSection>
 
         <div className="flex flex-wrap gap-1.5">
-          {["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"].map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+          {["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
       </div>
       <ModalLinks repo="https://github.com/rayymondf/Lingo_Seamless_Language_Translator" demo="https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl" />
@@ -397,7 +388,7 @@ function TodoModal({ onClose }: { onClose: () => void }) {
         </ModalSection>
 
         <div className="flex flex-wrap gap-1.5">
-          {["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"].map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+          {["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
       </div>
       <ModalLinks repo="https://github.com/rayymondf/Todo-List-Project" demo="https://rayymondf.github.io/Todo-List-Project/" />
@@ -439,7 +430,7 @@ function PoolModal({ onClose }: { onClose: () => void }) {
         </ModalSection>
 
         <div className="flex flex-wrap gap-1.5">
-          {["Java", "Java Swing", "2D Physics", "OOP"].map((s) => <ModalTag key={s}>{s}</ModalTag>)}
+          {["Java", "Java Swing", "2D Physics", "OOP"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
       </div>
       <ModalLinks repo="https://github.com/rayymondf/Java-Project-Billards-Game" demo={null} />
@@ -568,11 +559,7 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
 function StackTags({ stack }: { stack: string[] }) {
   return (
     <div className="flex flex-wrap gap-1.5">
-      {stack.map((s) => (
-        <span key={s} className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/50 dark:text-white/50 whitespace-nowrap">
-          {s}
-        </span>
-      ))}
+      {stack.map((s) => <Tag key={s}>{s}</Tag>)}
     </div>
   );
 }
@@ -672,7 +659,7 @@ export default function Home() {
               className="px-5 py-2.5 border border-black/20 dark:border-white/25 text-black/70 dark:text-white/70 text-sm font-medium rounded-full hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white transition-colors">
               View projects
             </button>
-            <a href="https://drive.google.com/file/d/1Mn_afMBupp73qlpViBJRjZ6p2U4GQqxa/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+            <a href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing" target="_blank" rel="noopener noreferrer"
               className="px-5 py-2.5 border border-black/20 dark:border-white/25 text-black/70 dark:text-white/70 text-sm font-medium rounded-full hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white transition-colors">
               Resume
             </a>
