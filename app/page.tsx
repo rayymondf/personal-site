@@ -35,8 +35,7 @@ const skills: Record<string, string[]> = {
   Languages: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
   "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "HTML5", "CSS3"],
   "Data & Cloud": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "Git", "Docker", "Linux"],
-  "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove"],
-  "ML & Control": ["Reinforcement Learning", "Inverse Kinematics", "Geometric Fabrics", "PCA", "Computer Vision", "OpenCV"],
+  "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Inverse Kinematics", "Computer Vision", "OpenCV"],
   "Embedded & Hardware": ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
 };
 
@@ -57,11 +56,8 @@ const experience = [
     period: "Jan 2026 - Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    bullets: [
-      "Developing robotics software within the team's Dockerized ROS2 monorepo for a custom-built bipedal humanoid robot, in collaboration with the UW Robotics Lab.",
-      "Implemented iterative Jacobian IK with damped least squares (DLS) in MuJoCo to control a 6-DOF arm and 15-DOF hand across 21 total degrees of freedom.",
-      "Integrated PCA-based hand pose compression trained on real human motion data, reducing 15 finger joints to a 7-dimensional control space for real-time manipulation.",
-    ],
+    description:
+      "Developing robotics software and control algorithms within the team's Dockerized ROS2 monorepo for a custom-built bipedal humanoid robot, in collaboration with the UW Robotics Lab. Implemented iterative Jacobian IK with damped least squares in MuJoCo to control a 6-DOF arm and 15-DOF hand across 21 degrees of freedom. Integrated PCA-based hand pose compression trained on real human motion data, reducing 15 finger joints to a 7-dimensional control space for real-time manipulation.",
   },
   {
     company: "Einfolab Inc.",
@@ -69,11 +65,8 @@ const experience = [
     period: "Jan 2026 - Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    bullets: [
-      "Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems serving healthcare and non-profit clients across Ontario.",
-      "Built Python and pandas pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort.",
-      "Configured and deployed Windows Server environments for client onboarding, streamlining infrastructure setup.",
-    ],
+    description:
+      "Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems serving healthcare and non-profit clients across Ontario. Built Python and pandas pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort. Configured and deployed Windows Server environments for client onboarding.",
   },
   {
     company: "University of Waterloo Formula Electric",
@@ -81,11 +74,8 @@ const experience = [
     period: "Sept 2025 - Present",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    bullets: [
-      "Developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module on a formula-style electric vehicle.",
-      "Built CAN log parsing and analysis tooling to accelerate firmware debugging across subsystems.",
-      "Implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
-    ],
+    description:
+      "Developing C/C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module on a formula-style electric vehicle competing at FSAE Michigan and Formula Hybrid+Electric. Built CAN log parsing and analysis tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
   },
   {
     company: "Robotics Team",
@@ -93,11 +83,8 @@ const experience = [
     period: "Oct 2023 - Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    bullets: [
-      "Led hardware design and build of a competitive RC Mars rover, owning the full stack from chassis design to embedded firmware.",
-      "Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping.",
-      "Integrated ultrasonic, IMU, and OpenCV camera sensors for real-time obstacle detection and autonomous fail-safe logic.",
-    ],
+    description:
+      "Led hardware design and build of a competitive RC Mars rover, owning the full stack from chassis design to embedded firmware. Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping. Integrated ultrasonic, IMU, and OpenCV camera sensors for real-time obstacle detection and autonomous fail-safe logic.",
   },
 ];
 
@@ -663,7 +650,7 @@ export default function Home() {
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
             className="text-base md:text-lg text-black/70 dark:text-white/75 mb-3 max-w-2xl leading-relaxed">
-            Electrical Engineering student at the University of Waterloo, working across embedded systems, robotics, hardware design, machine learning, and full-stack software. Focused on building practical systems that span from bare-metal firmware to autonomous software pipelines.
+            Electrical Engineering student at the University of Waterloo, working across embedded systems, robotics, hardware design, machine learning, and full-stack software. Focused on building practical, reliable systems that solve real problems.
           </motion.p>
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3}
@@ -751,14 +738,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <ul className="space-y-1.5">
-                {e.bullets.map((b, j) => (
-                  <li key={j} className="flex gap-2 text-sm text-black/65 dark:text-white/65 leading-relaxed">
-                    <span className="text-black/25 dark:text-white/25 shrink-0 mt-0.5">-</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-black/65 dark:text-white/65 text-sm leading-relaxed">{e.description}</p>
             </motion.div>
           ))}
         </div>
