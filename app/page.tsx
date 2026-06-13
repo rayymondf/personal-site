@@ -672,7 +672,7 @@ export default function Home() {
               className="px-5 py-2.5 border border-black/20 dark:border-white/25 text-black/70 dark:text-white/70 text-sm font-medium rounded-full hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white transition-colors">
               View projects
             </button>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+            <a href="https://drive.google.com/file/d/1Mn_afMBupp73qlpViBJRjZ6p2U4GQqxa/view?usp=sharing" target="_blank" rel="noopener noreferrer"
               className="px-5 py-2.5 border border-black/20 dark:border-white/25 text-black/70 dark:text-white/70 text-sm font-medium rounded-full hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white transition-colors">
               Resume
             </a>
