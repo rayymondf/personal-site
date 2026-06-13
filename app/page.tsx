@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -57,7 +57,7 @@ const experience = [
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
     description:
-      "WATonomous is the University of Waterloo's flagship autonomy design team, building software for autonomous vehicles, humanoid robots, and racecars. On the Humanoid subteam — in collaboration with the UW Robotics Lab — developed motion control software in a Dockerized ROS2 monorepo for a custom-built bipedal robot. Implemented iterative Jacobian IK with damped least squares in MuJoCo to control a 6-DOF arm and 15-DOF hand. Integrated PCA-based hand pose compression trained on real human motion capture data, reducing 15 finger joints to a 7-dimensional latent space for real-time dexterous manipulation.",
+      "WATonomous is UW's leading robotics design team, working on autonomous vehicles, humanoid robots, and racecars. On the Humanoid subteam, developed motion control software for a custom-built bipedal robot inside a shared Dockerized ROS2 monorepo, in collaboration with the UW Robotics Lab. Wrote arm and hand control code in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom. Also trained a PCA model on human hand motion data to compress 15 finger joint positions down to 7 values, making real-time hand control practical.",
   },
   {
     company: "Einfolab Inc.",
@@ -66,12 +66,12 @@ const experience = [
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
     description:
-      "Einfolab is a boutique IT consultancy in Richmond Hill serving healthcare and non-profit organizations across Ontario. Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems. Built Python and pandas ETL pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual processing time. Configured and deployed Windows Server environments for client onboarding.",
+      "Einfolab is a small IT company in Richmond Hill that builds database and software solutions for healthcare clinics, dental offices, and non-profits across Ontario. Designed and maintained SQL Server and MySQL databases for clinical, dental, and administrative systems. Wrote Python and pandas scripts to automate data cleaning, deduplication, and reconciliation across systems, which improved reporting accuracy and cut down manual work. Also configured and deployed Windows Server environments for new client onboarding.",
   },
   {
     company: "University of Waterloo Formula Electric",
     role: "Electrical & Firmware Engineer",
-    period: "Sept 2025 – Present",
+    period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
     description:
@@ -261,7 +261,7 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">BuildBoard</h2>
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">Full-Stack Web App · React 19 · Node.js · PostgreSQL · Deployed on Render</p>
 
-      <div className="grid grid-cols-2 gap-3 mb-6">
+      <div className="flex flex-col gap-3 mb-6">
         <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
           <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
             <Image src="/buildboard-hero.png" alt="BuildBoard landing page" fill className="object-cover" />
@@ -292,21 +292,21 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
 
         <ModalSection title="Key Features">
           <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">Project pages</span> — title, description, category, status, GitHub/demo links, skill tags</li>
-            <li><span className="text-black dark:text-white font-medium">Build logs</span> — milestone-tagged progress posts per project with comments and likes</li>
-            <li><span className="text-black dark:text-white font-medium">Team recruitment</span> — open roles with skill areas, join requests, owner accept/reject workflow</li>
-            <li><span className="text-black dark:text-white font-medium">Ranked feed</span> — score = likes × 2 + comments × 3 − age_in_hours × 0.05, computed as a SQL expression</li>
-            <li><span className="text-black dark:text-white font-medium">Authorization</span> — owner / admin / member permission model enforced at the route level</li>
-            <li><span className="text-black dark:text-white font-medium">Direct messaging</span> — DM threads between users with full conversation and message APIs</li>
-            <li><span className="text-black dark:text-white font-medium">Search</span> — ILIKE keyword search composable with category, status, and tag filters</li>
-            <li><span className="text-black dark:text-white font-medium">Guest demo</span> — read-only access with seeded demo data, no registration required</li>
+            <li><span className="text-black dark:text-white font-medium">Project pages</span>: title, description, category, status, GitHub/demo links, skill tags</li>
+            <li><span className="text-black dark:text-white font-medium">Build logs</span>: milestone-tagged progress posts per project with comments and likes</li>
+            <li><span className="text-black dark:text-white font-medium">Team recruitment</span>: open roles with skill areas, join requests, owner accept/reject workflow</li>
+            <li><span className="text-black dark:text-white font-medium">Ranked feed</span>: score = likes × 2 + comments × 3 − age_in_hours × 0.05, computed as a SQL expression</li>
+            <li><span className="text-black dark:text-white font-medium">Authorization</span>: owner / admin / member permission model enforced at the route level</li>
+            <li><span className="text-black dark:text-white font-medium">Direct messaging</span>: DM threads between users with full conversation and message APIs</li>
+            <li><span className="text-black dark:text-white font-medium">Search</span>: ILIKE keyword search composable with category, status, and tag filters</li>
+            <li><span className="text-black dark:text-white font-medium">Guest demo</span>: read-only access with seeded demo data, no registration required</li>
           </ul>
         </ModalSection>
 
         <ModalSection title="Security">
           <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
             <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">requireAuth</code> middleware on all write endpoints</li>
-            <li>Parameterized SQL queries throughout — no string interpolation</li>
+            <li>Parameterized SQL queries throughout: no string interpolation</li>
             <li>Session cookie: <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">httpOnly</code>, <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sameSite: lax</code>, <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">secure</code> in production</li>
             <li>CORS restricted to frontend origin only</li>
           </ul>
@@ -332,7 +332,7 @@ function LingoModal({ onClose }: { onClose: () => void }) {
 
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          Lingo is a Chrome extension built on Manifest V3 that surfaces a full translation workspace inside Chrome&apos;s native Side Panel. No npm packages, no build step, no framework — Chrome loads it directly as an unpacked set of files and it is live on the Chrome Web Store.
+          Lingo is a Chrome extension built on Manifest V3 that surfaces a full translation workspace inside Chrome&apos;s native Side Panel. No npm packages, no build step, no framework: Chrome loads it directly as an unpacked set of files and it is live on the Chrome Web Store.
         </p>
 
         <ModalSection title="How It Works">
@@ -348,9 +348,9 @@ function LingoModal({ onClose }: { onClose: () => void }) {
 
         <ModalSection title="Permissions">
           <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sidePanel</code> — opens the translator inside Chrome&apos;s native side panel</li>
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">storage</code> — persists draft text, language, and history locally</li>
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">https://api-free.deepl.com/*</code> — host permission for DeepL Free API calls</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sidePanel</code>: opens the translator inside Chrome&apos;s native side panel</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">storage</code>: persists draft text, language, and history locally</li>
+            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">https://api-free.deepl.com/*</code>: host permission for DeepL Free API calls</li>
           </ul>
         </ModalSection>
 
@@ -387,12 +387,12 @@ function TodoModal({ onClose }: { onClose: () => void }) {
 
         <ModalSection title="Features">
           <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
-            <li><span className="text-black dark:text-white font-medium">Calendar view</span> — 7-column monthly grid with todo chips plotted by due date; click any day to open a detail modal</li>
-            <li><span className="text-black dark:text-white font-medium">List view</span> — filtered, sorted flat list with live search across title, description, and tags</li>
-            <li><span className="text-black dark:text-white font-medium">Filters</span> — All / Active / Completed / Overdue, composable with tag filter</li>
-            <li><span className="text-black dark:text-white font-medium">Sort modes</span> — Newest / Due date / Priority / A to Z</li>
-            <li><span className="text-black dark:text-white font-medium">Todo fields</span> — title, description, due date, priority, comma-separated tags, repeat interval</li>
-            <li><span className="text-black dark:text-white font-medium">Accessibility</span> — ARIA roles, labels, keyboard navigation, and programmatic focus management</li>
+            <li><span className="text-black dark:text-white font-medium">Calendar view</span>: 7-column monthly grid with todo chips plotted by due date; click any day to open a detail modal</li>
+            <li><span className="text-black dark:text-white font-medium">List view</span>: filtered, sorted flat list with live search across title, description, and tags</li>
+            <li><span className="text-black dark:text-white font-medium">Filters</span>: All / Active / Completed / Overdue, composable with tag filter</li>
+            <li><span className="text-black dark:text-white font-medium">Sort modes</span>: Newest / Due date / Priority / A to Z</li>
+            <li><span className="text-black dark:text-white font-medium">Todo fields</span>: title, description, due date, priority, comma-separated tags, repeat interval</li>
+            <li><span className="text-black dark:text-white font-medium">Accessibility</span>: ARIA roles, labels, keyboard navigation, and programmatic focus management</li>
           </ul>
         </ModalSection>
 
@@ -416,7 +416,7 @@ function PoolModal({ onClose }: { onClose: () => void }) {
 
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          A two-player 8-ball billiards game in Java Swing with a fully custom physics engine. All collision detection, resolution, and movement dynamics are computed from scratch each tick on a Swing Timer game loop — no third-party physics library.
+          A two-player 8-ball billiards game in Java Swing with a fully custom physics engine. All collision detection, resolution, and movement dynamics are computed from scratch each tick on a Swing Timer game loop: no third-party physics library.
         </p>
 
         <ModalSection title="Physics Engine">
@@ -476,7 +476,7 @@ function PCBModal({ onClose }: { onClose: () => void }) {
         <ModalSection title="Design Overview">
           <div className="space-y-2">
             <ModalRow label="Topology" value="Low-side sensing. Shunt placed between load return and ground. Both amplifier inputs operate near ground, avoiding the high common-mode voltage of high-side configurations." />
-            <ModalRow label="Why amplification" value="At 200 mA through a 10 mΩ shunt, the differential signal is only 2 mV — below the ~4 mV resolution of a typical 8-bit ADC. The INA180 amplifies this to 200 mV (100 V/V), well within a 3.3V ADC range." />
+            <ModalRow label="Why amplification" value="At 200 mA through a 10 mΩ shunt, the differential signal is only 2 mV: below the ~4 mV resolution of a typical 8-bit ADC. The INA180 amplifies this to 200 mV (100 V/V), well within a 3.3V ADC range." />
             <ModalRow label="Signal path" value="Load supply → R1 (shunt) → load return → GND. INA180 IN+ and IN− connect across R1. V_OUT = Gain × I_LOAD × R_SENSE, routed to MCU ADC." />
           </div>
         </ModalSection>
@@ -484,19 +484,19 @@ function PCBModal({ onClose }: { onClose: () => void }) {
         <ModalSection title="Bill of Materials">
           <ul className="space-y-2 text-xs text-black/65 dark:text-white/60">
             <li>
-              <span className="text-black dark:text-white font-medium">U1 — INA180B3IDBVR (Texas Instruments)</span><br />
+              <span className="text-black dark:text-white font-medium">U1: INA180B3IDBVR (Texas Instruments)</span><br />
               100 V/V gain, SOT-23-5. Supply: 2.7–5.5V. Common-mode: −0.2V to +26V. Gain error: ±1% max. Bandwidth: 210 kHz. Range: −40°C to +125°C.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">R1 — WSL0603R0100FEA (Vishay)</span><br />
+              <span className="text-black dark:text-white font-medium">R1: WSL0603R0100FEA (Vishay)</span><br />
               10 mΩ, 1W shunt resistor, 0603. P = I²R = 0.4 mW at 200 mA. Low resistance minimizes insertion loss.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">C1 — C0603C104K8RACTU (KEMET)</span><br />
+              <span className="text-black dark:text-white font-medium">C1: C0603C104K8RACTU (KEMET)</span><br />
               100 nF X7R bypass capacitor, 0603. Placed within 1 mm of VS pin. Suppresses supply noise that would corrupt the current reading.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">P1 — MTSW-104-07-T-S-170 (Mill-Max)</span><br />
+              <span className="text-black dark:text-white font-medium">P1: MTSW-104-07-T-S-170 (Mill-Max)</span><br />
               4-pin 2.54 mm through-hole header. Exposes V_LOAD, 3V3, V_OUT, and GND for bench validation.
             </li>
           </ul>
@@ -533,16 +533,16 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
         <ModalSection title="Node Architecture">
           <ul className="space-y-3 text-xs text-black/65 dark:text-white/60">
             <li>
-              <span className="text-black dark:text-white font-medium">Costmap</span> — Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid, marks occupied cells, applies distance-weighted inflation kernel. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code>.
+              <span className="text-black dark:text-white font-medium">Costmap</span>: Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid, marks occupied cells, applies distance-weighted inflation kernel. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code>.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">Map Memory</span> — Fuses local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms into world frame via linear fusion. Updates only beyond a displacement threshold.
+              <span className="text-black dark:text-white font-medium">Map Memory</span>: Fuses local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms into world frame via linear fusion. Updates only beyond a displacement threshold.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">Planner (A*)</span> — Runs A* on the global grid with a Euclidean heuristic. Implements an idle/tracking state machine and replans on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.
+              <span className="text-black dark:text-white font-medium">Planner (A*)</span>: Runs A* on the global grid with a Euclidean heuristic. Implements an idle/tracking state machine and replans on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.
             </li>
             <li>
-              <span className="text-black dark:text-white font-medium">Control (Pure Pursuit)</span> — Selects a lookahead waypoint, computes arc curvature, outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.
+              <span className="text-black dark:text-white font-medium">Control (Pure Pursuit)</span>: Selects a lookahead waypoint, computes arc curvature, outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.
             </li>
           </ul>
         </ModalSection>
