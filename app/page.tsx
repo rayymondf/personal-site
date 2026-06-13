@@ -34,7 +34,7 @@ const LINKEDIN_SVG = (
 const skills: Record<string, string[]> = {
   Languages: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
   "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "Passport.js", "HTML5", "CSS3"],
-  "Data & ML": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "scikit-learn", "Git", "Docker", "Linux"],
+  "Data & ML": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "PyTorch", "scikit-learn", "Git", "Docker", "Linux"],
   "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Computer Vision", "OpenCV"],
   "Embedded & Hardware": ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
 };
@@ -46,6 +46,11 @@ const education = [
     period: "Sept 2025 – Apr 2030",
     location: "Waterloo, ON",
     logo: "/uwaterloo.png",
+    courses: [
+      "Fundamentals of Programming (C++)",
+      "Project Studios (MATLAB)",
+      "Digital Circuits (FPGA & Verilog)",
+    ],
   },
 ];
 
@@ -53,7 +58,7 @@ const experience = [
   {
     company: "WATonomous",
     role: "Robotics Software Engineer · Humanoid Team",
-    period: "Jan 2026 – Present",
+    period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
     description:
@@ -548,6 +553,10 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
             <ModalRow label="Algorithms" value="A* with Euclidean heuristic, Pure Pursuit geometric path tracking" />
           </div>
         </ModalSection>
+
+        <div className="flex flex-wrap gap-1.5">
+          {["ROS2 Humble", "C++17", "Gazebo", "Foxglove Studio", "A*", "Pure Pursuit", "Docker"].map((s) => <Tag key={s}>{s}</Tag>)}
+        </div>
       </div>
       <ModalLinks repo={null} demo="https://youtu.be/jMNTflrencM" />
     </ModalShell>
@@ -702,6 +711,18 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            {e.courses && e.courses.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-black/8 dark:border-white/8">
+                <p className="text-[10px] font-semibold text-black/40 dark:text-white/40 uppercase tracking-widest mb-2">Relevant Courses</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {e.courses.map((course) => (
+                    <span key={course} className="px-2.5 py-1 text-xs bg-black/6 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/65 dark:text-white/65">
+                      {course}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </motion.div>
         ))}
       </Section>
