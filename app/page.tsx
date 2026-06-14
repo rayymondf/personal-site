@@ -81,11 +81,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    bullets: [
-      "Contributed to motion control software for a custom bipedal robot in a Dockerized ROS2 monorepo, collaborating with the UW Robotics Lab.",
-      "Implemented arm and hand control in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom.",
-      "Trained a PCA model on human hand motion data to compress 15 finger joint positions to 7 values, enabling practical real-time hand control.",
-    ],
+    desc: "Worked on motion control software for a custom bipedal robot inside a Dockerized ROS2 monorepo, collaborating with the UW Robotics Lab. Implemented arm and hand control in MuJoCo using iterative Jacobian methods across 21 DOF, and trained a PCA model to compress 15 finger joint positions to 7 values for real-time hand control.",
   },
   {
     company: "Einfolab Inc.",
@@ -93,11 +89,7 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    bullets: [
-      "Designed and maintained SQL Server and MySQL databases supporting clinical, dental, and administrative workflows for healthcare and non-profit clients.",
-      "Built Python and pandas ETL pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort.",
-      "Supported client onboarding by configuring and deploying Windows Server environments.",
-    ],
+    desc: "Designed and maintained SQL Server and MySQL databases for healthcare and non-profit clients across Ontario. Built Python/pandas ETL pipelines to automate data cleaning, deduplication, and cross-system reconciliation. Also supported client onboarding by configuring and deploying Windows Server environments.",
   },
   {
     company: "University of Waterloo Formula Electric",
@@ -105,11 +97,7 @@ const experience = [
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    bullets: [
-      "Developed C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM).",
-      "Built CAN log parsing and analysis tooling to accelerate firmware debugging across subsystems.",
-      "Implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
-    ],
+    desc: "Developed C/C++ hardware-in-the-loop test utilities for the BMU, VCU, and PDM. Built CAN log parsing tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
   },
   {
     company: "Robotics Team",
@@ -117,11 +105,7 @@ const experience = [
     period: "Oct 2023 – Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    bullets: [
-      "Led end-to-end hardware design and build of a competitive RC Mars rover — from chassis design to embedded firmware.",
-      "Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping.",
-      "Integrated ultrasonic, IMU, and OpenCV camera modules for real-time obstacle detection and autonomous fail-safe logic.",
-    ],
+    desc: "Led end-to-end design and build of a competitive RC Mars rover, from chassis through embedded firmware. Wrote ESP32 motor control firmware in C++/Arduino with PWM drive and steering mapping, and integrated ultrasonic, IMU, and OpenCV camera modules for obstacle detection and autonomous fail-safe logic.",
   },
 ];
 
@@ -140,11 +124,11 @@ type Project = {
 
 const projects: Project[] = [
   {
-    name: "BuildBoard: Engineering Collaboration Platform",
+    name: "BuildBoard",
     image: "/buildboard-hero.png",
     stack: ["React 19", "Node.js", "Express", "PostgreSQL", "Passport.js", "Vite"],
     shortDesc:
-      "Full-stack platform for student engineers to create project pages, post build logs, recruit teammates by skill, and message collaborators. Features role-based permissions, a ranked activity feed, and a guest demo account.",
+      "Full-stack engineering collaboration platform. Students can create project pages, post build-log updates, open team recruitment roles, and message collaborators. Includes role-based auth, a SQL-ranked activity feed, and a guest demo account.",
     modalKey: "buildboard",
     repo: "https://github.com/rayymondf/Posting_Platform",
     demo: "https://posting-platform.onrender.com/",
@@ -154,7 +138,7 @@ const projects: Project[] = [
     image: "/lingo-ext.png",
     stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "DeepL API"],
     shortDesc:
-      "Chrome extension that opens a persistent translation workspace in the native Side Panel. Translates via the DeepL Free API, with dynamic language loading, draft persistence, and history storage. Published on the Chrome Web Store.",
+      "Manifest V3 Chrome extension that opens a full translation workspace in Chrome's native Side Panel. Calls the DeepL Free API for translations, persists draft text and history via Chrome Storage, and is live on the Chrome Web Store.",
     modalKey: "lingo",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
@@ -164,7 +148,7 @@ const projects: Project[] = [
     image: "/todo-app2.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
     shortDesc:
-      "Zero-dependency browser task manager with a strict three-layer architecture (TodoModel, Storage, App). Features a monthly calendar view, live search, filter/sort modes, priority levels, tags, repeat intervals, and full ARIA accessibility.",
+      "Zero-dependency task manager in vanilla JS. Strict three-layer architecture (TodoModel / Storage / App). Includes a monthly calendar view, live search, filter and sort modes, priority levels, tags, repeat intervals, and full keyboard accessibility.",
     modalKey: "todo",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
@@ -174,7 +158,7 @@ const projects: Project[] = [
     image: "/pool-game.png",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
     shortDesc:
-      "Two-player 8-ball billiards game with a fully custom physics engine: per-tick velocity integration, elastic ball collisions, friction, cushion bounce, sub-step CCD, and complete rule enforcement.",
+      "Two-player 8-ball billiards in Java Swing with a custom physics engine built from scratch: per-tick velocity integration, elastic circle-circle collisions, friction, rail bounce, sub-step CCD to prevent tunnelling, and full rule enforcement.",
     modalKey: "pool",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
     demo: null,
@@ -185,7 +169,7 @@ const projects: Project[] = [
     image: "/pcb1.png",
     stack: ["Altium Designer", "INA180B3IDBVR", "PCB Design", "Analog Electronics"],
     shortDesc:
-      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and a 10 mΩ shunt resistor outputs a voltage proportional to DC bus current, readable by an MCU ADC.",
+      "Current-sense breakout board for UW Orbital's Electrical Power System. Low-side topology: INA180B3IDBVR (100 V/V gain) across a 10 mΩ shunt amplifies a 2 mV differential signal to 200 mV, giving an MCU ADC readable output over 0–200 mA.",
     modalKey: "pcb",
     repo: null,
     demo: null,
@@ -196,7 +180,7 @@ const projects: Project[] = [
     image: "/wato-asd.png",
     stack: ["ROS2 Humble", "C++17", "Gazebo", "A*", "Pure Pursuit", "Docker"],
     shortDesc:
-      "Full autonomous navigation stack for a simulated differential-drive robot. Four ROS2 C++ nodes: LiDAR Costmap, Map Memory, A* Planner, and Pure Pursuit Controller, visualized live in Foxglove Studio.",
+      "Full autonomous nav stack for a simulated differential-drive robot in Gazebo. Four ROS2 C++ nodes — LiDAR Costmap, Map Memory, A* Planner, Pure Pursuit Controller — implement the full perception–planning–control pipeline, visualized in Foxglove Studio.",
     modalKey: "wato",
     repo: null,
     demo: "https://youtu.be/jMNTflrencM",
@@ -214,8 +198,8 @@ const contacts = [
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="py-14 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
-      <div className="max-w-4xl mx-auto">
+    <section id={id} className="py-16 px-8 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
+      <div className="max-w-5xl mx-auto">
         <h2 className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-8">{title}</h2>
         {children}
       </div>
@@ -519,8 +503,8 @@ function ProjectCard({ project, index, onLearnMore }: { project: Project; index:
       <div className="flex flex-col gap-2.5 p-4 flex-1">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">{project.name}</h3>
-            {project.subtitle && <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{project.subtitle}</p>}
+            <h3 className="text-black dark:text-white font-semibold text-base leading-snug">{project.name}</h3>
+            {project.subtitle && <p className="text-black/45 dark:text-white/45 text-sm mt-0.5">{project.subtitle}</p>}
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {project.repo && (
@@ -537,7 +521,7 @@ function ProjectCard({ project, index, onLearnMore }: { project: Project; index:
             )}
           </div>
         </div>
-        <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed flex-1">{project.shortDesc}</p>
+        <p className="text-black/60 dark:text-white/60 text-sm leading-relaxed flex-1">{project.shortDesc}</p>
         <div className="flex flex-wrap gap-1.5">
           {project.stack.map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
@@ -566,30 +550,33 @@ export default function Home() {
       <Navbar />
 
       {/* ── Name / Status Header ────────────────────────────────────────────── */}
-      <section id="hero" className="pt-28 pb-10 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto flex items-end justify-between flex-wrap gap-4">
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0}>
-            <h1 className="text-3xl font-bold text-black dark:text-white tracking-tight">Raymond Fang</h1>
-            <p className="text-sm text-black/55 dark:text-white/55 mt-1">
-              Electrical Engineering · University of Waterloo
-            </p>
-          </motion.div>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={1}
-            className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-xs text-black/50 dark:text-white/50">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
-              Open to internships
-            </span>
+      <section id="hero" className="pt-32 pb-12 px-8 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
+        <div className="max-w-5xl mx-auto">
+          <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={0}
+            className="text-6xl md:text-7xl font-bold text-black dark:text-white tracking-tight leading-tight">
+            Raymond Fang
+          </motion.h1>
+          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={1}
+            className="text-base text-black/55 dark:text-white/55 mt-2">
+            Electrical Engineering · University of Waterloo
+          </motion.p>
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={2}
+            className="flex items-center gap-3 mt-5">
             <a href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing"
               target="_blank" rel="noopener noreferrer"
-              className="text-xs border border-black/20 dark:border-white/25 text-black/60 dark:text-white/60 hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white rounded-full px-3 py-1.5 transition-colors">
+              className="text-sm border border-black/20 dark:border-white/25 text-black/60 dark:text-white/60 hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white rounded-full px-5 py-2 transition-colors">
               Resume
             </a>
             <button onClick={() => scrollTo("#contact")}
-              className="text-xs bg-black dark:bg-white text-white dark:text-black rounded-full px-3 py-1.5 hover:opacity-85 transition-opacity">
+              className="text-sm bg-black dark:bg-white text-white dark:text-black rounded-full px-5 py-2 hover:opacity-85 transition-opacity">
               Contact
             </button>
           </motion.div>
+          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3}
+            className="flex items-center gap-1.5 text-sm text-black/45 dark:text-white/45 mt-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+            Open to internships
+          </motion.p>
         </div>
       </section>
 
@@ -608,7 +595,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-1.5">
                 {group.items.map((skill) => (
                   <span key={skill}
-                    className="px-2 py-0.5 text-xs bg-black/5 dark:bg-white/8 border border-black/8 dark:border-white/10 rounded-md text-black/65 dark:text-white/65">
+                    className="px-2.5 py-1 text-sm bg-black/5 dark:bg-white/8 border border-black/8 dark:border-white/10 rounded-md text-black/65 dark:text-white/65">
                     {skill}
                   </span>
                 ))}
@@ -633,8 +620,8 @@ export default function Home() {
                   <p className="text-black/60 dark:text-white/60 text-sm mt-0.5">{e.degree}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
-                  <p className="text-black/45 dark:text-white/45 text-xs mt-1">{e.location}</p>
+                  <p className="text-black/45 dark:text-white/45 text-sm">{e.period}</p>
+                  <p className="text-black/45 dark:text-white/45 text-sm mt-1">{e.location}</p>
                 </div>
               </div>
             </div>
@@ -678,22 +665,15 @@ export default function Home() {
                 <div className="flex-1 border border-black/10 dark:border-white/12 rounded-xl p-5 bg-black/[0.01] dark:bg-white/[0.01]">
                   <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
                     <div>
-                      <h3 className="text-black dark:text-white font-semibold text-sm">{e.role}</h3>
-                      <p className="text-black/55 dark:text-white/55 text-xs mt-0.5">{e.company}</p>
+                      <h3 className="text-black dark:text-white font-semibold text-base">{e.role}</h3>
+                      <p className="text-black/55 dark:text-white/55 text-sm mt-0.5">{e.company}</p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
-                      <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{e.location}</p>
+                      <p className="text-black/45 dark:text-white/45 text-sm">{e.period}</p>
+                      <p className="text-black/45 dark:text-white/45 text-sm mt-0.5">{e.location}</p>
                     </div>
                   </div>
-                  <ul className="space-y-1.5">
-                    {e.bullets.map((b, bi) => (
-                      <li key={bi} className="flex gap-2 text-xs text-black/65 dark:text-white/60 leading-relaxed">
-                        <span className="mt-1.5 w-1 h-1 rounded-full bg-black/25 dark:bg-white/25 shrink-0" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-sm text-black/65 dark:text-white/60 leading-relaxed">{e.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -738,8 +718,8 @@ export default function Home() {
                 {icon}
               </div>
               <div className="min-w-0">
-                <p className="text-black/45 dark:text-white/45 text-xs mb-0.5">{label}</p>
-                <p className="text-black/75 dark:text-white/80 text-sm truncate font-medium group-hover:text-black dark:group-hover:text-white transition-colors">{value}</p>
+                <p className="text-black/45 dark:text-white/45 text-sm mb-0.5">{label}</p>
+                <p className="text-black/75 dark:text-white/80 text-base truncate font-medium group-hover:text-black dark:group-hover:text-white transition-colors">{value}</p>
               </div>
             </motion.a>
           ))}
@@ -747,7 +727,7 @@ export default function Home() {
       </Section>
 
       <footer className="py-10 px-6 border-t border-black/8 dark:border-white/8 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
-        <div className="max-w-4xl mx-auto text-center text-black/35 dark:text-white/35 text-xs">
+        <div className="max-w-5xl mx-auto text-center text-black/35 dark:text-white/35 text-sm">
           Raymond Fang · {CURRENT_YEAR}
         </div>
       </footer>
