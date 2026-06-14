@@ -54,7 +54,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is a student design team at the University of Waterloo that builds autonomous vehicle and robotics systems, with a humanoid division working alongside the UW Robotics Lab. I worked on motion control software for a custom bipedal robot in a Dockerized ROS2 monorepo. I implemented arm and hand control in MuJoCo using iterative Jacobian methods across 21 degrees of freedom, and trained a PCA model to compress 15 finger joint positions down to 7 values so that hand movements could be commanded in real time.",
+    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building software systems for autonomous vehicles, humanoid robots, and racecars in collaboration with the UW Robotics Lab. Contributed to motion control software for a custom bipedal robot inside a Dockerized ROS2 monorepo. Implemented arm and hand control in MuJoCo using iterative Jacobian methods across 21 degrees of freedom, and trained a PCA model to reduce 15 finger joint positions down to 7 principal components for real-time hand control.",
   },
   {
     company: "Einfolab Inc.",
@@ -62,15 +62,15 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is a software consultancy that builds data infrastructure and IT systems for healthcare and non-profit organizations across Ontario. I designed and maintained SQL Server and MySQL databases for several client deployments, built Python and pandas ETL pipelines to automate data cleaning and deduplication across systems, and helped onboard new clients by configuring and deploying their Windows Server environments.",
+    desc: "Einfolab is an IT solutions and consulting firm based in Richmond Hill that provides technology planning, data management, and back-office services primarily to health sector and non-profit clients across Ontario. Designed and maintained SQL Server and MySQL databases for several client deployments, built Python and pandas ETL pipelines to automate data cleaning and cross-system deduplication, and supported client onboarding by configuring and deploying Windows Server environments.",
   },
   {
-    company: "University of Waterloo Formula Electric",
+    company: "UW Formula Electric",
     role: "Electrical and Firmware Engineer",
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student engineering team that designs and races a formula-style electric car in the FSAE competition. I wrote C and C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module. I also built CAN log parsing tools to speed up firmware debugging, and implemented the pre-high-voltage startup sequence that checks whether all subsystems are ready before the car is allowed on track.",
+    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in the FSAE Michigan and Formula Hybrid and Electric competition series. Developed C and C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module. Built CAN log parsing tools to speed up firmware debugging across subsystems, and implemented the pre-high-voltage startup sequence that verifies all subsystems are ready before the car is allowed on track.",
   },
   {
     company: "Robotics Team",
@@ -78,7 +78,7 @@ const experience = [
     period: "Oct 2023 – Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    desc: "A competitive high school robotics team that designs and builds autonomous and RC vehicles for regional engineering competitions. I led the full build of a Mars rover from mechanical design through embedded firmware. I wrote ESP32 motor control code in C++ using PWM drive and steering mapping, and added ultrasonic, IMU, and OpenCV camera modules so the rover could detect obstacles and trigger autonomous fail-safe behavior.",
+    desc: "A competitive high school robotics team focused on designing and building autonomous and RC vehicles for regional engineering competitions. Led the full design and build of a Mars rover from mechanical chassis through embedded firmware. Wrote ESP32 motor control firmware in C++ using PWM drive and steering mapping, and integrated ultrasonic, IMU, and OpenCV camera modules so the rover could detect obstacles and trigger autonomous fail-safe behavior.",
   },
 ];
 
@@ -659,8 +659,7 @@ export default function Home() {
                 </div>
                 <p className="text-black/50 dark:text-white/50 text-sm leading-relaxed">{p.shortDesc}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {p.stack.slice(0, 4).map((s) => <Tag key={s}>{s}</Tag>)}
-                  {p.stack.length > 4 && <Tag>+{p.stack.length - 4}</Tag>}
+                  {p.stack.map((s) => <Tag key={s}>{s}</Tag>)}
                 </div>
                 <button
                   onClick={() => setOpenModal(p.modalKey)}
