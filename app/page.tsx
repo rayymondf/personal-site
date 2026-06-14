@@ -603,7 +603,7 @@ export default function Home() {
         <SectionLabel>Experience</SectionLabel>
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-[27px] top-3 bottom-3 w-px bg-white/8" aria-hidden />
+          <div className="absolute left-[27px] top-3 bottom-3 w-0.5 bg-white/20" aria-hidden />
           <div className="space-y-5">
             {experience.map((e, i) => (
               <motion.div
@@ -612,25 +612,25 @@ export default function Home() {
                 className="relative flex gap-6"
               >
                 <div className="shrink-0 z-10 w-14">
-                  <div className="w-14 h-14 rounded-xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden bg-white/5 border border-white/20 flex items-center justify-center ring-2 ring-black">
                     <Image
                       src={e.logo} alt={e.company} width={56} height={56}
                       className={`object-contain w-full h-full${e.logo === "/robotics.webp" ? " scale-125 object-cover" : ""}`}
                     />
                   </div>
                 </div>
-                <div className="flex-1 border border-white/8 rounded-2xl p-5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15 transition-all duration-300">
+                <div className="flex-1 border border-white/15 rounded-2xl p-5 bg-white/[0.04] hover:bg-white/[0.06] hover:border-white/25 transition-all duration-300">
                   <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
                     <div>
                       <h3 className="text-white font-semibold text-base">{e.role}</h3>
-                      <p className="text-white/45 text-sm mt-0.5">{e.company}</p>
+                      <p className="text-white/60 text-sm mt-0.5">{e.company}</p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="text-white/35 text-sm">{e.period}</p>
-                      <p className="text-white/35 text-sm mt-0.5">{e.location}</p>
+                      <p className="text-white/50 text-sm">{e.period}</p>
+                      <p className="text-white/50 text-sm mt-0.5">{e.location}</p>
                     </div>
                   </div>
-                  <p className="text-sm text-white/50 leading-relaxed">{e.desc}</p>
+                  <p className="text-sm text-white/65 leading-relaxed">{e.desc}</p>
                 </div>
               </motion.div>
             ))}
