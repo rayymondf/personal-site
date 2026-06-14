@@ -54,7 +54,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is a student design team at the University of Waterloo building full-stack autonomous vehicle and robotics systems, with a dedicated humanoid division working in collaboration with the UW Robotics Lab. Worked on motion control software for a custom bipedal robot inside a Dockerized ROS2 monorepo. Implemented arm and hand control in MuJoCo using iterative Jacobian methods across 21 DOF, and trained a PCA model to compress 15 finger joint positions to 7 values for real-time hand control.",
+    desc: "WATonomous is a student design team at the University of Waterloo that builds autonomous vehicle and robotics systems, with a humanoid division working alongside the UW Robotics Lab. I worked on motion control software for a custom bipedal robot in a Dockerized ROS2 monorepo. I implemented arm and hand control in MuJoCo using iterative Jacobian methods across 21 degrees of freedom, and trained a PCA model to compress 15 finger joint positions down to 7 values so that hand movements could be commanded in real time.",
   },
   {
     company: "Einfolab Inc.",
@@ -62,15 +62,15 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is a software consultancy specializing in data infrastructure and IT solutions for healthcare and non-profit organizations across Ontario. Designed and maintained SQL Server and MySQL databases for client deployments. Built Python/pandas ETL pipelines to automate data cleaning, deduplication, and cross-system reconciliation, and supported client onboarding by configuring and deploying Windows Server environments.",
+    desc: "Einfolab is a software consultancy that builds data infrastructure and IT systems for healthcare and non-profit organizations across Ontario. I designed and maintained SQL Server and MySQL databases for several client deployments, built Python and pandas ETL pipelines to automate data cleaning and deduplication across systems, and helped onboard new clients by configuring and deploying their Windows Server environments.",
   },
   {
     company: "University of Waterloo Formula Electric",
-    role: "Electrical & Firmware Engineer",
+    role: "Electrical and Firmware Engineer",
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student engineering team that designs, builds, and races a formula-style electric vehicle in the FSAE competition. Developed C/C++ hardware-in-the-loop test utilities for the BMU, VCU, and PDM subsystems. Built CAN log parsing tooling to accelerate firmware debugging across subsystems, and implemented pre-HV startup sequencing logic to verify full system readiness before track integration.",
+    desc: "UW Formula Electric is a student engineering team that designs and races a formula-style electric car in the FSAE competition. I wrote C and C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module. I also built CAN log parsing tools to speed up firmware debugging, and implemented the pre-high-voltage startup sequence that checks whether all subsystems are ready before the car is allowed on track.",
   },
   {
     company: "Robotics Team",
@@ -78,7 +78,7 @@ const experience = [
     period: "Oct 2023 – Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    desc: "A competitive high school robotics team focused on designing and building autonomous and RC vehicles for regional engineering competitions. Led end-to-end design and build of a Mars rover from chassis through embedded firmware. Wrote ESP32 motor control firmware in C++/Arduino with PWM drive and steering mapping, and integrated ultrasonic, IMU, and OpenCV camera modules for obstacle detection and autonomous fail-safe logic.",
+    desc: "A competitive high school robotics team that designs and builds autonomous and RC vehicles for regional engineering competitions. I led the full build of a Mars rover from mechanical design through embedded firmware. I wrote ESP32 motor control code in C++ using PWM drive and steering mapping, and added ultrasonic, IMU, and OpenCV camera modules so the rover could detect obstacles and trigger autonomous fail-safe behavior.",
   },
 ];
 
@@ -100,7 +100,7 @@ const projects: Project[] = [
     name: "BuildBoard",
     image: "/buildboard-hero.png",
     stack: ["React 19", "Node.js", "Express", "PostgreSQL", "Passport.js", "Vite"],
-    shortDesc: "Full-stack engineering collaboration platform. Students can create project pages, post build-log updates, open team recruitment roles, and message collaborators.",
+    shortDesc: "A full-stack platform for student engineers to share projects, post build updates, recruit teammates by skill, and message collaborators.",
     modalKey: "buildboard",
     repo: "https://github.com/rayymondf/Posting_Platform",
     demo: "https://posting-platform.onrender.com/",
@@ -109,7 +109,7 @@ const projects: Project[] = [
     name: "Lingo: Chrome Translation Extension",
     image: "/lingo-ext.png",
     stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "DeepL API"],
-    shortDesc: "Manifest V3 Chrome extension that opens a full translation workspace in Chrome's native Side Panel. Live on the Chrome Web Store.",
+    shortDesc: "A Chrome extension that opens a full translation workspace in the browser's native Side Panel using the DeepL API. Published on the Chrome Web Store.",
     modalKey: "lingo",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
@@ -118,7 +118,7 @@ const projects: Project[] = [
     name: "Todo: Calendar Task Manager",
     image: "/todo-app2.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
-    shortDesc: "Zero-dependency task manager in vanilla JS with three-layer architecture. Monthly calendar view, live search, filter and sort modes, priority levels, and full keyboard accessibility.",
+    shortDesc: "A task manager built in vanilla JavaScript with no dependencies. Includes a monthly calendar view, live search, filters, priority levels, and full keyboard accessibility.",
     modalKey: "todo",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
@@ -127,7 +127,7 @@ const projects: Project[] = [
     name: "Java 8-Ball Pool Game",
     image: "/pool-game.png",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
-    shortDesc: "Two-player 8-ball billiards in Java Swing with a custom physics engine: elastic collisions, friction, rail bounce, and sub-step CCD to prevent tunnelling.",
+    shortDesc: "A two-player 8-ball pool game in Java Swing with a physics engine written from scratch. Handles elastic collisions, friction, rail bounces, and prevents balls from tunnelling at high speeds.",
     modalKey: "pool",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
     demo: null,
@@ -137,7 +137,7 @@ const projects: Project[] = [
     subtitle: "UW Orbital",
     image: "/pcb1.png",
     stack: ["Altium Designer", "INA180B3IDBVR", "PCB Design", "Analog Electronics"],
-    shortDesc: "Current-sense breakout board for UW Orbital's EPS. Low-side topology with INA180B3IDBVR amplifying a 2 mV differential signal to 200 mV over 0–200 mA.",
+    shortDesc: "A current-sense breakout board for UW Orbital's power system. Amplifies a 2 mV signal across a shunt resistor to a readable 200 mV output for an MCU ADC.",
     modalKey: "pcb",
     repo: null,
     demo: null,
@@ -147,7 +147,7 @@ const projects: Project[] = [
     subtitle: "WATonomous ASD",
     image: "/wato-asd.png",
     stack: ["ROS2 Humble", "C++17", "Gazebo", "A*", "Pure Pursuit", "Docker"],
-    shortDesc: "Full autonomous nav stack for a simulated differential-drive robot. Four ROS2 C++ nodes implement the full perception–planning–control pipeline, visualized in Foxglove.",
+    shortDesc: "An autonomous navigation stack for a simulated robot in Gazebo. Four ROS2 nodes handle LiDAR mapping, global map building, A* path planning, and Pure Pursuit control.",
     modalKey: "wato",
     repo: null,
     demo: "https://youtu.be/jMNTflrencM",
@@ -305,7 +305,7 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          Full-stack collaboration platform for student engineers, makers, and robotics teams — purpose-built for sharing technical projects, recruiting teammates by skill, posting build logs, and messaging collaborators.
+          BuildBoard is a collaboration platform built for student engineers, makers, and robotics teams. It gives teams a dedicated place to share their technical work, recruit members by skill set, post progress updates, and message each other directly.
         </p>
         <ModalSection title="Architecture">
           <div className="space-y-1">
@@ -343,7 +343,7 @@ function LingoModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          Manifest V3 Chrome extension surfacing a translation workspace inside Chrome&apos;s native Side Panel. No npm packages, no build step. Live on the Chrome Web Store.
+          A Manifest V3 Chrome extension that opens a translation workspace inside the browser's native Side Panel. It has no npm dependencies and no build step, so Chrome loads it directly as a set of static files. Published on the Chrome Web Store.
         </p>
         <ModalSection title="How It Works">
           <div className="space-y-1">
@@ -371,7 +371,7 @@ function TodoModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          Zero-dependency task manager enforcing a strict three-layer architecture (TodoModel / Storage / App). Monthly calendar view, live search, filters, priority levels, tags, and full keyboard accessibility.
+          A task manager built in vanilla JavaScript with no frameworks or dependencies. The code is split into three clear layers: a data model that handles all task logic, a storage layer that reads and writes to localStorage, and a UI layer that connects the two via event delegation.
         </p>
         <ModalSection title="Architecture">
           <div className="space-y-1">
@@ -399,7 +399,7 @@ function PoolModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          Two-player 8-ball billiards with a fully custom physics engine — all collision detection, resolution, and movement dynamics computed from scratch on a Swing Timer game loop.
+          A two-player 8-ball pool game built in Java Swing. All physics are written from scratch on a Swing Timer game loop with no third-party libraries. The engine handles ball-to-ball collisions, friction, cushion bounces, and uses continuous collision detection to prevent fast-moving balls from passing through each other.
         </p>
         <ModalSection title="Physics Engine">
           <div className="space-y-1">
@@ -438,13 +438,13 @@ function PCBModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          Low-side current-sense breakout board for UW Orbital&apos;s Electrical Power System. Measures DC bus current on a 5V rail over 0–200 mA and outputs an analog voltage readable by an MCU ADC.
+          A current sensing breakout board designed for UW Orbital's Electrical Power System. It measures how much current the satellite bus is drawing on a 5V rail (up to 200 mA) and outputs a proportional voltage that a microcontroller ADC can read directly.
         </p>
         <ModalSection title="Design Overview">
           <div className="space-y-1">
-            <ModalRow label="Topology" value="Low-side sensing — shunt between load return and ground." />
-            <ModalRow label="Amplifier" value="INA180B3IDBVR (100 V/V). 2 mV differential amplified to 200 mV at 200 mA." />
-            <ModalRow label="Layout" value="Altium Designer on Orbital's shared Altium 365 workspace. GND copper pour both layers." />
+            <ModalRow label="Topology" value="Low-side sensing places the shunt resistor between the load return path and ground, so both amplifier inputs stay near ground and avoid high common-mode voltage issues." />
+            <ModalRow label="Amplifier" value="INA180B3IDBVR with a fixed 100 V/V gain. At 200 mA through a 10 milliohm shunt, the 2 mV differential gets amplified to 200 mV, well within a 3.3V ADC range." />
+            <ModalRow label="Layout" value="Designed in Altium Designer on Orbital's shared Altium 365 workspace. Ground copper pour on both layers stitched with vias for a solid return path." />
           </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
@@ -466,14 +466,14 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
       <p className="text-center text-xs text-black/30 dark:text-white/30 mb-5">Live costmap, inflated obstacles, and A* path overlaid on occupancy grid</p>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          Full autonomous navigation stack for a simulated differential-drive robot in Gazebo. Four ROS2 C++ nodes implement the full perception–world model–planning–control pipeline.
+          An autonomous navigation stack for a simulated differential-drive robot in Gazebo. Four ROS2 C++ nodes work together to take raw sensor data and turn it into robot movement: the robot builds a map from LiDAR scans, plans a path using A*, and follows it using a Pure Pursuit controller.
         </p>
         <ModalSection title="Node Architecture">
           <ul className="space-y-2 text-sm text-black/55 dark:text-white/55">
-            <li><span className="text-black dark:text-white font-medium">Costmap</span>: Converts LiDAR scan to Cartesian grid, marks occupied cells, applies inflation kernel.</li>
-            <li><span className="text-black dark:text-white font-medium">Map Memory</span>: Fuses local costmaps into persistent global map via odometry.</li>
-            <li><span className="text-black dark:text-white font-medium">Planner (A*)</span>: A* with Euclidean heuristic, replans on map updates.</li>
-            <li><span className="text-black dark:text-white font-medium">Controller</span>: Pure Pursuit — selects lookahead waypoint, computes arc curvature, outputs Twist at 10 Hz.</li>
+            <li><span className="text-black dark:text-white font-medium">Costmap:</span> Converts incoming LiDAR scans into a 2D occupancy grid and inflates obstacles so the planner keeps a safe clearance distance.</li>
+            <li><span className="text-black dark:text-white font-medium">Map Memory:</span> Merges successive local costmaps into a persistent global map using odometry to track the robot's position over time.</li>
+            <li><span className="text-black dark:text-white font-medium">Planner (A*):</span> Finds the shortest path to the goal using A* with a Euclidean heuristic. Replans automatically when the map changes.</li>
+            <li><span className="text-black dark:text-white font-medium">Controller (Pure Pursuit):</span> Picks a lookahead point on the planned path, computes the turning radius needed to reach it, and publishes wheel velocity commands at 10 Hz.</li>
           </ul>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
