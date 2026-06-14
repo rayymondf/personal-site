@@ -6,6 +6,7 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 const links = [
+  { label: "Skills", href: "#skills" },
   { label: "Education", href: "#education" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
@@ -42,7 +43,7 @@ export default function Navbar() {
           onClick={() => handleClick("#hero")}
           className="text-sm font-semibold text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors"
         >
-          Raymond Fang
+          RF
         </button>
 
         <div className="hidden md:flex items-center gap-8">

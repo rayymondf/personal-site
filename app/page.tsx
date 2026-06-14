@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -31,13 +31,33 @@ const LINKEDIN_SVG = (
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
-const skills: Record<string, string[]> = {
-  Languages: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
-  "Web & Backend": ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "Passport.js", "HTML5", "CSS3"],
-  "Data & ML": ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "PyTorch", "scikit-learn", "Git", "Docker", "Linux"],
-  "Robotics & Simulation": ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Computer Vision", "OpenCV"],
-  "Embedded & Hardware": ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
-};
+const skills: { category: string; icon: string; items: string[] }[] = [
+  {
+    category: "Languages",
+    icon: "{ }",
+    items: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"],
+  },
+  {
+    category: "Web & Backend",
+    icon: "⬡",
+    items: ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "Passport.js", "HTML5", "CSS3"],
+  },
+  {
+    category: "Data & ML",
+    icon: "◈",
+    items: ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "PyTorch", "scikit-learn", "Git", "Docker", "Linux"],
+  },
+  {
+    category: "Robotics & Simulation",
+    icon: "⊕",
+    items: ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "Computer Vision", "OpenCV"],
+  },
+  {
+    category: "Embedded & Hardware",
+    icon: "⌁",
+    items: ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "PWM", "UART"],
+  },
+];
 
 const education = [
   {
@@ -61,8 +81,11 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    description:
-      "WATonomous is the University of Waterloo's leading robotics design team, designing and building autonomous vehicles, humanoid robots, and electric racecars — competing in international FSAE, SAE AutoDrive, and RoboSub competitions. Working on the Humanoid subteam in collaboration with the UW Robotics Lab, contributed to motion control software for a custom-built bipedal robot inside a shared Dockerized ROS2 monorepo. Implemented arm and hand control in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom, and trained a PCA model on human hand motion data to compress 15 finger joint positions to 7 values, enabling practical real-time hand control.",
+    bullets: [
+      "Contributed to motion control software for a custom bipedal robot in a Dockerized ROS2 monorepo, collaborating with the UW Robotics Lab.",
+      "Implemented arm and hand control in MuJoCo using iterative Jacobian methods to coordinate movement across 21 degrees of freedom.",
+      "Trained a PCA model on human hand motion data to compress 15 finger joint positions to 7 values, enabling practical real-time hand control.",
+    ],
   },
   {
     company: "Einfolab Inc.",
@@ -70,8 +93,11 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    description:
-      "Einfolab is an IT and data management company in Richmond Hill that provides database, software, and infrastructure solutions to healthcare clinics, dental offices, and non-profits across Ontario. Designed and maintained SQL Server and MySQL databases supporting clinical, dental, and administrative workflows. Built Python and pandas pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort. Also supported client onboarding by configuring and deploying Windows Server environments.",
+    bullets: [
+      "Designed and maintained SQL Server and MySQL databases supporting clinical, dental, and administrative workflows for healthcare and non-profit clients.",
+      "Built Python and pandas ETL pipelines to automate data cleaning, deduplication, and cross-system reconciliation, improving reporting accuracy and reducing manual effort.",
+      "Supported client onboarding by configuring and deploying Windows Server environments.",
+    ],
   },
   {
     company: "University of Waterloo Formula Electric",
@@ -79,8 +105,11 @@ const experience = [
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    description:
-      "UW Formula Electric (UWFE) is a student design team that builds and races an open-wheel electric formula car at FSAE Michigan and the Formula Hybrid+Electric competition. Developed C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM). Built CAN log parsing and analysis tooling to accelerate firmware debugging, and implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
+    bullets: [
+      "Developed C/C++ hardware-in-the-loop test utilities for the Battery Management Unit (BMU), Vehicle Control Unit (VCU), and Power Distribution Module (PDM).",
+      "Built CAN log parsing and analysis tooling to accelerate firmware debugging across subsystems.",
+      "Implemented pre-HV startup sequencing logic to verify system readiness before track integration.",
+    ],
   },
   {
     company: "Robotics Team",
@@ -88,8 +117,11 @@ const experience = [
     period: "Oct 2023 – Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    description:
-      "Led the full hardware design and build of a competitive RC Mars rover, owning the entire stack from chassis design through to embedded firmware. Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping. Integrated ultrasonic, IMU, and OpenCV camera modules for real-time obstacle detection and autonomous fail-safe logic.",
+    bullets: [
+      "Led end-to-end hardware design and build of a competitive RC Mars rover — from chassis design to embedded firmware.",
+      "Developed ESP32-based motor control firmware in C++/Arduino with PWM drive and steering mapping.",
+      "Integrated ultrasonic, IMU, and OpenCV camera modules for real-time obstacle detection and autonomous fail-safe logic.",
+    ],
   },
 ];
 
@@ -120,9 +152,9 @@ const projects: Project[] = [
   {
     name: "Lingo: Chrome Translation Extension",
     image: "/lingo-ext.png",
-    stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"],
+    stack: ["JavaScript", "Manifest V3", "Chrome Side Panel API", "DeepL API"],
     shortDesc:
-      "Chrome extension that opens a persistent translation workspace in the native Side Panel. Translates via the DeepL Free API, with dynamic language loading, draft persistence, and history storage via Chrome Storage. Published on the Chrome Web Store.",
+      "Chrome extension that opens a persistent translation workspace in the native Side Panel. Translates via the DeepL Free API, with dynamic language loading, draft persistence, and history storage. Published on the Chrome Web Store.",
     modalKey: "lingo",
     repo: "https://github.com/rayymondf/Lingo_Seamless_Language_Translator",
     demo: "https://chromewebstore.google.com/detail/lingo-language-translator/okfkakjgiocfbejhmlpfmlbgjgdkddbl",
@@ -132,7 +164,7 @@ const projects: Project[] = [
     image: "/todo-app2.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
     shortDesc:
-      "Zero-dependency browser task manager with a strict three-layer architecture (TodoModel, Storage, App). Features a monthly calendar view, live search, filter and sort modes, priority levels, tags, repeat intervals, and full ARIA accessibility.",
+      "Zero-dependency browser task manager with a strict three-layer architecture (TodoModel, Storage, App). Features a monthly calendar view, live search, filter/sort modes, priority levels, tags, repeat intervals, and full ARIA accessibility.",
     modalKey: "todo",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
@@ -142,7 +174,7 @@ const projects: Project[] = [
     image: "/pool-game.png",
     stack: ["Java", "Java Swing", "2D Physics", "OOP"],
     shortDesc:
-      "Two-player 8-ball billiards game in Java Swing with a fully custom physics engine: per-tick velocity integration, elastic ball collisions with overlap correction, friction, cushion bounce, sub-step CCD, and full rule enforcement.",
+      "Two-player 8-ball billiards game with a fully custom physics engine: per-tick velocity integration, elastic ball collisions, friction, cushion bounce, sub-step CCD, and complete rule enforcement.",
     modalKey: "pool",
     repo: "https://github.com/rayymondf/Java-Project-Billards-Game",
     demo: null,
@@ -151,9 +183,9 @@ const projects: Project[] = [
     name: "Low-Side Current Sensing PCB",
     subtitle: "UW Orbital",
     image: "/pcb1.png",
-    stack: ["Altium Designer", "INA180B3IDBVR", "PCB Design", "Analog Electronics", "Altium 365"],
+    stack: ["Altium Designer", "INA180B3IDBVR", "PCB Design", "Analog Electronics"],
     shortDesc:
-      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and a 10 mΩ shunt resistor outputs a voltage proportional to DC bus load current, readable by an MCU ADC.",
+      "Current-sense breakout board for UW Orbital's EPS. Low-side topology with an INA180B3IDBVR (100 V/V gain) and a 10 mΩ shunt resistor outputs a voltage proportional to DC bus current, readable by an MCU ADC.",
     modalKey: "pcb",
     repo: null,
     demo: null,
@@ -162,9 +194,9 @@ const projects: Project[] = [
     name: "Autonomous Robot Navigation Stack",
     subtitle: "WATonomous ASD",
     image: "/wato-asd.png",
-    stack: ["ROS2 Humble", "C++17", "Gazebo", "Foxglove", "A*", "Pure Pursuit", "Docker"],
+    stack: ["ROS2 Humble", "C++17", "Gazebo", "A*", "Pure Pursuit", "Docker"],
     shortDesc:
-      "Full autonomous navigation stack for a simulated differential-drive robot in Gazebo. Four ROS2 C++ nodes: LiDAR Costmap, global Map Memory, A* Planner, and Pure Pursuit Controller, visualized live in Foxglove Studio.",
+      "Full autonomous navigation stack for a simulated differential-drive robot. Four ROS2 C++ nodes: LiDAR Costmap, Map Memory, A* Planner, and Pure Pursuit Controller, visualized live in Foxglove Studio.",
     modalKey: "wato",
     repo: null,
     demo: "https://youtu.be/jMNTflrencM",
@@ -183,11 +215,19 @@ const contacts = [
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="py-14 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-6">{title}</h2>
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-xs font-semibold tracking-widest text-black/40 dark:text-white/40 uppercase mb-8">{title}</h2>
         {children}
       </div>
     </section>
+  );
+}
+
+function Tag({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/[0.08] border border-black/10 dark:border-white/[0.12] rounded-full text-black/50 dark:text-white/50 whitespace-nowrap">
+      {children}
+    </span>
   );
 }
 
@@ -210,14 +250,6 @@ function ModalShell({ onClose, children }: { onClose: () => void; children: Reac
         {children}
       </motion.div>
     </motion.div>
-  );
-}
-
-function Tag({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/[0.08] border border-black/10 dark:border-white/[0.12] rounded-full text-black/50 dark:text-white/50 whitespace-nowrap">
-      {children}
-    </span>
   );
 }
 
@@ -265,18 +297,15 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">BuildBoard</h2>
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">Full-Stack Web App · React 19 · Node.js · PostgreSQL · Deployed on Render</p>
-
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
         <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
           <Image src="/buildboard-hero.png" alt="BuildBoard landing page" fill className="object-cover" />
         </div>
       </div>
-
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
           BuildBoard is a full-stack collaboration platform for student engineers, makers, and robotics teams. It replaces generic social networks with a purpose-built tool for sharing technical projects, recruiting teammates by skill, posting build log updates, and messaging collaborators.
         </p>
-
         <ModalSection title="Architecture">
           <div className="space-y-2">
             <ModalRow label="Frontend" value="React 19 SPA with Vite. Routing via Browser History API (no React Router). Responsive sidebar nav on desktop, bottom tab bar on mobile." />
@@ -285,7 +314,6 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
             <ModalRow label="Hosting" value="Render (server + static). Neon serverless PostgreSQL. Tables auto-created on first startup." />
           </div>
         </ModalSection>
-
         <ModalSection title="Key Features">
           <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
             <li><span className="text-black dark:text-white font-medium">Project pages</span>: title, description, category, status, GitHub/demo links, skill tags</li>
@@ -298,7 +326,6 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
             <li><span className="text-black dark:text-white font-medium">Guest demo</span>: read-only access with seeded demo data, no registration required</li>
           </ul>
         </ModalSection>
-
         <ModalSection title="Security">
           <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
             <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">requireAuth</code> middleware on all write endpoints</li>
@@ -307,7 +334,6 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
             <li>CORS restricted to frontend origin only</li>
           </ul>
         </ModalSection>
-
         <div className="flex flex-wrap gap-1.5">
           {["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
@@ -325,12 +351,10 @@ function LingoModal({ onClose }: { onClose: () => void }) {
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
         <Image src="/lingo-ext.png" alt="Lingo extension" width={800} height={500} className="w-full h-auto object-cover" />
       </div>
-
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
           Lingo is a Chrome extension built on Manifest V3 that surfaces a full translation workspace inside Chrome&apos;s native Side Panel. No npm packages, no build step, no framework: Chrome loads it directly as an unpacked set of files and it is live on the Chrome Web Store.
         </p>
-
         <ModalSection title="How It Works">
           <div className="space-y-2">
             <ModalRow label="Entry point" value="manifest.json registers sidePanelServiceWorker.js as the background service worker with sidePanel and storage permissions." />
@@ -341,15 +365,6 @@ function LingoModal({ onClose }: { onClose: () => void }) {
             <ModalRow label="Persistence" value="Chrome Storage API saves draft text, last selected language, and recent translation history across sessions." />
           </div>
         </ModalSection>
-
-        <ModalSection title="Permissions">
-          <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">sidePanel</code>: opens the translator inside Chrome&apos;s native side panel</li>
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">storage</code>: persists draft text, language, and history locally</li>
-            <li><code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">https://api-free.deepl.com/*</code>: host permission for DeepL Free API calls</li>
-          </ul>
-        </ModalSection>
-
         <div className="flex flex-wrap gap-1.5">
           {["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
@@ -367,31 +382,26 @@ function TodoModal({ onClose }: { onClose: () => void }) {
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
         <Image src="/todo-app2.png" alt="Todo calendar view" width={800} height={500} className="w-full h-auto object-cover" />
       </div>
-
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
           A browser-based task manager with zero dependencies. No framework, no npm, no build step. The project enforces a strict three-layer architecture that cleanly separates data logic, storage, and rendering.
         </p>
-
         <ModalSection title="Code Architecture">
           <div className="space-y-2">
             <ModalRow label="TodoModel" value="Pure data layer with no DOM access. Handles all CRUD, filtering, sorting, tag queries, calendar date lookups, and overdue detection." />
             <ModalRow label="Storage" value="Serializes and deserializes full state to localStorage under todo-app-v2. Normalizes on load to handle schema changes." />
-            <ModalRow label="App" value="Connects model to DOM via event delegation. Manages calendar rendering, list rendering, and three modal types (todo form, day view, delete confirm). Escape key closes modals." />
+            <ModalRow label="App" value="Connects model to DOM via event delegation. Manages calendar rendering, list rendering, and three modal types. Escape key closes modals." />
           </div>
         </ModalSection>
-
         <ModalSection title="Features">
           <ul className="space-y-1.5 text-xs text-black/65 dark:text-white/60">
             <li><span className="text-black dark:text-white font-medium">Calendar view</span>: 7-column monthly grid with todo chips plotted by due date; click any day to open a detail modal</li>
             <li><span className="text-black dark:text-white font-medium">List view</span>: filtered, sorted flat list with live search across title, description, and tags</li>
             <li><span className="text-black dark:text-white font-medium">Filters</span>: All / Active / Completed / Overdue, composable with tag filter</li>
             <li><span className="text-black dark:text-white font-medium">Sort modes</span>: Newest / Due date / Priority / A to Z</li>
-            <li><span className="text-black dark:text-white font-medium">Todo fields</span>: title, description, due date, priority, comma-separated tags, repeat interval</li>
             <li><span className="text-black dark:text-white font-medium">Accessibility</span>: ARIA roles, labels, keyboard navigation, and programmatic focus management</li>
           </ul>
         </ModalSection>
-
         <div className="flex flex-wrap gap-1.5">
           {["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
@@ -409,31 +419,18 @@ function PoolModal({ onClose }: { onClose: () => void }) {
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
         <Image src="/pool-game.png" alt="Pool game" width={800} height={500} className="w-full h-auto object-cover" />
       </div>
-
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
           A two-player 8-ball billiards game in Java Swing with a fully custom physics engine. All collision detection, resolution, and movement dynamics are computed from scratch each tick on a Swing Timer game loop: no third-party physics library.
         </p>
-
         <ModalSection title="Physics Engine">
           <div className="space-y-2">
             <ModalRow label="Integration" value="Per-tick velocity integration. Ball positions updated by velocity × dt each frame. Friction decelerates multiplicatively until below a rest threshold." />
-            <ModalRow label="Ball collisions" value="Elastic circle-circle overlap detection. Velocities resolved along the collision normal using conservation of momentum. Overlap separation prevents same-tick tunnelling." />
-            <ModalRow label="Cushion bounce" value="AABB boundary checks on all four rails. Normal velocity component reflected and scaled by an energy loss coefficient to simulate cushion damping." />
+            <ModalRow label="Ball collisions" value="Elastic circle-circle overlap detection. Velocities resolved along the collision normal using conservation of momentum." />
+            <ModalRow label="Cushion bounce" value="AABB boundary checks on all four rails. Normal velocity component reflected and scaled by an energy loss coefficient." />
             <ModalRow label="Sub-step CCD" value="At high speeds the physics step is subdivided to prevent any ball from passing through another ball or a rail within a single frame." />
-            <ModalRow label="Pocket detection" value="Distance threshold check against each pocket center, evaluated before rail bounce to prevent incorrect reflections." />
           </div>
         </ModalSection>
-
-        <ModalSection title="Rule Enforcement">
-          <ul className="space-y-1 text-xs text-black/65 dark:text-white/60">
-            <li>Open table at game start; solids/stripes assigned on first legal pocket</li>
-            <li>Scratch detection and ball-in-hand placement for the fouled player</li>
-            <li>Win condition: all assigned balls pocketed, then 8-ball legally sunk</li>
-            <li>Loss condition: 8-ball sunk early or on a scratch</li>
-          </ul>
-        </ModalSection>
-
         <div className="flex flex-wrap gap-1.5">
           {["Java", "Java Swing", "2D Physics", "OOP"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
@@ -448,7 +445,6 @@ function PCBModal({ onClose }: { onClose: () => void }) {
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Low-Side Current Sensing PCB</h2>
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">UW Orbital · Altium Designer · Analog Hardware Design</p>
-
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 flex flex-col">
           <div className="relative w-full bg-white dark:bg-white/5" style={{ aspectRatio: "4/3" }}>
@@ -463,46 +459,15 @@ function PCBModal({ onClose }: { onClose: () => void }) {
           <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Schematic</p>
         </div>
       </div>
-
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          A low-side current-sense breakout board designed for UW Orbital&apos;s Electrical Power System (EPS). Measures DC bus current on a 5V rail over a 0–200 mA range and outputs a proportional analog voltage readable by an MCU ADC. The same sensing topology is used on Orbital&apos;s flight CubeSat hardware.
+          A low-side current-sense breakout board designed for UW Orbital&apos;s Electrical Power System (EPS). Measures DC bus current on a 5V rail over a 0–200 mA range and outputs a proportional analog voltage readable by an MCU ADC.
         </p>
-
         <ModalSection title="Design Overview">
           <div className="space-y-2">
-            <ModalRow label="Topology" value="Low-side sensing. Shunt placed between load return and ground. Both amplifier inputs operate near ground, avoiding the high common-mode voltage of high-side configurations." />
-            <ModalRow label="Why amplification" value="At 200 mA through a 10 mΩ shunt, the differential signal is only 2 mV: below the ~4 mV resolution of a typical 8-bit ADC. The INA180 amplifies this to 200 mV (100 V/V), well within a 3.3V ADC range." />
-            <ModalRow label="Signal path" value="Load supply → R1 (shunt) → load return → GND. INA180 IN+ and IN− connect across R1. V_OUT = Gain × I_LOAD × R_SENSE, routed to MCU ADC." />
-          </div>
-        </ModalSection>
-
-        <ModalSection title="Bill of Materials">
-          <ul className="space-y-2 text-xs text-black/65 dark:text-white/60">
-            <li>
-              <span className="text-black dark:text-white font-medium">U1: INA180B3IDBVR (Texas Instruments)</span><br />
-              100 V/V gain, SOT-23-5. Supply: 2.7–5.5V. Common-mode: −0.2V to +26V. Gain error: ±1% max. Bandwidth: 210 kHz. Range: −40°C to +125°C.
-            </li>
-            <li>
-              <span className="text-black dark:text-white font-medium">R1: WSL0603R0100FEA (Vishay)</span><br />
-              10 mΩ, 1W shunt resistor, 0603. P = I²R = 0.4 mW at 200 mA. Low resistance minimizes insertion loss.
-            </li>
-            <li>
-              <span className="text-black dark:text-white font-medium">C1: C0603C104K8RACTU (KEMET)</span><br />
-              100 nF X7R bypass capacitor, 0603. Placed within 1 mm of VS pin. Suppresses supply noise that would corrupt the current reading.
-            </li>
-            <li>
-              <span className="text-black dark:text-white font-medium">P1: MTSW-104-07-T-S-170 (Mill-Max)</span><br />
-              4-pin 2.54 mm through-hole header. Exposes V_LOAD, 3V3, V_OUT, and GND for bench validation.
-            </li>
-          </ul>
-        </ModalSection>
-
-        <ModalSection title="Layout Notes">
-          <div className="space-y-2">
-            <ModalRow label="Tool" value="Altium Designer via UW Orbital's shared Altium 365 workspace." />
-            <ModalRow label="Bypass cap" value="C1 within 1 mm of VS pin to minimize supply trace inductance." />
-            <ModalRow label="Ground plane" value="GND copper pour on both layers, stitched with vias to reduce impedance and provide a low-resistance return path." />
+            <ModalRow label="Topology" value="Low-side sensing. Shunt placed between load return and ground. Both amplifier inputs operate near ground, avoiding high common-mode voltage." />
+            <ModalRow label="Amplifier" value="INA180B3IDBVR (100 V/V gain). At 200 mA through a 10 mΩ shunt, the 2 mV differential signal is amplified to 200 mV — well within a 3.3V ADC range." />
+            <ModalRow label="Tool" value="Altium Designer via UW Orbital's shared Altium 365 workspace. GND copper pour on both layers, stitched with vias." />
           </div>
         </ModalSection>
       </div>
@@ -515,45 +480,22 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Autonomous Robot Navigation Stack</h2>
       <p className="text-black/45 dark:text-white/45 text-xs mb-5">WATonomous ASD · ROS2 Humble · C++17 · Gazebo · Foxglove</p>
-
       <div className="rounded-xl overflow-hidden border border-black/10 dark:border-white/10 mb-6">
         <Image src="/wato-asd.png" alt="Foxglove visualization" width={800} height={500} className="w-full h-auto object-cover" />
         <p className="text-center text-[10px] text-black/40 dark:text-white/40 py-1.5">Foxglove: live costmap, inflated obstacles, and A* path overlaid on the occupancy grid</p>
       </div>
-
       <div className="space-y-4">
         <p className="text-sm text-black/70 dark:text-white/65 leading-relaxed">
-          A full autonomous navigation stack built from scratch for a simulated differential-drive robot in Gazebo, developed for WATonomous&apos;s Autonomous Software Division. The system enables point-to-point navigation with static obstacle avoidance via four tightly coupled ROS2 C++ nodes, mirroring the perception–world model–planning–control architecture used in production autonomous systems.
+          A full autonomous navigation stack built from scratch for a simulated differential-drive robot in Gazebo. Four tightly coupled ROS2 C++ nodes mirror the perception–world model–planning–control architecture used in production autonomous systems.
         </p>
-
         <ModalSection title="Node Architecture">
           <ul className="space-y-3 text-xs text-black/65 dark:text-white/60">
-            <li>
-              <span className="text-black dark:text-white font-medium">Costmap</span>: Subscribes to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/lidar</code> (LaserScan). Converts polar scan data to Cartesian grid, marks occupied cells, applies distance-weighted inflation kernel. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::OccupancyGrid</code>.
-            </li>
-            <li>
-              <span className="text-black dark:text-white font-medium">Map Memory</span>: Fuses local costmaps into a persistent global map using odometry from <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/odom/filtered</code>. Transforms into world frame via linear fusion. Updates only beyond a displacement threshold.
-            </li>
-            <li>
-              <span className="text-black dark:text-white font-medium">Planner (A*)</span>: Runs A* on the global grid with a Euclidean heuristic. Implements an idle/tracking state machine and replans on map updates or timeout. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.
-            </li>
-            <li>
-              <span className="text-black dark:text-white font-medium">Control (Pure Pursuit)</span>: Selects a lookahead waypoint, computes arc curvature, outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> to <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">/cmd_vel</code> at 10 Hz.
-            </li>
+            <li><span className="text-black dark:text-white font-medium">Costmap</span>: Converts LiDAR polar scan to Cartesian grid, marks occupied cells, applies distance-weighted inflation kernel. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">OccupancyGrid</code>.</li>
+            <li><span className="text-black dark:text-white font-medium">Map Memory</span>: Fuses local costmaps into a persistent global map using odometry. Updates only beyond a displacement threshold.</li>
+            <li><span className="text-black dark:text-white font-medium">Planner (A*)</span>: Runs A* with Euclidean heuristic. Implements idle/tracking state machine and replans on map updates. Publishes <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">nav_msgs::Path</code>.</li>
+            <li><span className="text-black dark:text-white font-medium">Control (Pure Pursuit)</span>: Selects a lookahead waypoint, computes arc curvature, outputs <code className="text-[10px] bg-black/8 dark:bg-white/10 px-1 rounded">geometry_msgs::Twist</code> at 10 Hz.</li>
           </ul>
         </ModalSection>
-
-        <ModalSection title="Stack">
-          <div className="space-y-2">
-            <ModalRow label="Language" value="C++17 (rclcpp)" />
-            <ModalRow label="Middleware" value="ROS2 Humble, DDS pub/sub, typed messages" />
-            <ModalRow label="Simulation" value="Gazebo, differential-drive robot, laser scanner, camera" />
-            <ModalRow label="Visualization" value="Foxglove Studio, WebSocket bridge, 3D and raw message panels" />
-            <ModalRow label="Infrastructure" value="Docker Compose, WATonomous monorepo (watod CLI)" />
-            <ModalRow label="Algorithms" value="A* with Euclidean heuristic, Pure Pursuit geometric path tracking" />
-          </div>
-        </ModalSection>
-
         <div className="flex flex-wrap gap-1.5">
           {["ROS2 Humble", "C++17", "Gazebo", "Foxglove Studio", "A*", "Pure Pursuit", "Docker"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
@@ -565,14 +507,6 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
 
 // ── Project Card ──────────────────────────────────────────────────────────────
 
-function StackTags({ stack }: { stack: string[] }) {
-  return (
-    <div className="flex flex-wrap gap-1.5">
-      {stack.map((s) => <Tag key={s}>{s}</Tag>)}
-    </div>
-  );
-}
-
 function ProjectCard({ project, index, onLearnMore }: { project: Project; index: number; onLearnMore: () => void }) {
   return (
     <motion.div
@@ -582,14 +516,11 @@ function ProjectCard({ project, index, onLearnMore }: { project: Project; index:
       <div className="relative w-full bg-black shrink-0" style={{ aspectRatio: "16/9" }}>
         <Image src={project.image} alt={project.name} fill className="object-cover" />
       </div>
-
       <div className="flex flex-col gap-2.5 p-4 flex-1">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
             <h3 className="text-black dark:text-white font-semibold text-sm leading-snug">{project.name}</h3>
-            {project.subtitle && (
-              <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{project.subtitle}</p>
-            )}
+            {project.subtitle && <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{project.subtitle}</p>}
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {project.repo && (
@@ -606,11 +537,10 @@ function ProjectCard({ project, index, onLearnMore }: { project: Project; index:
             )}
           </div>
         </div>
-
         <p className="text-black/60 dark:text-white/60 text-xs leading-relaxed flex-1">{project.shortDesc}</p>
-
-        <StackTags stack={project.stack} />
-
+        <div className="flex flex-wrap gap-1.5">
+          {project.stack.map((s) => <Tag key={s}>{s}</Tag>)}
+        </div>
         <button onClick={onLearnMore}
           className="self-start mt-1 text-xs text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white border border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35 rounded-full px-3 py-1 transition-colors">
           Learn More
@@ -635,75 +565,72 @@ export default function Home() {
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section id="hero" className="relative min-h-screen px-6 pt-36 pb-14 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:32px_32px]" />
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={0}
-            className="text-sm text-black/40 dark:text-white/50 mb-3">Hi, I&apos;m</motion.p>
-
-          <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
-            className="text-5xl md:text-7xl font-bold text-black dark:text-white mb-5 leading-tight">
-            Raymond Fang
-          </motion.h1>
-
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
-            className="text-base md:text-lg text-black/70 dark:text-white/75 mb-3 max-w-2xl leading-relaxed">
-            Electrical Engineering student at the University of Waterloo, working across embedded systems, robotics, hardware design, and full-stack software. Focused on building practical, reliable systems that solve real problems.
-          </motion.p>
-
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={3}
-            className="text-sm text-black/50 dark:text-white/50 mb-8 flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
-            Open to internships
-          </motion.p>
-
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}
-            className="flex flex-wrap gap-3 mb-12">
-            <button onClick={() => scrollTo("#contact")}
-              className="px-5 py-2.5 bg-black dark:bg-white text-white dark:text-black text-sm font-medium rounded-full hover:opacity-85 transition-opacity">
-              Get in touch
-            </button>
-            <button onClick={() => scrollTo("#projects")}
-              className="px-5 py-2.5 border border-black/20 dark:border-white/25 text-black/70 dark:text-white/70 text-sm font-medium rounded-full hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white transition-colors">
-              View projects
-            </button>
-            <a href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing" target="_blank" rel="noopener noreferrer"
-              className="px-5 py-2.5 border border-black/20 dark:border-white/25 text-black/70 dark:text-white/70 text-sm font-medium rounded-full hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white transition-colors">
+      {/* ── Name / Status Header ────────────────────────────────────────────── */}
+      <section id="hero" className="pt-28 pb-10 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
+        <div className="max-w-4xl mx-auto flex items-end justify-between flex-wrap gap-4">
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0}>
+            <h1 className="text-3xl font-bold text-black dark:text-white tracking-tight">Raymond Fang</h1>
+            <p className="text-sm text-black/55 dark:text-white/55 mt-1">
+              Electrical Engineering · University of Waterloo
+            </p>
+          </motion.div>
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={1}
+            className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 text-xs text-black/50 dark:text-white/50">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+              Open to internships
+            </span>
+            <a href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing"
+              target="_blank" rel="noopener noreferrer"
+              className="text-xs border border-black/20 dark:border-white/25 text-black/60 dark:text-white/60 hover:border-black/40 dark:hover:border-white/50 hover:text-black dark:hover:text-white rounded-full px-3 py-1.5 transition-colors">
               Resume
             </a>
-          </motion.div>
-
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={5} className="space-y-4">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category}>
-                <p className="text-[10px] text-black/35 dark:text-white/35 uppercase tracking-widest mb-2">{category}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {items.map((skill) => (
-                    <span key={skill} className="px-2.5 py-1 text-xs bg-black/6 dark:bg-white/8 border border-black/10 dark:border-white/12 rounded-full text-black/65 dark:text-white/65">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <button onClick={() => scrollTo("#contact")}
+              className="text-xs bg-black dark:bg-white text-white dark:text-black rounded-full px-3 py-1.5 hover:opacity-85 transition-opacity">
+              Contact
+            </button>
           </motion.div>
         </div>
       </section>
 
-      {/* Education */}
+      {/* ── Technical Skills ────────────────────────────────────────────────── */}
+      <Section id="skills" title="Technical Skills">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {skills.map((group, i) => (
+            <motion.div key={group.category}
+              variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+              className="border border-black/10 dark:border-white/12 rounded-xl p-4 bg-black/[0.02] dark:bg-white/[0.02]"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-mono text-black/30 dark:text-white/30 w-5 text-center select-none">{group.icon}</span>
+                <p className="text-[11px] font-semibold text-black/55 dark:text-white/55 uppercase tracking-widest">{group.category}</p>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {group.items.map((skill) => (
+                  <span key={skill}
+                    className="px-2 py-0.5 text-xs bg-black/5 dark:bg-white/8 border border-black/8 dark:border-white/10 rounded-md text-black/65 dark:text-white/65">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* ── Education ───────────────────────────────────────────────────────── */}
       <Section id="education" title="Education">
         {education.map((e, i) => (
           <motion.div key={e.school} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
             className="border border-black/10 dark:border-white/12 rounded-xl p-6">
             <div className="flex items-center gap-4">
-              <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
-                <Image src={e.logo} alt={e.school} width={80} height={80} className="object-contain w-full h-full" />
+              <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
+                <Image src={e.logo} alt={e.school} width={56} height={56} className="object-contain w-full h-full" />
               </div>
               <div className="flex-1 flex items-center justify-between gap-4 flex-wrap">
                 <div>
                   <h3 className="text-black dark:text-white font-semibold">{e.school}</h3>
-                  <p className="text-black/60 dark:text-white/60 text-sm mt-1">{e.degree}</p>
+                  <p className="text-black/60 dark:text-white/60 text-sm mt-0.5">{e.degree}</p>
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
@@ -727,37 +654,56 @@ export default function Home() {
         ))}
       </Section>
 
-      {/* Experience */}
+      {/* ── Experience (Timeline) ───────────────────────────────────────────── */}
       <Section id="experience" title="Experience">
-        <div className="space-y-4">
-          {experience.map((e, i) => (
-            <motion.div key={e.company} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
-              className="border border-black/10 dark:border-white/12 rounded-xl p-6">
-              <div className="flex items-center gap-5 mb-4">
-                <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white border border-black/8 dark:border-white/10 flex items-center justify-center">
-                  <Image src={e.logo} alt={e.company} width={80} height={80}
-                    className={`object-contain w-full h-full${e.logo === "/robotics.webp" ? " scale-[1.25] object-cover" : ""}`} />
-                </div>
-                <div className="flex-1 flex items-start justify-between gap-4 flex-wrap">
-                  <div>
-                    <h3 className="text-black dark:text-white font-semibold">{e.role}</h3>
-                    <p className="text-black/55 dark:text-white/55 text-sm mt-0.5">{e.company}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
-                    <p className="text-black/45 dark:text-white/45 text-xs mt-1">{e.location}</p>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-[27px] top-3 bottom-3 w-px bg-black/10 dark:bg-white/10" aria-hidden />
+
+          <div className="space-y-0">
+            {experience.map((e, i) => (
+              <motion.div key={e.company}
+                variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                className="relative flex gap-6 pb-8 last:pb-0"
+              >
+                {/* Timeline dot + logo */}
+                <div className="relative shrink-0 flex flex-col items-center" style={{ width: 56 }}>
+                  <div className="w-14 h-14 rounded-xl overflow-hidden bg-white border border-black/8 dark:border-white/10 flex items-center justify-center z-10">
+                    <Image src={e.logo} alt={e.company} width={56} height={56}
+                      className={`object-contain w-full h-full${e.logo === "/robotics.webp" ? " scale-[1.25] object-cover" : ""}`} />
                   </div>
                 </div>
-              </div>
-              <p className="text-black/65 dark:text-white/65 text-sm leading-relaxed">{e.description}</p>
-            </motion.div>
-          ))}
+
+                {/* Content */}
+                <div className="flex-1 border border-black/10 dark:border-white/12 rounded-xl p-5 bg-black/[0.01] dark:bg-white/[0.01]">
+                  <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
+                    <div>
+                      <h3 className="text-black dark:text-white font-semibold text-sm">{e.role}</h3>
+                      <p className="text-black/55 dark:text-white/55 text-xs mt-0.5">{e.company}</p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="text-black/45 dark:text-white/45 text-xs">{e.period}</p>
+                      <p className="text-black/45 dark:text-white/45 text-xs mt-0.5">{e.location}</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-1.5">
+                    {e.bullets.map((b, bi) => (
+                      <li key={bi} className="flex gap-2 text-xs text-black/65 dark:text-white/60 leading-relaxed">
+                        <span className="mt-1.5 w-1 h-1 rounded-full bg-black/25 dark:bg-white/25 shrink-0" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </Section>
 
-      {/* Projects */}
+      {/* ── Projects (3-col grid) ───────────────────────────────────────────── */}
       <Section id="projects" title="Projects">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
           {projects.map((p, i) => (
             <ProjectCard
               key={p.name}
@@ -778,7 +724,7 @@ export default function Home() {
         {openModal === "wato" && <WATonomousModal onClose={closeModal} />}
       </AnimatePresence>
 
-      {/* Contact */}
+      {/* ── Contact ─────────────────────────────────────────────────────────── */}
       <Section id="contact" title="Contact">
         <div className="grid gap-3 sm:grid-cols-2">
           {contacts.map(({ label, value, href, icon }, i) => (
@@ -801,7 +747,7 @@ export default function Home() {
       </Section>
 
       <footer className="py-10 px-6 border-t border-black/8 dark:border-white/8 bg-[#f5f5f0] dark:bg-[#0a0a0a]">
-        <div className="max-w-3xl mx-auto text-center text-black/35 dark:text-white/35 text-xs">
+        <div className="max-w-4xl mx-auto text-center text-black/35 dark:text-white/35 text-xs">
           Raymond Fang · {CURRENT_YEAR}
         </div>
       </footer>
