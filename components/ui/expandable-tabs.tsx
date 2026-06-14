@@ -64,14 +64,14 @@ export function ExpandableTabs({ tabs, className, activeColor = "text-white", on
   };
 
   const Separator = () => (
-    <div className="mx-1 h-[24px] w-[1.2px] bg-white/20" aria-hidden="true" />
+    <div className="mx-1 h-[24px] w-[1.2px] bg-black/15 dark:bg-white/20" aria-hidden="true" />
   );
 
   return (
     <div
       ref={outsideClickRef}
       className={cn(
-        "flex flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md p-1 shadow-sm",
+        "flex flex-wrap items-center gap-2 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-black/60 backdrop-blur-md p-1 shadow-sm",
         className
       )}
     >
@@ -92,8 +92,8 @@ export function ExpandableTabs({ tabs, className, activeColor = "text-white", on
             className={cn(
               "relative flex items-center rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300",
               selected === index
-                ? cn("bg-white/10", activeColor)
-                : "text-white/60 hover:bg-white/10 hover:text-white"
+                ? cn("bg-black/8 dark:bg-white/10", activeColor)
+                : "text-black/50 dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white"
             )}
           >
             <Icon size={20} />
