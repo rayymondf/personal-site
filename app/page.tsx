@@ -496,8 +496,8 @@ export default function Home() {
       <Navbar />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section id="hero" className="min-h-screen flex items-center px-6">
-        <div className="max-w-6xl mx-auto w-full pt-24 pb-16">
+      <section id="hero" className="flex items-center px-6">
+        <div className="max-w-6xl mx-auto w-full pt-28 pb-10">
           <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0}>
             <span className="inline-flex items-center gap-2 text-xs border border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 rounded-full px-3 py-1.5 text-black/50 dark:text-white/50 mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -559,7 +559,7 @@ export default function Home() {
       </section>
 
       {/* ── Skills ────────────────────────────────────────────────────────── */}
-      <section id="skills" className="py-24 px-6 max-w-6xl mx-auto">
+      <section id="skills" className="py-12 px-6 max-w-6xl mx-auto">
         <SectionLabel>Technical Skills</SectionLabel>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {skills.map((group, i) => (
@@ -581,7 +581,7 @@ export default function Home() {
       </section>
 
       {/* ── Experience ────────────────────────────────────────────────────── */}
-      <section id="experience" className="py-24 px-6 max-w-6xl mx-auto">
+      <section id="experience" className="py-12 px-6 max-w-6xl mx-auto">
         <SectionLabel>Experience</SectionLabel>
         <div className="relative">
           <div className="absolute left-[27px] top-3 bottom-3 w-0.5 bg-black/15 dark:bg-white/20" aria-hidden />
@@ -620,7 +620,7 @@ export default function Home() {
       </section>
 
       {/* ── Projects ──────────────────────────────────────────────────────── */}
-      <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
+      <section id="projects" className="py-12 px-6 max-w-6xl mx-auto">
         <SectionLabel>Projects</SectionLabel>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((p, i) => (
@@ -674,7 +674,7 @@ export default function Home() {
       </section>
 
       {/* ── Contact ───────────────────────────────────────────────────────── */}
-      <section id="contact" className="py-24 px-6 max-w-6xl mx-auto">
+      <section id="contact" className="py-12 px-6 max-w-6xl mx-auto">
         <SectionLabel>Contact</SectionLabel>
         <div className="grid sm:grid-cols-2 gap-3">
           {contacts.map(({ label, value, href }, i) => (
