@@ -53,7 +53,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. Worked on both the ML and firmware sides of a 21-DOF bipedal arm-hand robot, training ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot for arm manipulation tasks, while also writing STM32G4 firmware for joint actuator control using field-oriented control with encoder feedback and DMA-driven ADC current sensing. Bridged the embedded side to the robot's ROS2 stack via micro-ROS over CAN-FD, and built rosbag2-based data pipelines to convert hardware trials into LeRobot-format training datasets.",
+    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. On the firmware side, wrote field-oriented control firmware on an STM32G4 with a 1 kHz FreeRTOS control loop, brought up a custom actuator board from bare hardware, and wrote IMU and encoder drivers with a Kalman filter for joint state estimation. Bridged the embedded stack to ROS 2 via micro-ROS over CAN-FD. On the ML side, trained ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot, built a full demo-collection and training pipeline with Weights and Biases tracking and Dockerized runs, and engineered rosbag2-based ROS 2 data pipelines to convert hardware trials into LeRobot-format training datasets.",
   },
   {
     company: "Einfolab Inc.",
@@ -61,7 +61,7 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services to health sector clients across Ontario. Built a Dockerized Python Airflow ETL pipeline to orchestrate ingestion, SQL validation, and reconciliation of healthcare records across clinical, dental-imaging, finance, and administrative domains, with automated retries and pytest CI integration. Engineered an unsupervised anomaly detection system using scikit-learn Isolation Forest to surface records that bypassed rule-based SQL checks, and developed a FastAPI service backed by an LLM to auto-classify flagged data errors by type to reduce manual review overhead.",
+    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services to health sector clients across Ontario. Built a Dockerized Python Airflow ETL pipeline to orchestrate ingestion, SQL validation, and reconciliation of healthcare records across clinical, dental-imaging, finance, and administrative domains, with automated retries, failure alerting, and pytest CI integration. Engineered an unsupervised anomaly detection system using a scikit-learn Isolation Forest to catch records that bypassed rule-based SQL checks, and developed a FastAPI service backed by an LLM with structured outputs to auto-classify flagged data errors by type to reduce manual review overhead.",
   },
   {
     company: "UW Formula Electric",
@@ -69,7 +69,7 @@ const experience = [
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in FSAE Michigan and Formula Hybrid and Electric competitions. Developed STM32 firmware in C and C++ for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module, implementing CAN message handling, ADC sampling, and fail-safe logic across the car's high-voltage powertrain. Built Python CAN telemetry tooling using pandas and NumPy to parse test logs and detect signal anomalies for post-session debugging, and developed a C++ and Python hardware-in-the-loop testing framework with CMake and pytest to simulate ADC faults, CAN dropouts, and watchdog failures before on-vehicle integration.",
+    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric racecar in FSAE Michigan and Formula Hybrid competitions. On the firmware side, developed STM32 firmware in C and C++ for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module, implementing CAN message handling, ADC sampling, and fail-safe logic for the car's high-voltage powertrain, and built a C++ and Python hardware-in-the-loop framework with CMake and pytest to catch integration bugs before on-vehicle testing. On the software side, built a real-time telemetry dashboard in React and TypeScript backed by Python and FastAPI, streaming CAN data over WebSocket for track-side monitoring. Also trained a scikit-learn battery anomaly-detection model on logged cell telemetry to flag voltage and thermal outliers, and built a Python pipeline to ingest and store CAN logs in a TimescaleDB database for automated post-test analysis.",
   },
   {
     company: "Robotics Team",
@@ -77,7 +77,7 @@ const experience = [
     period: "Oct 2023 – Jun 2025",
     location: "Markham, ON",
     logo: "/robotics.webp",
-    desc: "A competitive high school robotics team focused on designing and building autonomous and RC vehicles for regional engineering competitions. Led the full design and build of a Mars rover from mechanical chassis through embedded firmware. Wrote ESP32 motor control firmware in C++ using PWM drive and steering mapping, and integrated ultrasonic, IMU, and OpenCV camera modules so the rover could detect obstacles and trigger autonomous fail-safe behavior.",
+    desc: "A competitive high school robotics team focused on designing and building autonomous and RC vehicles for regional engineering competitions. Led the full design and build of a Mars rover from the mechanical chassis through the embedded firmware stack. Wrote ESP32 motor control firmware in C++ with PWM drive and steering mapping, and integrated ultrasonic, IMU, and OpenCV camera modules to enable real-time obstacle detection and autonomous fail-safe behavior.",
   },
 ];
 
