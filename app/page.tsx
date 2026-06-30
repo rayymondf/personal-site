@@ -50,11 +50,11 @@ const skills = [
 const experience = [
   {
     company: "WATonomous",
-    role: "Robotics Software Engineer · Humanoid Team",
+    role: "Robotics & ML Engineer · Humanoid Team",
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building full-stack systems for autonomous vehicles, humanoid robots, and racecars. Trained ACT and Diffusion Policy imitation-learning models in PyTorch with Hugging Face LeRobot on 200+ demos of a 21-DOF arm-hand, reaching 90% grasp-and-place success across 50 IsaacLab and hardware trials. Implemented FOC with encoder feedback and DMA-driven ADC current sensing on an STM32G4, then bridged firmware to the robot's ROS2 stack via micro-ROS over CAN-FD, holding under 2ms latency for actuator commands and telemetry feedback.",
+    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. Worked on both the ML and firmware sides of a custom humanoid — training ACT and Diffusion Policy imitation-learning models using Hugging Face LeRobot for arm-hand manipulation, while also writing STM32G4 firmware for joint actuator control using field-oriented control with encoder feedback and DMA-driven ADC current sensing. Bridged the embedded side to the robot's ROS2 stack via micro-ROS over CAN-FD, and built data pipelines to convert hardware trials into LeRobot-format training datasets.",
   },
   {
     company: "Einfolab Inc.",
@@ -62,15 +62,15 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services primarily to health sector clients across Ontario. Built T-SQL and Python (pandas, openpyxl) pipelines to validate and cleanse clinical, dental-imaging, finance, and administrative records, cutting recurring QA time from 2 hours to under 30 minutes. Also prototyped an AI-assisted data-quality workflow using SQL rule checks and LLM-generated issue summaries to classify data errors and speed up root-cause analysis for the data team.",
+    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services primarily to health sector clients across Ontario. Worked on building and maintaining SQL Server and MySQL validation pipelines using T-SQL and Python to standardize records across clinical, dental-imaging, finance, and administrative data. Automated Excel and CSV ingestion and cleansing workflows using pandas and PowerShell, and prototyped an AI-assisted data-quality workflow that used SQL rule checks alongside LLM-generated summaries to help classify errors and surface issues earlier.",
   },
   {
     company: "UW Formula Electric",
-    role: "Electrical and Firmware Engineer",
+    role: "Software & Firmware Engineer",
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in FSAE Michigan and Formula Hybrid and Electric competitions. Built a real-time telemetry dashboard in React and TypeScript backed by Python/FastAPI, streaming 5,000+ CAN frames per test over WebSocket for track-side monitoring. Also built a C++/Python hardware-in-the-loop validation framework for BMU, VCU, and PDU firmware, and automated pre-HV startup test workflows using CMake, Git, and pytest-style scripts across 25+ startup and fault scenarios.",
+    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in FSAE Michigan and Formula Hybrid and Electric competitions. Built a real-time telemetry dashboard in React and TypeScript backed by a Python/FastAPI server, streaming CAN bus data over WebSocket for track-side monitoring and debugging. Also developed a C++/Python hardware-in-the-loop validation framework for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module firmware, and automated the pre-high-voltage startup test sequence to verify brake and throttle inputs, sensor states, CAN heartbeats, and fail-safe handling across a range of startup and fault scenarios.",
   },
   {
     company: "Robotics Team",
