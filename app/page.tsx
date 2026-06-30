@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Mail, ExternalLink, X, Home as HomeIcon, Briefcase, Code2, User, Send,
+  Mail, ExternalLink, X, Home as HomeIcon, Briefcase, Code2, FolderOpen, Send,
   ChevronRight, Sun, Moon,
 } from "lucide-react";
 import Image from "next/image";
@@ -50,11 +50,11 @@ const skills = [
 const experience = [
   {
     company: "WATonomous",
-    role: "Robotics & ML Engineer · Humanoid Team",
+    role: "Robotics & ML Engineer · Humanoid Autonomy",
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. Worked on both the ML and firmware sides of a custom humanoid — training ACT and Diffusion Policy imitation-learning models using Hugging Face LeRobot for arm-hand manipulation, while also writing STM32G4 firmware for joint actuator control using field-oriented control with encoder feedback and DMA-driven ADC current sensing. Bridged the embedded side to the robot's ROS2 stack via micro-ROS over CAN-FD, and built data pipelines to convert hardware trials into LeRobot-format training datasets.",
+    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. Worked on both the ML and firmware sides of a 21-DOF bipedal arm-hand robot — training ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot for arm manipulation tasks, while also writing STM32G4 firmware for joint actuator control using field-oriented control with encoder feedback and DMA-driven ADC current sensing. Bridged the embedded side to the robot's ROS2 stack via micro-ROS over CAN-FD, and built rosbag2-based data pipelines to convert hardware trials into LeRobot-format training datasets.",
   },
   {
     company: "Einfolab Inc.",
@@ -62,7 +62,7 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services primarily to health sector clients across Ontario. Worked on building and maintaining SQL Server and MySQL validation pipelines using T-SQL and Python to standardize records across clinical, dental-imaging, finance, and administrative data. Automated Excel and CSV ingestion and cleansing workflows using pandas and PowerShell, and prototyped an AI-assisted data-quality workflow that used SQL rule checks alongside LLM-generated summaries to help classify errors and surface issues earlier.",
+    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services to health sector clients across Ontario. Built a Dockerized Python Airflow ETL pipeline to orchestrate ingestion, SQL validation, and reconciliation of healthcare records across clinical, dental-imaging, finance, and administrative domains, with automated retries and pytest CI integration. Engineered an unsupervised anomaly detection system using scikit-learn Isolation Forest to surface records that bypassed rule-based SQL checks, and developed a FastAPI service backed by an LLM to auto-classify flagged data errors by type to reduce manual review overhead.",
   },
   {
     company: "UW Formula Electric",
@@ -70,7 +70,7 @@ const experience = [
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in FSAE Michigan and Formula Hybrid and Electric competitions. Built a real-time telemetry dashboard in React and TypeScript backed by a Python/FastAPI server, streaming CAN bus data over WebSocket for track-side monitoring and debugging. Also developed a C++/Python hardware-in-the-loop validation framework for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module firmware, and automated the pre-high-voltage startup test sequence to verify brake and throttle inputs, sensor states, CAN heartbeats, and fail-safe handling across a range of startup and fault scenarios.",
+    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in FSAE Michigan and Formula Hybrid and Electric competitions. Developed STM32 firmware in C and C++ for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module, implementing CAN message handling, ADC sampling, and fail-safe logic across the car's high-voltage powertrain. Built Python CAN telemetry tooling using pandas and NumPy to parse test logs and detect signal anomalies for post-session debugging, and developed a C++ and Python hardware-in-the-loop testing framework with CMake and pytest to simulate ADC faults, CAN dropouts, and watchdog failures before on-vehicle integration.",
   },
   {
     company: "Robotics Team",
@@ -196,7 +196,7 @@ function Navbar() {
     { title: "Home", icon: HomeIcon },
     { title: "Skills", icon: Code2 },
     { title: "Experience", icon: Briefcase },
-    { title: "Projects", icon: User },
+    { title: "Projects", icon: FolderOpen },
     { title: "Contact", icon: Send },
   ];
 
