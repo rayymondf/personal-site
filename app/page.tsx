@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
-import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 
 function GithubIcon({ size = 16 }: { size?: number }) {
@@ -54,7 +53,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. Worked on both the ML and firmware sides of a 21-DOF bipedal arm-hand robot — training ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot for arm manipulation tasks, while also writing STM32G4 firmware for joint actuator control using field-oriented control with encoder feedback and DMA-driven ADC current sensing. Bridged the embedded side to the robot's ROS2 stack via micro-ROS over CAN-FD, and built rosbag2-based data pipelines to convert hardware trials into LeRobot-format training datasets.",
+    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. Worked on both the ML and firmware sides of a 21-DOF bipedal arm-hand robot, training ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot for arm manipulation tasks, while also writing STM32G4 firmware for joint actuator control using field-oriented control with encoder feedback and DMA-driven ADC current sensing. Bridged the embedded side to the robot's ROS2 stack via micro-ROS over CAN-FD, and built rosbag2-based data pipelines to convert hardware trials into LeRobot-format training datasets.",
   },
   {
     company: "Einfolab Inc.",
@@ -523,19 +522,18 @@ export default function Home() {
             variants={fadeUp} initial="hidden" animate="show" custom={3}
             className="flex flex-wrap gap-3 mb-10"
           >
-            <Button
+            <button
               onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full px-6 bg-black dark:bg-white text-white dark:text-black hover:opacity-80"
+              className="inline-flex items-center gap-1.5 rounded-full px-6 h-10 text-sm font-medium bg-black dark:bg-white text-white dark:text-black hover:opacity-75 transition-opacity"
             >
-              <ChevronRight size={16} className="mr-1" /> Projects
-            </Button>
-            <Button
-              variant="outline"
+              <ChevronRight size={16} /> Projects
+            </button>
+            <button
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full px-6 border-black/20 dark:border-white/20 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5"
+              className="inline-flex items-center gap-1.5 rounded-full px-6 h-10 text-sm font-medium border border-black/20 dark:border-white/20 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
             >
-              <Mail size={16} className="mr-1" /> Get in Touch
-            </Button>
+              <Mail size={16} /> Get in Touch
+            </button>
           </motion.div>
 
           <motion.div
