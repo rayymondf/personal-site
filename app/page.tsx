@@ -40,11 +40,11 @@ const fadeUp = {
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 const skills = [
-  { category: "Languages", icon: "{ }", items: ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL", "Ruby", "MATLAB", "Bash"] },
-  { category: "Web & Backend", icon: "⬡", items: ["React", "Next.js", "Node.js", "Express", "FastAPI", "Tailwind CSS", "Vite", "REST APIs", "HTML5", "CSS3"] },
-  { category: "Data & ML", icon: "◈", items: ["PostgreSQL", "MySQL", "SQL Server", "pandas", "NumPy", "PyTorch", "scikit-learn", "Git", "Docker", "Linux"] },
-  { category: "Robotics & Simulation", icon: "⊕", items: ["ROS2", "Gazebo", "MuJoCo", "Isaac Sim", "IsaacLab", "Foxglove", "OpenCV"] },
-  { category: "Embedded & Hardware", icon: "⌁", items: ["STM32", "ESP32", "Arduino", "FPGA", "Verilog", "Altium", "KiCad", "CAN", "I2C", "SPI", "UART"] },
+  { category: "Languages", icon: "{ }", items: ["C", "C++", "Python", "TypeScript", "JavaScript", "Java", "SQL", "MATLAB", "Verilog", "Bash"] },
+  { category: "Web & Backend", icon: "⬡", items: ["React", "Next.js", "Node.js", "Express", "FastAPI", "WebSocket", "GraphQL", "REST APIs", "Tailwind CSS", "Vite"] },
+  { category: "Data & ML", icon: "◈", items: ["PyTorch", "scikit-learn", "Hugging Face", "pandas", "NumPy", "PostgreSQL", "MySQL", "SQL Server", "TimescaleDB", "Docker"] },
+  { category: "Robotics & Simulation", icon: "⊕", items: ["ROS2", "IsaacLab", "Isaac Sim", "Gazebo", "Foxglove", "micro-ROS", "rosbag2", "OpenCV", "Imitation Learning", "FOC"] },
+  { category: "Embedded & Hardware", icon: "⌁", items: ["STM32", "FreeRTOS", "CAN/CAN-FD", "I2C", "SPI", "UART", "DMA", "Altium Designer", "KiCad", "LTspice"] },
 ];
 
 const experience = [
@@ -54,7 +54,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building software systems for autonomous vehicles, humanoid robots, and racecars in collaboration with the UW Robotics Lab. Contributed to motion control software for a custom bipedal robot inside a Dockerized ROS2 monorepo. Implemented arm and hand control in MuJoCo using iterative Jacobian methods across 21 degrees of freedom, and trained a PCA model to reduce 15 finger joint positions down to 7 principal components for real-time hand control.",
+    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building full-stack systems for autonomous vehicles, humanoid robots, and racecars. Trained ACT and Diffusion Policy imitation-learning models in PyTorch with Hugging Face LeRobot on 200+ demos of a 21-DOF arm-hand, reaching 90% grasp-and-place success across 50 IsaacLab and hardware trials. Implemented FOC with encoder feedback and DMA-driven ADC current sensing on an STM32G4, then bridged firmware to the robot's ROS2 stack via micro-ROS over CAN-FD, holding under 2ms latency for actuator commands and telemetry feedback.",
   },
   {
     company: "Einfolab Inc.",
@@ -62,7 +62,7 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is an IT solutions and consulting firm based in Richmond Hill that provides technology planning, data management, and back-office services primarily to health sector and non-profit clients across Ontario. Designed and maintained SQL Server and MySQL databases for several client deployments, built Python and pandas ETL pipelines to automate data cleaning and cross-system deduplication, and supported client onboarding by configuring and deploying Windows Server environments.",
+    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services primarily to health sector clients across Ontario. Built T-SQL and Python (pandas, openpyxl) pipelines to validate and cleanse clinical, dental-imaging, finance, and administrative records, cutting recurring QA time from 2 hours to under 30 minutes. Also prototyped an AI-assisted data-quality workflow using SQL rule checks and LLM-generated issue summaries to classify data errors and speed up root-cause analysis for the data team.",
   },
   {
     company: "UW Formula Electric",
@@ -70,7 +70,7 @@ const experience = [
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in the FSAE Michigan and Formula Hybrid and Electric competition series. Developed C and C++ hardware-in-the-loop test utilities for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module. Built CAN log parsing tools to speed up firmware debugging across subsystems, and implemented the pre-high-voltage startup sequence that verifies all subsystems are ready before the car is allowed on track.",
+    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric formula-style racecar in FSAE Michigan and Formula Hybrid and Electric competitions. Built a real-time telemetry dashboard in React and TypeScript backed by Python/FastAPI, streaming 5,000+ CAN frames per test over WebSocket for track-side monitoring. Also built a C++/Python hardware-in-the-loop validation framework for BMU, VCU, and PDU firmware, and automated pre-HV startup test workflows using CMake, Git, and pytest-style scripts across 25+ startup and fault scenarios.",
   },
   {
     company: "Robotics Team",
