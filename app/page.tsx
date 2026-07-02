@@ -53,7 +53,7 @@ const experience = [
     period: "Oct 2025 – Present",
     location: "Waterloo, ON",
     logo: "/watonomous_logo.jpg",
-    desc: "WATonomous is the flagship autonomy design team at the University of Waterloo, building systems for autonomous vehicles, humanoid robots, and racecars. On the firmware side, wrote field-oriented control firmware on an STM32G4 with a 1 kHz FreeRTOS control loop, brought up a custom actuator board from bare hardware, and wrote IMU and encoder drivers with a Kalman filter for joint state estimation. Bridged the embedded stack to ROS 2 via micro-ROS over CAN-FD. On the ML side, trained ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot, built a full demo-collection and training pipeline with Weights and Biases tracking and Dockerized runs, and engineered rosbag2-based ROS 2 data pipelines to convert hardware trials into LeRobot-format training datasets.",
+    desc: "WATonomous is the University of Waterloo's flagship autonomy design team, building full-stack systems for autonomous vehicles and humanoid robots. On the ML side, trained ACT and Diffusion Policy imitation-learning models in PyTorch using Hugging Face LeRobot, scaled training with NVIDIA Isaac Lab GPU-parallel simulation, and fine-tuned an open-source VLA model on annotated trajectories for spoken-language task instructions. On the firmware side, programmed FOC motor control on an STM32G4 with a FreeRTOS control loop, fusing IMU and encoder data through a Kalman filter for joint-state estimation, and bridged the embedded stack to ROS 2 over a CAN-FD bus using micro-ROS.",
   },
   {
     company: "Einfolab Inc.",
@@ -61,7 +61,7 @@ const experience = [
     period: "Jan 2026 – Apr 2026",
     location: "Richmond Hill, ON",
     logo: "/einfolab.webp",
-    desc: "Einfolab is an IT solutions and consulting firm that provides data management and back-office services to health sector clients across Ontario. Built a Dockerized Python Airflow ETL pipeline to orchestrate ingestion, SQL validation, and reconciliation of healthcare records across clinical, dental-imaging, finance, and administrative domains, with automated retries, failure alerting, and pytest CI integration. Engineered an unsupervised anomaly detection system using a scikit-learn Isolation Forest to catch records that bypassed rule-based SQL checks, and developed a FastAPI service backed by an LLM with structured outputs to auto-classify flagged data errors by type to reduce manual review overhead.",
+    desc: "Einfolab is an IT solutions and consulting firm delivering data management and back-office services to health sector clients across Ontario. Built a Dockerized Airflow ETL pipeline to orchestrate ingestion, SQL validation, and reconciliation of patient records across clinical, dental-imaging, finance, and administrative domains, with automated retries, failure alerting, and pytest CI integration. Engineered a scikit-learn Isolation Forest to catch anomalous records that bypassed rule-based SQL checks, and developed a FastAPI service backed by an LLM with structured outputs to auto-classify flagged data errors by type, reducing manual review overhead.",
   },
   {
     company: "UW Formula Electric",
@@ -69,7 +69,7 @@ const experience = [
     period: "Sept 2025 – Apr 2026",
     location: "Waterloo, ON",
     logo: "/waterlooformulaelectric_logo.jpg",
-    desc: "UW Formula Electric is a student design team at the University of Waterloo that designs, builds, and competes with an open-wheel electric racecar in FSAE Michigan and Formula Hybrid competitions. On the firmware side, developed STM32 firmware in C and C++ for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module, implementing CAN message handling, ADC sampling, and fail-safe logic for the car's high-voltage powertrain, and built a C++ and Python hardware-in-the-loop framework with CMake and pytest to catch integration bugs before on-vehicle testing. On the software side, built a real-time telemetry dashboard in React and TypeScript backed by Python and FastAPI, streaming CAN data over WebSocket for track-side monitoring. Also trained a scikit-learn battery anomaly-detection model on logged cell telemetry to flag voltage and thermal outliers, and built a Python pipeline to ingest and store CAN logs in a TimescaleDB database for automated post-test analysis.",
+    desc: "UW Formula Electric is a student design team that designs, builds, and competes with an open-wheel electric racecar in FSAE and Formula Hybrid competitions. On the firmware side, developed C/C++ firmware for the Battery Management Unit, Vehicle Control Unit, and Power Distribution Module, implementing CAN message handling, ADC sampling, and fail-safe logic for the high-voltage powertrain, and built a HIL testing framework in C++ and Python with CMake and pytest to catch integration bugs before on-vehicle testing. On the software side, built a real-time telemetry dashboard in React and TypeScript backed by FastAPI, streaming CAN data over WebSocket for live vehicle monitoring, trained a scikit-learn anomaly-detection model to flag voltage and thermal outliers in battery telemetry, and built a Python pipeline to ingest and store CAN logs in TimescaleDB for automated post-test analysis.",
   },
   {
     company: "Robotics Team",
@@ -619,7 +619,20 @@ export default function Home() {
 
       {/* ── Projects ──────────────────────────────────────────────────────── */}
       <section id="projects" className="py-12 px-6 max-w-6xl mx-auto">
-        <SectionLabel>Projects</SectionLabel>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3 flex-1">
+            <span className="text-[10px] font-semibold tracking-[0.2em] text-black/30 dark:text-white/30 uppercase">Projects</span>
+            <div className="flex-1 h-px bg-black/10 dark:bg-white/10" />
+          </div>
+          <a
+            href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-4 shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 h-8 text-xs font-medium border border-black/15 dark:border-white/15 text-black/55 dark:text-white/55 hover:border-black/30 dark:hover:border-white/30 hover:text-black dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.05] transition-all"
+          >
+            <ExternalLink size={12} /> Resume
+          </a>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((p, i) => (
             <motion.div
