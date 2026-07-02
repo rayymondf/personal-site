@@ -304,24 +304,26 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          BuildBoard is a collaboration platform built for student engineers, makers, and robotics teams. It gives teams a dedicated place to share their technical work, recruit members by skill set, post progress updates, and message each other directly.
+          BuildBoard is a full-stack collaboration platform built for student engineers, makers, and robotics teams. It solves a common problem: existing platforms like GitHub are too code-focused, while social media is too generic. BuildBoard combines project showcasing, structured build logs, skill-based team recruitment, and direct messaging into one cohesive product designed specifically for technical builders.
         </p>
-        <ModalSection title="Architecture">
-          <div className="space-y-1">
-            <ModalRow label="Frontend" value="React 19 SPA with Vite. Browser History routing. Responsive sidebar nav on desktop, bottom tab bar on mobile." />
-            <ModalRow label="Backend" value="Node.js + Express REST API. Session-cookie auth via Passport.js with bcrypt password hashing." />
-            <ModalRow label="Database" value="PostgreSQL on Neon. Parameterized queries. UNIQUE constraints prevent duplicate likes." />
-            <ModalRow label="Hosting" value="Render (server + static). Neon serverless PostgreSQL." />
-          </div>
-        </ModalSection>
-        <ModalSection title="Key Features">
+        <ModalSection title="How It Works">
           <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
-            <li><span className="text-black dark:text-white font-medium">Project pages</span>: title, description, category, status, GitHub/demo links, skill tags</li>
-            <li><span className="text-black dark:text-white font-medium">Build logs</span>: milestone-tagged progress posts with comments and likes</li>
-            <li><span className="text-black dark:text-white font-medium">Recruitment</span>: open roles with skill areas, join requests, owner accept/reject workflow</li>
-            <li><span className="text-black dark:text-white font-medium">Ranked feed</span>: score = likes × 2 + comments × 3 − age_in_hours × 0.05, computed in SQL</li>
-            <li><span className="text-black dark:text-white font-medium">Guest demo</span>: read-only access with seeded data, no registration required</li>
+            <li><span className="text-black dark:text-white font-medium">Project pages:</span> Each project has a dedicated page with a title, description, category, status, skill tags, and links. Anyone can browse; only authenticated owners can edit.</li>
+            <li><span className="text-black dark:text-white font-medium">Build logs:</span> Team members post milestone-tagged progress updates. Other users can comment and like individual updates.</li>
+            <li><span className="text-black dark:text-white font-medium">Team recruitment:</span> Project owners post open roles with required skills. Users submit join requests, and owners accept or reject them directly from the platform.</li>
+            <li><span className="text-black dark:text-white font-medium">Ranked activity feed:</span> A SQL-computed score (likes x 2 + comments x 3, decayed by age) surfaces the most active projects at the top of the feed.</li>
+            <li><span className="text-black dark:text-white font-medium">Direct messaging:</span> Users can message each other through per-conversation DM threads.</li>
+            <li><span className="text-black dark:text-white font-medium">Guest demo:</span> A read-only demo account with seeded data lets employers explore the platform without registering.</li>
           </ul>
+        </ModalSection>
+        <ModalSection title="Technical Architecture">
+          <div className="space-y-1">
+            <ModalRow label="Frontend" value="React 19 single-page app built with Vite. Uses the Browser History API for routing with no React Router dependency. Responsive layout with a sidebar on desktop and a bottom tab bar on mobile." />
+            <ModalRow label="Backend" value="Node.js and Express REST API with over 30 routes. Session-cookie authentication using Passport.js local strategy and bcrypt password hashing." />
+            <ModalRow label="Authorization" value="Object-level permission model: owners have full control, admins can manage members, members can post updates, and public users can only read." />
+            <ModalRow label="Database" value="PostgreSQL with 12 tables including projects, members, roles, join requests, updates, comments, likes, conversations, and messages. Parameterized queries throughout. Hosted on Neon." />
+            <ModalRow label="Hosting" value="Server and static files deployed on Render. PostgreSQL hosted on Neon serverless." />
+          </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
           {["React 19", "Vite", "Node.js", "Express", "PostgreSQL", "Passport.js", "Render", "Neon"].map((s) => <Tag key={s}>{s}</Tag>)}
@@ -336,19 +338,28 @@ function LingoModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Lingo: Chrome Translation Extension</h2>
-      <p className="text-black/40 dark:text-white/40 text-sm mb-5">Chrome Extension · Manifest V3 · DeepL API · Chrome Web Store</p>
+      <p className="text-black/40 dark:text-white/40 text-sm mb-5">Chrome Extension · Manifest V3 · DeepL API · Published on Chrome Web Store</p>
       <div className="rounded-xl overflow-hidden border border-black/8 dark:border-white/8 mb-6">
         <Image src="/lingo-ext.png" alt="Lingo" width={800} height={500} className="w-full h-auto" />
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          A Manifest V3 Chrome extension that opens a translation workspace inside the browser's native Side Panel. It has no npm dependencies and no build step, so Chrome loads it directly as a set of static files. Published on the Chrome Web Store.
+          Lingo is a Chrome extension that adds a full translation workspace directly inside Chrome's native Side Panel, so users can translate text without opening a new tab or leaving the page they are reading. It is published on the Chrome Web Store, has no npm dependencies, and requires no build step. Chrome loads it directly as a set of static files.
         </p>
         <ModalSection title="How It Works">
+          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+            <li><span className="text-black dark:text-white font-medium">Side panel activation:</span> A background service worker listens for the extension icon click and calls chrome.sidePanel.open(), which opens the translator panel inside Chrome's native sidebar. The panel persists across page navigation.</li>
+            <li><span className="text-black dark:text-white font-medium">Translation:</span> On submit, a POST request is sent to the DeepL Free API with the user's text and selected target language. The translated result is displayed immediately. If the language list fails to load from the API, a built-in fallback list keeps the dropdown usable.</li>
+            <li><span className="text-black dark:text-white font-medium">Local persistence:</span> The Chrome Storage API saves the current draft text, the last selected language, and a history of recent translations. This data is local to the browser and never sent anywhere except during translation.</li>
+          </ul>
+        </ModalSection>
+        <ModalSection title="Extension Architecture">
           <div className="space-y-1">
-            <ModalRow label="Service worker" value="Opens side panel on icon click via chrome.sidePanel.open(), persistent across navigation." />
-            <ModalRow label="Translation" value="POST /v2/translate to DeepL Free API. Language list fetched from /v2/languages." />
-            <ModalRow label="Persistence" value="Chrome Storage API saves draft text, last selected language, and translation history." />
+            <ModalRow label="manifest.json" value="Declares Manifest V3 configuration, requests sidePanel and storage permissions, and registers the host permission for the DeepL API domain." />
+            <ModalRow label="sidePanelServiceWorker.js" value="Background service worker. Handles the icon click event and tells Chrome to open the side panel." />
+            <ModalRow label="panel.html + styles.css" value="The translation UI rendered inside the side panel. Input area, language selector, output area, and recent history list." />
+            <ModalRow label="backendService.js" value="Handles all API calls to DeepL, restores saved state from Chrome Storage on load, and saves successful translations to local history." />
+            <ModalRow label="languageSelector.js" value="Fetches the supported language list from the DeepL API and populates the dropdown. Falls back to a hardcoded list on failure." />
           </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
@@ -364,19 +375,28 @@ function TodoModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Todo: Calendar Task Manager</h2>
-      <p className="text-black/40 dark:text-white/40 text-sm mb-5">Vanilla JavaScript · Zero Dependencies · Three-Layer Architecture</p>
+      <p className="text-black/40 dark:text-white/40 text-sm mb-5">Vanilla JavaScript · Zero Dependencies · No Build Step · Runs in Any Browser</p>
       <div className="rounded-xl overflow-hidden border border-black/8 dark:border-white/8 mb-6">
         <Image src="/todo-app2.png" alt="Todo" width={800} height={500} className="w-full h-auto" />
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          A task manager built in vanilla JavaScript with no frameworks or dependencies. The code is split into three clear layers: a data model that handles all task logic, a storage layer that reads and writes to localStorage, and a UI layer that connects the two via event delegation.
+          A fully-featured task manager built in plain HTML, CSS, and JavaScript with no frameworks, no npm packages, and no build step. The app runs by opening a single HTML file in any browser. Despite its simplicity, it supports a monthly calendar view, priority levels, tags, filters, repeating tasks, overdue detection, and full keyboard accessibility.
         </p>
-        <ModalSection title="Architecture">
+        <ModalSection title="Features">
+          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+            <li><span className="text-black dark:text-white font-medium">Calendar view:</span> A 7-column monthly grid where each day cell shows chips for tasks due on that date. Clicking a day opens a modal listing all tasks for that day.</li>
+            <li><span className="text-black dark:text-white font-medium">List view:</span> A flat list of all tasks with live search, sort by date or priority, and filter by status (all, active, completed, overdue) or by tag.</li>
+            <li><span className="text-black dark:text-white font-medium">Task fields:</span> Title, description, due date, priority (low, medium, high), comma-separated tags, and repeat interval (daily, weekly, monthly).</li>
+            <li><span className="text-black dark:text-white font-medium">Overdue detection:</span> Incomplete tasks past their due date are automatically highlighted.</li>
+            <li><span className="text-black dark:text-white font-medium">Accessibility:</span> ARIA roles and labels, full keyboard navigation, and focus management across all modals.</li>
+          </ul>
+        </ModalSection>
+        <ModalSection title="Code Architecture">
           <div className="space-y-1">
-            <ModalRow label="TodoModel" value="Pure data layer. All CRUD, filtering, sorting, and calendar date lookups." />
-            <ModalRow label="Storage" value="Serializes to localStorage under todo-app-v2. Normalizes on load." />
-            <ModalRow label="App" value="Connects model to DOM via event delegation. Escape key closes modals." />
+            <ModalRow label="TodoModel" value="Pure data layer with no DOM access. Handles all task creation, updates, deletion, filtering, sorting, tag lookups, and overdue checks." />
+            <ModalRow label="Storage" value="Reads and writes to localStorage under the key todo-app-v2. Normalizes data on load to handle schema changes gracefully." />
+            <ModalRow label="App" value="Connects the model to the DOM using event delegation rather than per-element listeners. Handles calendar rendering, list rendering, and all three modal types (task form, day view, delete confirmation). Escape key closes any open modal." />
           </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
@@ -392,19 +412,30 @@ function PoolModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Java 8-Ball Pool Game</h2>
-      <p className="text-black/40 dark:text-white/40 text-sm mb-5">Java Swing · Custom 2D Physics Engine · OOP Design</p>
+      <p className="text-black/40 dark:text-white/40 text-sm mb-5">Java Swing · Custom 2D Physics Engine · Object-Oriented Design</p>
       <div className="rounded-xl overflow-hidden border border-black/8 dark:border-white/8 mb-6">
         <Image src="/pool-game.png" alt="Pool game" width={800} height={500} className="w-full h-auto" />
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          A two-player 8-ball pool game built in Java Swing. All physics are written from scratch on a Swing Timer game loop with no third-party libraries. The engine handles ball-to-ball collisions, friction, cushion bounces, and uses continuous collision detection to prevent fast-moving balls from passing through each other.
+          A two-player 8-ball pool game built entirely in Java Swing with a physics engine written from scratch. No third-party libraries are used. A Swing Timer drives the game loop, and all physical behavior including ball collisions, friction, rail bounces, and pocket detection is computed manually using 2D vector math every tick.
         </p>
         <ModalSection title="Physics Engine">
+          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+            <li><span className="text-black dark:text-white font-medium">Ball-to-ball collisions:</span> Each tick, every pair of balls is checked for overlap using their center distance vs. their combined radii. On collision, velocities are exchanged along the collision normal using elastic collision math, and the balls are separated to prevent them from sticking together.</li>
+            <li><span className="text-black dark:text-white font-medium">Friction:</span> Each tick, velocity is multiplied by a friction coefficient slightly below 1.0, causing balls to decelerate smoothly until they stop at a defined rest threshold.</li>
+            <li><span className="text-black dark:text-white font-medium">Rail bounces:</span> When a ball reaches a table boundary, the velocity component perpendicular to that wall is reversed with a small energy loss applied.</li>
+            <li><span className="text-black dark:text-white font-medium">Continuous collision detection:</span> At high speeds, the physics step is subdivided into smaller sub-steps so fast-moving balls do not pass through each other between frames.</li>
+            <li><span className="text-black dark:text-white font-medium">Pocket detection:</span> Pocket checks run before rail bounce checks. A ball is pocketed when its center comes within a threshold distance of a pocket center, so balls near pockets fall in naturally instead of bouncing away from the edge.</li>
+          </ul>
+        </ModalSection>
+        <ModalSection title="Game Rules Implemented">
           <div className="space-y-1">
-            <ModalRow label="Integration" value="Per-tick velocity integration. Friction decelerates multiplicatively until rest threshold." />
-            <ModalRow label="Collisions" value="Elastic circle-circle overlap detection. Velocities resolved along collision normal." />
-            <ModalRow label="CCD" value="Physics step subdivided at high speeds to prevent tunnelling." />
+            <ModalRow label="Open table" value="Ball groups (solids vs. stripes) are unassigned at the start. The first legally pocketed ball assigns the groups." />
+            <ModalRow label="Turn system" value="Players alternate turns. A legal pocket continues the turn; a miss or foul passes play to the opponent." />
+            <ModalRow label="Foul detection" value="Scratching the cue ball, hitting the wrong group first, or ending a shot with no rail contact and no pocket all result in a foul." />
+            <ModalRow label="Ball-in-hand" value="After a foul, the opponent can place the cue ball anywhere on the table before shooting." />
+            <ModalRow label="8-ball rules" value="Pocketing the 8-ball before clearing your group loses the game. Pocketing it legally after clearing your group wins." />
           </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
@@ -437,13 +468,23 @@ function PCBModal({ onClose }: { onClose: () => void }) {
       </div>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          A current sensing breakout board designed for UW Orbital's Electrical Power System. It measures how much current the satellite bus is drawing on a 5V rail (up to 200 mA) and outputs a proportional voltage that a microcontroller ADC can read directly.
+          A custom current-sensing breakout board designed for UW Orbital's Electrical Power System. The board measures how much current is flowing through a 5V power rail by converting a tiny voltage drop across a shunt resistor into a readable output voltage that a microcontroller ADC can sample directly.
         </p>
         <ModalSection title="Design Overview">
+          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+            <li><span className="text-black dark:text-white font-medium">Why low-side sensing:</span> The shunt resistor is placed between the load's return path and ground. This keeps both amplifier input pins close to ground potential, which avoids high common-mode voltage issues that arise in high-side sensing topologies. It is the simpler and more reliable choice for a low-voltage satellite power rail.</li>
+            <li><span className="text-black dark:text-white font-medium">Amplifier (INA180B3IDBVR):</span> A precision current-sense amplifier with a fixed gain of 100 V/V. At 200 mA flowing through a 10 milliohm shunt resistor, the differential voltage across the shunt is 2 mV. The amplifier scales that up to 200 mV, placing the output well within a 3.3V ADC input range and giving the microcontroller a clean, readable signal.</li>
+            <li><span className="text-black dark:text-white font-medium">PCB layout:</span> Designed in Altium Designer on UW Orbital's shared Altium 365 workspace. Both copper layers include a ground pour stitched with vias to minimize return path impedance. Bypass capacitors are placed close to the amplifier supply pins to suppress high-frequency noise.</li>
+          </ul>
+        </ModalSection>
+        <ModalSection title="Specifications">
           <div className="space-y-1">
-            <ModalRow label="Topology" value="Low-side sensing places the shunt resistor between the load return path and ground, so both amplifier inputs stay near ground and avoid high common-mode voltage issues." />
-            <ModalRow label="Amplifier" value="INA180B3IDBVR with a fixed 100 V/V gain. At 200 mA through a 10 milliohm shunt, the 2 mV differential gets amplified to 200 mV, well within a 3.3V ADC range." />
-            <ModalRow label="Layout" value="Designed in Altium Designer on Orbital's shared Altium 365 workspace. Ground copper pour on both layers stitched with vias for a solid return path." />
+            <ModalRow label="Sensing topology" value="Low-side, single-ended output" />
+            <ModalRow label="Shunt resistor" value="10 milliohms" />
+            <ModalRow label="Amplifier gain" value="100 V/V (INA180B3IDBVR)" />
+            <ModalRow label="Output range" value="0 to 200 mV for 0 to 200 mA input current" />
+            <ModalRow label="Supply voltage" value="3.3V, compatible with STM32 ADC input" />
+            <ModalRow label="Design tool" value="Altium Designer on Altium 365 (UW Orbital workspace)" />
           </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
@@ -458,22 +499,37 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose}>
       <h2 className="text-black dark:text-white font-semibold text-lg mb-1">Autonomous Robot Navigation Stack</h2>
-      <p className="text-black/40 dark:text-white/40 text-sm mb-5">WATonomous ASD · ROS2 Humble · C++17 · Gazebo · Foxglove</p>
+      <p className="text-black/40 dark:text-white/40 text-sm mb-5">WATonomous ASD · ROS2 Humble · C++17 · Gazebo · Docker</p>
       <div className="rounded-xl overflow-hidden border border-black/8 dark:border-white/8 mb-2">
         <Image src="/wato-asd.png" alt="Foxglove" width={800} height={500} className="w-full h-auto" />
       </div>
-      <p className="text-center text-xs text-black/30 dark:text-white/30 mb-5">Live costmap, inflated obstacles, and A* path overlaid on occupancy grid</p>
+      <p className="text-center text-xs text-black/30 dark:text-white/30 mb-5">Foxglove visualization: live costmap, inflated obstacles, and A* planned path overlaid on the occupancy grid</p>
       <div className="space-y-4">
         <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">
-          An autonomous navigation stack for a simulated differential-drive robot in Gazebo. Four ROS2 C++ nodes work together to take raw sensor data and turn it into robot movement: the robot builds a map from LiDAR scans, plans a path using A*, and follows it using a Pure Pursuit controller.
+          A modular autonomous navigation stack for a differential-drive robot simulated in Gazebo. The stack is composed of four ROS2 nodes written in C++17, each responsible for one stage of the pipeline: building a map from sensor data, merging it into a persistent world model, planning a path through the environment, and executing that path with a feedback controller. The entire system runs in Docker for reproducible simulation environments.
         </p>
-        <ModalSection title="Node Architecture">
+        <ModalSection title="How the Pipeline Works">
           <ul className="space-y-2 text-sm text-black/55 dark:text-white/55">
-            <li><span className="text-black dark:text-white font-medium">Costmap:</span> Converts incoming LiDAR scans into a 2D occupancy grid and inflates obstacles so the planner keeps a safe clearance distance.</li>
-            <li><span className="text-black dark:text-white font-medium">Map Memory:</span> Merges successive local costmaps into a persistent global map using odometry to track the robot's position over time.</li>
-            <li><span className="text-black dark:text-white font-medium">Planner (A*):</span> Finds the shortest path to the goal using A* with a Euclidean heuristic. Replans automatically when the map changes.</li>
-            <li><span className="text-black dark:text-white font-medium">Controller (Pure Pursuit):</span> Picks a lookahead point on the planned path, computes the turning radius needed to reach it, and publishes wheel velocity commands at 10 Hz.</li>
+            <li>
+              <span className="text-black dark:text-white font-medium">1. Costmap node:</span> Subscribes to the robot's LiDAR laser scan topic and converts each incoming scan into a 2D occupancy grid, where cells are marked free, occupied, or unknown. Obstacles are then inflated outward by a configurable radius so the planner automatically keeps the robot a safe distance from walls and objects.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">2. Map Memory node:</span> Takes the local costmap from the previous node and fuses successive frames into a single persistent global map. It uses wheel odometry to track the robot's position over time, so new local observations are correctly placed into the global coordinate frame as the robot moves through the environment.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">3. Planner node (A*):</span> Receives a navigation goal and searches the global map for the shortest collision-free path using the A* algorithm with a Euclidean distance heuristic. The planner publishes a new path whenever the goal changes or when the map updates with new obstacles that block the current route.
+            </li>
+            <li>
+              <span className="text-black dark:text-white font-medium">4. Controller node (Pure Pursuit):</span> Takes the planned path and drives the robot along it by continuously selecting a lookahead point ahead of the robot on the path, computing the turning radius needed to reach that point, and publishing left and right wheel velocity commands at 10 Hz. The lookahead distance is tunable to balance tracking accuracy against smoothness.
+            </li>
           </ul>
+        </ModalSection>
+        <ModalSection title="Infrastructure">
+          <div className="space-y-1">
+            <ModalRow label="Simulation" value="Gazebo simulates the robot's sensors (LiDAR, odometry) and physics. The robot model publishes the same ROS2 topic types a real robot would, so the navigation stack runs identically in simulation and on hardware." />
+            <ModalRow label="Visualization" value="Foxglove Studio visualizes live ROS2 topics: the raw laser scan, the local costmap, the global map, the planned path, and the robot's pose estimate all rendered in real time." />
+            <ModalRow label="Containerization" value="The full stack runs in Docker using WATonomous's watod tooling, which manages multi-container ROS2 environments and makes the simulation reproducible across machines." />
+          </div>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
           {["ROS2 Humble", "C++17", "Gazebo", "Foxglove Studio", "A*", "Pure Pursuit", "Docker"].map((s) => <Tag key={s}>{s}</Tag>)}
