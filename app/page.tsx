@@ -117,7 +117,7 @@ const projects: Project[] = [
     name: "Todo: Calendar Task Manager",
     image: "/todo-app2.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
-    shortDesc: "A browser-based task manager with no frameworks or dependencies. Supports a monthly calendar view, list view with live search and filters, priority levels, tags, repeat intervals, and overdue detection. All data is saved locally in the browser.",
+    shortDesc: "A browser-based task manager with no frameworks or build step. Features a monthly calendar view, list view with live search, priority levels, tags, and overdue detection. Data persists locally.",
     modalKey: "todo",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
