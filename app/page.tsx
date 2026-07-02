@@ -148,7 +148,7 @@ const projects: Project[] = [
     stack: ["ROS2 Humble", "C++17", "Gazebo", "A*", "Pure Pursuit", "Docker"],
     shortDesc: "An autonomous navigation stack for a simulated robot in Gazebo. Four ROS2 nodes handle LiDAR mapping, global map building, A* path planning, and Pure Pursuit control.",
     modalKey: "wato",
-    repo: null,
+    repo: "https://github.com/rayymondf/autonomous_robot",
     demo: "https://youtu.be/jMNTflrencM",
   },
 ];
@@ -479,7 +479,7 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
           {["ROS2 Humble", "C++17", "Gazebo", "Foxglove Studio", "A*", "Pure Pursuit", "Docker"].map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
       </div>
-      <ModalLinks repo={null} demo="https://youtu.be/jMNTflrencM" />
+      <ModalLinks repo="https://github.com/rayymondf/autonomous_robot" demo="https://youtu.be/jMNTflrencM" />
     </ModalShell>
   );
 }
