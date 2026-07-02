@@ -117,7 +117,7 @@ const projects: Project[] = [
     name: "Todo: Calendar Task Manager",
     image: "/todo-app2.png",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript", "localStorage"],
-    shortDesc: "A task manager built in vanilla JavaScript with no dependencies. Includes a monthly calendar view, live search, filters, priority levels, and full keyboard accessibility.",
+    shortDesc: "A browser-based task manager with no frameworks or dependencies. Supports a monthly calendar view, list view with live search and filters, priority levels, tags, repeat intervals, and overdue detection. All data is saved locally in the browser.",
     modalKey: "todo",
     repo: "https://github.com/rayymondf/Todo-List-Project",
     demo: "https://rayymondf.github.io/Todo-List-Project/",
@@ -257,7 +257,7 @@ function ModalShell({ onClose, children }: { onClose: () => void; children: Reac
 function ModalSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="border border-black/8 dark:border-white/8 rounded-xl p-4 bg-black/[0.02] dark:bg-white/[0.02]">
-      <p className="text-[10px] font-semibold text-black/35 dark:text-white/35 uppercase tracking-widest mb-3">{title}</p>
+      <p className="text-[10px] font-semibold text-black/35 dark:text-white/35 uppercase tracking-widest mb-3.5">{title}</p>
       {children}
     </div>
   );
@@ -265,9 +265,9 @@ function ModalSection({ title, children }: { title: string; children: React.Reac
 
 function ModalRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex gap-3 text-sm py-1">
-      <span className="text-black/35 dark:text-white/35 shrink-0 w-24">{label}</span>
-      <span className="text-black/65 dark:text-white/65">{value}</span>
+    <div className="flex gap-3 text-sm py-1.5">
+      <span className="text-black/40 dark:text-white/40 shrink-0 w-36 leading-relaxed">{label}</span>
+      <span className="text-black/65 dark:text-white/65 leading-relaxed">{value}</span>
     </div>
   );
 }
@@ -307,7 +307,7 @@ function BuildBoardModal({ onClose }: { onClose: () => void }) {
           BuildBoard is a full-stack collaboration platform built for student engineers, makers, and robotics teams. It solves a common problem: existing platforms like GitHub are too code-focused, while social media is too generic. BuildBoard combines project showcasing, structured build logs, skill-based team recruitment, and direct messaging into one cohesive product designed specifically for technical builders.
         </p>
         <ModalSection title="How It Works">
-          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+          <ul className="space-y-2.5 text-sm text-black/55 dark:text-white/55 leading-relaxed">
             <li><span className="text-black dark:text-white font-medium">Project pages:</span> Each project has a dedicated page with a title, description, category, status, skill tags, and links. Anyone can browse; only authenticated owners can edit.</li>
             <li><span className="text-black dark:text-white font-medium">Build logs:</span> Team members post milestone-tagged progress updates. Other users can comment and like individual updates.</li>
             <li><span className="text-black dark:text-white font-medium">Team recruitment:</span> Project owners post open roles with required skills. Users submit join requests, and owners accept or reject them directly from the platform.</li>
@@ -347,20 +347,35 @@ function LingoModal({ onClose }: { onClose: () => void }) {
           Lingo is a Chrome extension that adds a full translation workspace directly inside Chrome's native Side Panel, so users can translate text without opening a new tab or leaving the page they are reading. It is published on the Chrome Web Store, has no npm dependencies, and requires no build step. Chrome loads it directly as a set of static files.
         </p>
         <ModalSection title="How It Works">
-          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+          <ul className="space-y-2.5 text-sm text-black/55 dark:text-white/55 leading-relaxed">
             <li><span className="text-black dark:text-white font-medium">Side panel activation:</span> A background service worker listens for the extension icon click and calls chrome.sidePanel.open(), which opens the translator panel inside Chrome's native sidebar. The panel persists across page navigation.</li>
             <li><span className="text-black dark:text-white font-medium">Translation:</span> On submit, a POST request is sent to the DeepL Free API with the user's text and selected target language. The translated result is displayed immediately. If the language list fails to load from the API, a built-in fallback list keeps the dropdown usable.</li>
             <li><span className="text-black dark:text-white font-medium">Local persistence:</span> The Chrome Storage API saves the current draft text, the last selected language, and a history of recent translations. This data is local to the browser and never sent anywhere except during translation.</li>
           </ul>
         </ModalSection>
         <ModalSection title="Extension Architecture">
-          <div className="space-y-1">
-            <ModalRow label="manifest.json" value="Declares Manifest V3 configuration, requests sidePanel and storage permissions, and registers the host permission for the DeepL API domain." />
-            <ModalRow label="sidePanelServiceWorker.js" value="Background service worker. Handles the icon click event and tells Chrome to open the side panel." />
-            <ModalRow label="panel.html + styles.css" value="The translation UI rendered inside the side panel. Input area, language selector, output area, and recent history list." />
-            <ModalRow label="backendService.js" value="Handles all API calls to DeepL, restores saved state from Chrome Storage on load, and saves successful translations to local history." />
-            <ModalRow label="languageSelector.js" value="Fetches the supported language list from the DeepL API and populates the dropdown. Falls back to a hardcoded list on failure." />
-          </div>
+          <ul className="space-y-3 text-sm text-black/55 dark:text-white/55">
+            <li>
+              <p className="text-black dark:text-white font-medium mb-0.5">manifest.json</p>
+              <p className="leading-relaxed">Declares the Manifest V3 configuration, requests <code className="text-xs bg-black/5 dark:bg-white/5 px-1 py-0.5 rounded">sidePanel</code> and <code className="text-xs bg-black/5 dark:bg-white/5 px-1 py-0.5 rounded">storage</code> permissions, and registers the host permission for the DeepL API domain.</p>
+            </li>
+            <li>
+              <p className="text-black dark:text-white font-medium mb-0.5">sidePanelServiceWorker.js</p>
+              <p className="leading-relaxed">Background service worker. Listens for the extension icon click event and calls <code className="text-xs bg-black/5 dark:bg-white/5 px-1 py-0.5 rounded">chrome.sidePanel.open()</code> to open the translation panel.</p>
+            </li>
+            <li>
+              <p className="text-black dark:text-white font-medium mb-0.5">panel.html + styles.css</p>
+              <p className="leading-relaxed">The translation UI rendered inside the side panel. Includes the input area, language selector dropdown, translated output area, and recent history list.</p>
+            </li>
+            <li>
+              <p className="text-black dark:text-white font-medium mb-0.5">backendService.js</p>
+              <p className="leading-relaxed">Handles all API calls to DeepL, restores saved draft and history from Chrome Storage on load, and saves each successful translation to local history.</p>
+            </li>
+            <li>
+              <p className="text-black dark:text-white font-medium mb-0.5">languageSelector.js</p>
+              <p className="leading-relaxed">Fetches the supported language list from the DeepL API and populates the target language dropdown. Falls back to a hardcoded language list if the API request fails.</p>
+            </li>
+          </ul>
         </ModalSection>
         <div className="flex flex-wrap gap-1.5">
           {["JavaScript", "Manifest V3", "Chrome Side Panel API", "Chrome Storage API", "DeepL API"].map((s) => <Tag key={s}>{s}</Tag>)}
@@ -384,7 +399,7 @@ function TodoModal({ onClose }: { onClose: () => void }) {
           A fully-featured task manager built in plain HTML, CSS, and JavaScript with no frameworks, no npm packages, and no build step. The app runs by opening a single HTML file in any browser. Despite its simplicity, it supports a monthly calendar view, priority levels, tags, filters, repeating tasks, overdue detection, and full keyboard accessibility.
         </p>
         <ModalSection title="Features">
-          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+          <ul className="space-y-2.5 text-sm text-black/55 dark:text-white/55 leading-relaxed">
             <li><span className="text-black dark:text-white font-medium">Calendar view:</span> A 7-column monthly grid where each day cell shows chips for tasks due on that date. Clicking a day opens a modal listing all tasks for that day.</li>
             <li><span className="text-black dark:text-white font-medium">List view:</span> A flat list of all tasks with live search, sort by date or priority, and filter by status (all, active, completed, overdue) or by tag.</li>
             <li><span className="text-black dark:text-white font-medium">Task fields:</span> Title, description, due date, priority (low, medium, high), comma-separated tags, and repeat interval (daily, weekly, monthly).</li>
@@ -421,7 +436,7 @@ function PoolModal({ onClose }: { onClose: () => void }) {
           A two-player 8-ball pool game built entirely in Java Swing with a physics engine written from scratch. No third-party libraries are used. A Swing Timer drives the game loop, and all physical behavior including ball collisions, friction, rail bounces, and pocket detection is computed manually using 2D vector math every tick.
         </p>
         <ModalSection title="Physics Engine">
-          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+          <ul className="space-y-2.5 text-sm text-black/55 dark:text-white/55 leading-relaxed">
             <li><span className="text-black dark:text-white font-medium">Ball-to-ball collisions:</span> Each tick, every pair of balls is checked for overlap using their center distance vs. their combined radii. On collision, velocities are exchanged along the collision normal using elastic collision math, and the balls are separated to prevent them from sticking together.</li>
             <li><span className="text-black dark:text-white font-medium">Friction:</span> Each tick, velocity is multiplied by a friction coefficient slightly below 1.0, causing balls to decelerate smoothly until they stop at a defined rest threshold.</li>
             <li><span className="text-black dark:text-white font-medium">Rail bounces:</span> When a ball reaches a table boundary, the velocity component perpendicular to that wall is reversed with a small energy loss applied.</li>
@@ -471,7 +486,7 @@ function PCBModal({ onClose }: { onClose: () => void }) {
           A custom current-sensing breakout board designed for UW Orbital's Electrical Power System. The board measures how much current is flowing through a 5V power rail by converting a tiny voltage drop across a shunt resistor into a readable output voltage that a microcontroller ADC can sample directly.
         </p>
         <ModalSection title="Design Overview">
-          <ul className="space-y-1.5 text-sm text-black/55 dark:text-white/55">
+          <ul className="space-y-2.5 text-sm text-black/55 dark:text-white/55 leading-relaxed">
             <li><span className="text-black dark:text-white font-medium">Why low-side sensing:</span> The shunt resistor is placed between the load's return path and ground. This keeps both amplifier input pins close to ground potential, which avoids high common-mode voltage issues that arise in high-side sensing topologies. It is the simpler and more reliable choice for a low-voltage satellite power rail.</li>
             <li><span className="text-black dark:text-white font-medium">Amplifier (INA180B3IDBVR):</span> A precision current-sense amplifier with a fixed gain of 100 V/V. At 200 mA flowing through a 10 milliohm shunt resistor, the differential voltage across the shunt is 2 mV. The amplifier scales that up to 200 mV, placing the output well within a 3.3V ADC input range and giving the microcontroller a clean, readable signal.</li>
             <li><span className="text-black dark:text-white font-medium">PCB layout:</span> Designed in Altium Designer on UW Orbital's shared Altium 365 workspace. Both copper layers include a ground pour stitched with vias to minimize return path impedance. Bypass capacitors are placed close to the amplifier supply pins to suppress high-frequency noise.</li>
@@ -509,7 +524,7 @@ function WATonomousModal({ onClose }: { onClose: () => void }) {
           A modular autonomous navigation stack for a differential-drive robot simulated in Gazebo. The stack is composed of four ROS2 nodes written in C++17, each responsible for one stage of the pipeline: building a map from sensor data, merging it into a persistent world model, planning a path through the environment, and executing that path with a feedback controller. The entire system runs in Docker for reproducible simulation environments.
         </p>
         <ModalSection title="How the Pipeline Works">
-          <ul className="space-y-2 text-sm text-black/55 dark:text-white/55">
+          <ul className="space-y-3 text-sm text-black/55 dark:text-white/55 leading-relaxed">
             <li>
               <span className="text-black dark:text-white font-medium">1. Costmap node:</span> Subscribes to the robot's LiDAR laser scan topic and converts each incoming scan into a 2D occupancy grid, where cells are marked free, occupied, or unknown. Obstacles are then inflated outward by a configurable radius so the planner automatically keeps the robot a safe distance from walls and objects.
             </li>
