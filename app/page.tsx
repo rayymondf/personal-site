@@ -528,6 +528,14 @@ export default function Home() {
             >
               <ChevronRight size={16} /> Projects
             </button>
+            <a
+              href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full px-6 h-10 text-sm font-medium border border-black/20 dark:border-white/20 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            >
+              <ExternalLink size={16} /> Resume
+            </a>
             <button
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="inline-flex items-center gap-1.5 rounded-full px-6 h-10 text-sm font-medium border border-black/20 dark:border-white/20 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
@@ -619,20 +627,7 @@ export default function Home() {
 
       {/* ── Projects ──────────────────────────────────────────────────────── */}
       <section id="projects" className="py-12 px-6 max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3 flex-1">
-            <span className="text-[10px] font-semibold tracking-[0.2em] text-black/30 dark:text-white/30 uppercase">Projects</span>
-            <div className="flex-1 h-px bg-black/10 dark:bg-white/10" />
-          </div>
-          <a
-            href="https://drive.google.com/drive/folders/1Yxby7jcXt58jyNnhvGHdMyLEBAqSAyhF?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-4 shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 h-8 text-xs font-medium border border-black/15 dark:border-white/15 text-black/55 dark:text-white/55 hover:border-black/30 dark:hover:border-white/30 hover:text-black dark:hover:text-white hover:bg-black/[0.03] dark:hover:bg-white/[0.05] transition-all"
-          >
-            <ExternalLink size={12} /> Resume
-          </a>
-        </div>
+        <SectionLabel>Projects</SectionLabel>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((p, i) => (
             <motion.div
@@ -674,7 +669,7 @@ export default function Home() {
                 </div>
                 <button
                   onClick={() => setOpenModal(p.modalKey)}
-                  className="self-start text-xs text-black/35 dark:text-white/35 hover:text-black dark:hover:text-white/70 border border-black/10 dark:border-white/10 hover:border-black/25 dark:hover:border-white/25 rounded-full px-3 py-1 transition-all mt-1"
+                  className="self-start text-xs text-black/35 dark:text-white/35 hover:text-black dark:hover:text-white border border-black/10 dark:border-white/10 hover:border-black/25 dark:hover:border-white/25 rounded-full px-3 py-1 transition-all mt-1"
                 >
                   View Details
                 </button>
