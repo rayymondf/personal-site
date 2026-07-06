@@ -71,7 +71,7 @@ export const experience: ExperienceEntry[] = [
   {
     company: "einfolab",
     role: "data engineering co-op",
-    period: "jan – apr 2026",
+    period: "jan 2026 – apr 2026",
     logo: "/einfolab.webp",
     bullets: [
       "built the Airflow ETL that moves 10k+ clinical records/month across 4 hospital domains, dockerized on AWS with automated retries, alerting, and pytest CI",
