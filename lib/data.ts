@@ -60,11 +60,10 @@ export const experience: ExperienceEntry[] = [
     period: "oct 2025 – now",
     logo: "/watonomous_logo.jpg",
     bullets: [
-      "trained reinforcement-learning and imitation-learning policies in Isaac Lab + PyTorch across 60+ runs tracked in Weights & Biases, iterating on reward shaping to cut convergence time 40%",
-      "validated the best-performing policies on the physical humanoid, taking them past sim into real-hardware deployment",
-      "wrote the firmware underneath: STM32 FOC motor control with Kalman-filtered IMU/encoder fusion for stable joint-angle tracking, integrated into the ROS 2 control stack for real-time operation",
-      "built a Python pipeline applying PCA and inverse-kinematics to a 21-DOF hand, compressing 15 finger-joint commands into 7 synergy controls",
-      "that 15-to-7 reduction shrank the action space the policy has to output and gave operators a low-dimensional interface for direct teleop of the hand",
+      "trained rl + imitation-learning policies in Isaac Lab + PyTorch, 60+ runs tracked in Weights & Biases; reward-shaping sweeps cut convergence time 40%",
+      "validated the top policies on the physical humanoid: sim → real hardware, not just sim numbers",
+      "wrote the firmware underneath: STM32 FOC motor control + Kalman-filtered IMU/encoder fusion for joint-angle tracking, wired into the ROS 2 control stack",
+      "PCA + inverse-kinematics pipeline on a 21-DOF hand: 15 finger-joint commands → 7 synergy controls, shrinking the policy's action space and giving operators a low-dim teleop interface",
     ],
   },
   {
@@ -73,10 +72,10 @@ export const experience: ExperienceEntry[] = [
     period: "jan 2026 – apr 2026",
     logo: "/einfolab.webp",
     bullets: [
-      "built a dockerized Python pipeline (pandas + NumPy) to ingest, validate, and reconcile 10k+ monthly medical, dental, financial, and administrative records, with automated retries, failure alerting, and pytest CI",
-      "fine-tuned a scikit-learn Isolation Forest for unsupervised anomaly detection, catching records the rule-based sql checks missed at 92% precision on a labeled validation set",
-      "built a FastAPI service integrating an LLM with structured outputs to auto-classify flagged errors by type, cutting manual review from 2h to 30min per batch at 91% accuracy",
-      "shipped versioned FastAPI endpoints exposing pipeline run status, error logs, and record-level audit trails, giving stakeholders real-time visibility into data quality",
+      "dockerized python pipeline (pandas + NumPy) ingesting, validating, and reconciling 10k+ records/month across 4 domains (medical, dental, financial, admin), with retries, alerting, and pytest CI",
+      "caught what sql rules missed: scikit-learn Isolation Forest, 92% precision on a labeled validation set",
+      "FastAPI + LLM (structured outputs) auto-classifying flagged errors by type: manual review 2h → 30min at 91% accuracy",
+      "shipped versioned FastAPI endpoints exposing run status, error logs, and record-level audit trails, real-time data-quality visibility for stakeholders",
     ],
   },
   {
@@ -85,11 +84,11 @@ export const experience: ExperienceEntry[] = [
     period: "sep 2025 – apr 2026",
     logo: "/waterlooformulaelectric_logo.jpg",
     bullets: [
-      "built and deployed a real-time telemetry dashboard in React, Next.js, TypeScript, and Tailwind, containerized on Kubernetes with GitHub Actions CI/CD, streaming 5000+ CAN frames per test over WebSocket",
-      "engineered a Python pipeline (pandas + NumPy) to parse and store CAN telemetry in TimescaleDB, automating post-test log processing across 30+ tests and cutting analysis from hours to minutes",
-      "trained a scikit-learn anomaly model on battery cell telemetry, reaching 94% precision flagging voltage and thermal outliers during test sessions",
-      "contributed embedded c/c++ firmware for the battery, vehicle control, and power distribution units",
-      "built a HIL test rig in c++/python with pytest, simulating sensor faults and CAN dropouts to catch integration bugs before on-vehicle testing",
+      "live telemetry dashboard (React + Next.js + TypeScript + Tailwind) on Kubernetes with GitHub Actions CI/CD, 5000+ CAN frames per test over WebSocket",
+      "python pipeline (pandas + NumPy) parsing + storing CAN telemetry in TimescaleDB across 30+ tests: post-test analysis hours → minutes",
+      "scikit-learn anomaly model on battery cell telemetry: 94% precision flagging voltage + thermal outliers",
+      "embedded c/c++ firmware for the battery, vehicle control, and power distribution units (BMU / VCU / PDU)",
+      "HIL test rig in c++/python with pytest: simulate sensor faults + CAN dropouts, catch integration bugs before on-vehicle testing",
     ],
   },
   {
