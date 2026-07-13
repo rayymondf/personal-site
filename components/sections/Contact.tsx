@@ -9,7 +9,7 @@ export function Contact() {
           <h2 className="mb-8 font-mono text-sm text-accent">say hi</h2>
           <p className="mb-8 max-w-xl leading-relaxed text-muted">
             i like talking about systems that move, models that misbehave, and
-            why the sim always lies. if you&apos;re hiring for fall 2026, or
+            why the sim always lies. if you&apos;re hiring for internships, or
             just want to chat, my inbox is open.
           </p>
           <a

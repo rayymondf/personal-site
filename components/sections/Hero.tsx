@@ -51,7 +51,7 @@ export function Hero() {
           <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-emerald-500" />
           <span>
             currently: building humanoid manipulation @ watonomous · open to
-            fall 2026 internships
+            open to internships
           </span>
         </motion.p>
 
