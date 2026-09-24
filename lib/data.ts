@@ -386,5 +386,4 @@ export const links = {
   linkedin: "https://www.linkedin.com/in/raymond-fang-214192331",
   email: "mailto:rayymondf29@gmail.com",
   emailSchool: "mailto:r53fang@uwaterloo.ca",
-  resume: "https://drive.google.com/file/d/1uauy1bFa25CLPNCLs2YwKsGFzsSqyO9H/view?usp=sharing",
 };

@@ -8,7 +8,6 @@ const heroLinks = [
   { label: "github", href: links.github, external: true },
   { label: "linkedin", href: links.linkedin, external: true },
   { label: "email", href: links.email, external: false },
-  { label: "resume", href: links.resume, external: true },
 ];
 
 export function Hero() {
